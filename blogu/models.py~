@@ -30,7 +30,7 @@ class Blog(models.Model):
     #comments=models.ManyToManyField(Comment)
     #text = models.TextField()
     likes=models.IntegerField(default=0)
-    datetime_added=models.DateTimeField(null=True,blank=True)
+    datetime_added=models.DateTimeField(default=datetime.now())
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         if(self.likes<0):
@@ -51,7 +51,7 @@ class Company(models.Model):
     user=models.OneToOneField(User)
     name=models.CharField(max_length=200)
     logo=models.ImageField(upload_to='logo_images',blank=True)
-    date_registered=models.DateTimeField(null=True,blank=True)
+    date_registered=models.DateTimeField(default=datetime.now())
     address=models.CharField(max_length=300)
     about=models.TextField()
     def __unicode__(self):
@@ -67,7 +67,7 @@ class UnPostedBlog(models.Model):
     #comments=models.ManyToManyField(Comment)
     text = models.TextField()
     likes=models.IntegerField(default=0)
-    datetime_added=models.DateTimeField(null=True,blank=True)
+    datetime_added=models.DateTimeField(default=datetime.now())
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         if(self.likes<0):
@@ -87,7 +87,7 @@ class Discussion(models.Model):
     slug=models.SlugField(unique=True)
     intro=models.CharField(max_length=500,default="None")
     started_by=models.ForeignKey('blogu.UserProfile')
-    started_on=models.DateTimeField(null=True,blank=True)
+    started_on=models.DateTimeField(default=datetime.now())
     likes=models.IntegerField(default=0)
     category=models.ForeignKey(Category)
     def __unicode__(self):
@@ -102,7 +102,7 @@ class Discuss(models.Model):
     discuss_text=models.TextField()
     discuss_by=models.ForeignKey('blogu.UserProfile')
     discuss_on=models.ForeignKey(Discussion)
-    posted_on=models.DateTimeField(null=True,blank=True)
+    posted_on=models.DateTimeField(default=datetime.now())
     likes=models.IntegerField(default=0)
     def __unicode__(self):
         return self.discuss_text
@@ -114,7 +114,7 @@ class UserProfile(models.Model):
     liked_blogs=models.ManyToManyField(Blog,blank=True)
     liked_categories=models.ManyToManyField(Category,blank=True)
     level=models.IntegerField(default=1)
-    date_registered=models.DateTimeField(null=True,blank=True)
+    date_registered=models.DateTimeField(default=datetime.now())
     google_registered=models.BooleanField(default=False)
     profile_tag_line=models.CharField(max_length=300,null=True,blank=True)
     languages=models.IntegerField(default=1)#English=1,Hindi=2,English And Hindi both =3
