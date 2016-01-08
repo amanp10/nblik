@@ -10,6 +10,6 @@ django-ckeditor==5.0.2
 django-registration-redux==1.2
 django-social-auth==0.7.28
 facebook-sdk==0.4.0
-python-social-auth==0.2.13
+python-social-auth
 requests==2.2.1
 pillow
