@@ -2,7 +2,6 @@
 __pycache__/
 *.py[cod]
 *.pyc
-virt_env/
 
 # C extensions
 *.so
