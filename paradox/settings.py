@@ -89,7 +89,7 @@ TEMPLATES = [
 #TEMPLATE_DIRS=(TEMPLATE_PATH,)
 WSGI_APPLICATION = 'paradox.wsgi.application'
 
-
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
@@ -102,7 +102,7 @@ DATABASES = {
 
 if 'ON_HEROKU' in os.environ:
     DATABASES['default'] =  dj_database_url.config()
-    DATABASES['default']['CONN_MAX_AGE'] = 500
+    #DATABASES['default']['CONN_MAX_AGE'] = 500
     #DATABASES['default']['ENGINE'] = 'django_postgrespool'
 
 if 'DEBUG' in os.environ:
@@ -142,7 +142,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 #EMAIL_HOST_USER = 'nitingera1996@gmail.com'
 #EMAIL_HOST_PASSWORD = 'geranitin18091996'
 #ACCOUNT_ACTIVATION_DAYS = 7
-#REGISTRATION_AUTO_LOGIN = True  
+#REGISTRATION_AUTO_LOGIN = True
 LOGIN_URL ='/blogu/login/'
 LOGIN_REDIRECT_URL = '/blogu/next_step/'
 SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
