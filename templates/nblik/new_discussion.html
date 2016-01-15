@@ -1,0 +1,52 @@
+{% extends 'nblik/base.html' %}
+{% load staticfiles %}
+{% block title %}- Discuss{% endblock %}
+{% block body_block %}
+<style type="text/css">
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+input[required]
+{
+	font-size: 16px;
+	color:black;
+	padding: 1px 3px 1px 3px;
+}
+#discussion_form
+{
+	margin: 20px;
+}
+#new_discuss_topic
+{
+	width:90%;
+}
+#new_discuss_intro
+{
+	resize:none;
+}
+h2
+{
+	font-family: 'Montserrat',tahoma,arial;
+}
+input[type="submit"]
+{
+	background:rgb(70,94,170);
+	color:white;
+	font-weight: bold;
+}
+select
+{
+	background: rgb(210,217,236);
+}
+</style>
+<h2>Start a Discussion...</h2>
+<form method="post" action="/nblik/new_discussion/" id="discussion_form">
+	{% csrf_token %}
+<strong>Select a Category : </strong><select name="category">
+{% for cat in categories %}
+<option value="{{ cat.id }}">{{ cat.name }}</option>
+{% endfor %}
+</select><br><br>
+<input type="text" name="discuss_topic" id="new_discuss_topic" placeholder="Topic" max-length="100" required><br><br>
+<textarea name="discuss_intro" id="new_discuss_intro" placeholder="Introduction" cols="90" rows="5" max-length="500" required></textarea><br><br>
+<input type="submit" value="Done!">
+</form>
+{% endblock %}

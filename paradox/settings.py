@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blogu',
+    'nblik',
     'registration',
     'bootstrap_toolkit',
     'social_auth',
@@ -136,15 +136,15 @@ STATICFILES_DIRS = (
 )
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(STATIC_PATH,'media')
 #EMAIL_HOST = 'smtp.gmail.com'
 #EMAIL_USE_TLS = True
 #EMAIL_HOST_USER = 'nitingera1996@gmail.com'
 #EMAIL_HOST_PASSWORD = 'geranitin18091996'
 #ACCOUNT_ACTIVATION_DAYS = 7
 #REGISTRATION_AUTO_LOGIN = True
-LOGIN_URL ='/blogu/login/'
-LOGIN_REDIRECT_URL = '/blogu/next_step/'
+LOGIN_URL ='/nblik/login/'
+LOGIN_REDIRECT_URL = '/nblik/next_step/'
 SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
 SOCIAL_AUTH_UID_LENGTH = 16
 SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16

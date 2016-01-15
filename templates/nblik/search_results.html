@@ -1,0 +1,17 @@
+<u1 class ="search-results">
+{% if cats %}
+    {% for cat in cats %}
+	    <li><a href="{% url 'category' cat.slug %}">{{ cat.name }} <span style="color:gray;font-weight:normal;">(category)</span></a></li>
+	{% endfor %}
+{% endif %}
+{% if blogs %}
+    {% for blog in blogs %}
+	    <li><a href="{% url 'blog' blog.slug %}">{{ blog.title }} <span style="color:gray;font-weight:normal;">(blog)</span></a></li>
+	{% endfor %}
+{% endif %}
+{% if users %}
+    {% for user in users %}
+	    <li><a href="/{{ user }}/">{{ user }} <span style="color:gray;font-weight:normal;">(user)</span></a></li>
+	{% endfor %}
+{% endif %}
+</u1>

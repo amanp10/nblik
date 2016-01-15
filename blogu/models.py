@@ -21,7 +21,7 @@ class Category(models.Model):
 
 class Blog(models.Model):
     category = models.ForeignKey(Category)
-    title = models.CharField(max_length=128)
+    title = models.CharField(max_length=250)
     written_by=models.ForeignKey(User)
     views = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
@@ -83,9 +83,9 @@ class BlogId(models.Model):
         return self.id1
 
 class Discussion(models.Model):
-    topic=models.CharField(max_length=100)
+    topic=models.CharField(max_length=250)
     slug=models.SlugField(unique=True)
-    intro=models.CharField(max_length=500,default="None")
+    intro=models.CharField(max_length=1000,default="None")
     started_by=models.ForeignKey('blogu.UserProfile')
     started_on=models.DateTimeField(null=True,blank=True)
     likes=models.IntegerField(default=0)

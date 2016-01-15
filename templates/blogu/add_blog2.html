@@ -1,6 +1,7 @@
 {% extends 'blogu/base2.html' %}
 {% load staticfiles %}
 {% load bootstrap_toolkit %}
+{% block title %}- Write{% endblock %}
 {% block body_block %}
 <style type="text/css" rel="stylesheet">
 ::-webkit-scrollbar,-moz-scrollbar,-o-scrollbar,scrollbar { 
@@ -82,37 +83,12 @@ $('#submit_no_cat').click(function(event){
         event.preventDefault();
         alert('Please select a category');
     }
-    else if($('#id_title').val()=="")
-    {
-        event.preventDefault();
-        alert('Please give a title');
-    }
-    else if($('.cke_contents_ltr').html()=="<p><br></p>")
-    {
-        event.preventDefault();
-        alert('Please add content');
-    }
     else
     {
         $("#blog_form2").submit();
     }
 });
-$('#submit_cat').click(function(event){
-    if($('#id_title').val()=="")
-    {
-        event.preventDefault();
-        alert('Please give a title');
-    }
-    else if($('.cke_contents_ltr').html()=="<p><br></p>")
-    {
-        event.preventDefault();
-        alert('Please add content');
-    }
-    else
-    {
-        $("#blog_form").submit();
-    }
-});
 </script>
 {% endif %}
 {% endblock %}
+

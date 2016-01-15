@@ -37,7 +37,7 @@ function onSignInClick(profile){
     image_url=profile.getImageUrl();
   }
   $.ajax({
-                  url : "/blogu/google_login/",
+                  url : "/nblik/google_login/",
                   type : "POST",
                   dataType: "json",
                   data : {

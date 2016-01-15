@@ -79,7 +79,7 @@ h1
 	margin-bottom: 5px;
 	font-size: 18px;
 }
-#blog_like,#category_like
+.blog_like,#category_like
 {
 	padding: 3px;
 	font-size:13px;
@@ -87,9 +87,9 @@ h1
 	border:none;
 	font-weight: bold;
 }
-#blog_like:hover,#category_like:hover
+.blog_like:hover,#category_like:hover
 {
-	background: blue;
+	background: rgb(70,94,170);
 }
 #comment
 {
@@ -99,7 +99,7 @@ h1
 }
 #comment:hover
 {
-	background: blue;
+	background: rgb(70,94,170);
 }
 #share:link
 {
@@ -113,7 +113,7 @@ padding: 3px;
 }
 #share:hover
 {
-	background: blue;
+	background: rgb(70,94,170);
 	text-decoration: none;
 }
 #share:visited

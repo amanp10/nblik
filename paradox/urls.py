@@ -2,15 +2,15 @@
 from django.conf import settings
 from django.conf.urls import include, url, patterns
 from django.contrib import admin
-from blogu import views
+from nblik import views
 
 #class MyRegistrationView(RegistrationView):
 #    def get_success_url(self,request,user):
-#        return '/blogu/'
+#        return '/nblik/'
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^blogu/', include('blogu.urls')),
+    url(r'^nblik/', include('nblik.urls')),
 	url(r'^$', views.index,name='index'),
 	#url(r'^accounts/register/$', MyRegistrationView.as_view(),name = 'registration_register'),
 	url(r'^accounts/',include('registration.backends.simple.urls')),

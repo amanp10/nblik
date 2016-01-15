@@ -339,7 +339,11 @@ def add_blog2(request,category_name_slug):
             blog1.save()
             return blog(request,slugify(blog1.title))
         else:
-            print blog1.errors
+            form=BlogForm()
+            cat=None
+            blog_list=Blog.objects.all()
+            context_dict={'category_list':Category.objects.all(),'category':cat,'myform':form,'blog_list':blog_list}
+            return render(request,'blogu/add_blog.html',context_dict)
     else:
         form=BlogForm()
         blog_list=Blog.objects.all()
