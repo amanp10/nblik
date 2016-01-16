@@ -31,6 +31,9 @@ body
 {% if user.is_authenticated %}
 <span style="color:rgb(50,50,50);font-size:16px;">Discussions-</span><span><a href="{% url 'new_discussion' %}">Start a new discussion</a></span>
 <br/><br />
+{% else %}
+<span style="color:rgb(50,50,50);font-size:16px;">Discussions-</span><span><a href="/nblik/login_signup">Start a new discussion</a></span>
+<br/><br />
 {% endif %}
 <br />
 {% for discussion in discussions %}
@@ -38,7 +41,7 @@ body
 {% if user.is_authenticated %}
 <a id="discuss_topic_a" href="{% url 'discussion' discussion.slug %}">{{ discussion.topic }}</a>
 {% else %}
-<a class="discuss_topic" href="#">{{ discussion.topic }}</a>
+<a class="discuss_topic" href="/nblik/login_signup">{{ discussion.topic }}</a>
 {% endif %}
     &nbsp &nbsp <span style="color:gray;">started by</span> <img src="{{ discussion.started_by.picture.url }}" class="pro_pic"/> <span style="font-weight:bold;font-size:16px;color:black;">{{ discussion.started_by }}</span><br />on {{ discussion.started_on }}<br />{{ discussion.likes }} like(s)  <hr>
 {% endfor %}

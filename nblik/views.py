@@ -758,3 +758,44 @@ def edit_language(request):
     u.languages=int(language)
     u.save()
     return HttpResponse('Done')
+
+def edit_blog(request,blog_slug):
+    blog=Blog.objects.get(slug=blog_slug)
+    context_dict={}
+    context_dict['blog_text']=(str(blog.blog_content)).replace("\r\n","")
+    context_dict['blog_title']=str(blog.title)
+    context_dict['blog_category']=str(blog.category.slug)
+    context_dict['category_list']=Category.objects.all()
+    form=BlogForm()
+    context_dict['myform']=form
+    context_dict['blog_id']=str(blog.id)
+    print context_dict['blog_text']
+    return render(request,'nblik/edit_blog.html',context_dict)
+
+def update_blog(request,category_name_slug):
+    try:
+        cat=Category.objects.get(slug=category_name_slug)
+    except Category.DoesNotExist:
+        cat=None
+
+    if request.method=="POST":
+        blog_f=BlogForm(request.POST)
+        if blog_f.is_valid():
+            title = blog_f.cleaned_data['title']
+            blog_content=blog_f.cleaned_data['blog_content']
+            blog_id=request.POST.get('blog_id')
+            blog1=Blog.objects.get(id=int(blog_id))
+            blog1.title=title
+            blog1.blog_content=blog_content
+            blog1.datetime_added=datetime.now()
+            blog1.category=cat
+            blog1.written_by=request.user
+            blog1.save()
+            return blog(request,slugify(blog1.title))
+        else:
+            return edit_blog(request,blog_id)
+
+def delete_blog(request,blog_slug):
+    blog=Blog.objects.get(slug=blog_slug)
+    blog.delete()
+    return HttpResponseRedirect('/nblik/')

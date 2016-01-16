@@ -27,29 +27,36 @@ def get_to_follow_list(user=None):
             up=UserProfile.objects.get(user=user)
             up_follow=Follow.objects.get(userprofile=user)
             already_followed_list=up_follow.followed.all()
-            liked_blog_list=up.liked_blogs.all()
-            liked_categories_list=up.liked_categories.all()
-            up_all=UserProfile.objects.all()
+            #liked_blog_list=up.liked_blogs.all()
+            #liked_categories_list=up.liked_categories.all()
+            #up_all=UserProfile.objects.order_by('-level')[:5]
+            to_follow=Follow.objects.order_by('-followers')[:5]
             up_list=[]
-            for up1 in up_all:
-                if up==up1:
-                    continue
-                if up1 in already_followed_list:
-                    pass
-                else:
-                    up1_liked_blog_list=up1.liked_blogs.all()
-                    #print up1_liked_blog_list
-                    up1_liked_category_list=up1.liked_categories.all()
-                    for lc1 in liked_categories_list:
-                        if lc1 in up1_liked_category_list:
-                            up_list.append(up1)
+            for follow in to_follow:
+                if user!=follow.userprofile:
+                    up_list.append(follow.userprofile.userprofile)
+                    for already in already_followed_list:
+                        if already==follow.userprofile.userprofile:
+                            up_list.remove(follow.userprofile.userprofile)
                             break
-                        else:
-                            for lb1 in liked_blogs_list:
-                                if lb1 in up1_liked_blog_list:
-                                    up_list.append(up1)
-                                    break
-
+            # for up1 in up_all:
+            #     if up==up1:
+            #         continue
+            #     if up1 in already_followed_list:
+            #         pass
+            #     else:
+            #         up1_liked_blog_list=up1.liked_blogs.all()
+            #         print up1_liked_blog_list
+            #         up1_liked_category_list=up1.liked_categories.all()
+            #         for lc1 in liked_categories_list:
+            #             if lc1 in up1_liked_category_list:
+            #                 up_list.append(up1)
+            #                 break
+            #             else:
+            #                 for lb1 in liked_blogs_list:
+            #                     if lb1 in up1_liked_blog_list:
+            #                         up_list.append(up1)
+            #            
             return {'userprofiles':up_list}
         except:
             return None

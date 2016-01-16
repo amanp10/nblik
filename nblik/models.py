@@ -140,7 +140,7 @@ class Comment(models.Model):
 
 class Follow(models.Model):
     userprofile=models.OneToOneField(User)
-    followed=models.ManyToManyField(UserProfile)
+    followed=models.ManyToManyField(UserProfile,blank=True)
     followers=models.IntegerField(default=0)
     no_followed=models.IntegerField(default=0)
     def __unicode__(self):

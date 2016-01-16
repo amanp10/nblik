@@ -47,6 +47,7 @@ body
     font-weight: bold;
 }
 </style>
+<script src="{% static "js/jquery-1.11.3.min.js" %}"></script>
 <!--form>
     {{ myform.media }}
     {{ myform.as_p }}
@@ -81,9 +82,10 @@ body
     </div>
     <button id="submit_no_cat" class= "btn btn-primary" type = "submit" name ="submit">Done!</button>
 </form>
-<script src="{% static "js/jquery-1.11.3.min.js" %}"></script>
 <script type="text/javascript">
 $('#id_blog_content').html("{{ quick_blog_text }}");
+var url= "/nblik/"+ $("#select-category").val() + "/add_blog/" ;
+$('#blog_form2').attr("action",url);
 $('#submit_no_cat').click(function(event){
     if($('#select-category').val()=="")
     {

@@ -22,16 +22,18 @@
                 <h3 style="font-family:arial;">
             <a href="{% url 'blog' blog.slug %}" class="blog_title"><strong>{{ blog.title }}</strong></a>
                 </h3>
-                <p class='text-left' style="color:gray;"> &nbsp<img src="{{ blog.written_by.userprofile.picture.url }}" class="pro_pic"/> -<a id="written_by" href="/{{ blog.written_by }}/">{{ blog.written_by }}</a></p>
+                <p class='text-left' style="color:gray;"> &nbsp<img src="{{ blog.written_by.userprofile.picture.url }}" class="pro_pic"/> -<a id="written_by" href="/{{ blog.written_by }}/">{{ blog.written_by.userprofile.name }}</a></p>
                 <div class="active_text text_div"><p class="blog_text">{{ blog.blog_content|safe }}</p></div>
                 <span id="{{ blog.id }}" style="color:black;font-weight:bold;">
                 {{ blog.likes }} </span><font style="color:gray;">like(s)</font>
-				{% if show %}
                 {% if user.is_authenticated %}
+                {% if show %}
                         <button data-blogid="{{ blog.id }}" class="btn btn-primary blog_like" type="button">
                         <span class="glyphicon glyphicon-thumbs-up"> </span>
                         Like</button>
                     {% endif %}
+                    {% else %}
+        <a href="/nblik/login_signup" class='btn btn-primary blog_like'><span class="glyphicon glyphicon-thumbs-up"> </span> Like</a>
 				{% endif %},&nbsp
                 <font style="color:black;font-weight:bold;">
                 {% for key,value in comments_number.items %}

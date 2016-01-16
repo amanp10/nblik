@@ -39,11 +39,6 @@ $(document).ready(function(){
     });
     });
 
-    $('#hide_write').click(function(event){
-      event.preventDefault();
-      alert("You need to login first!");
-    });
-
     $('#new_discuss_topic').change(function(){
         var discussion_topic=$('#new_discuss_topic').val();
         console.log(discussion_topic);
@@ -242,14 +237,11 @@ $(".discuss-lyk").click(function(event){
   {
     $(this).toggleClass('active_text');
   });
-  $('.discuss_topic').click(function(event){
-    event.preventDefault();
-    alert("You need to log in first!");
-  });
-});
+
 
   $('#edit_language').click(function(event){
       $('#language_id').toggleClass("language1");
       $('#language_id').toggleClass("language2");
       event.stopImmediatePropagation();
     });
+});
