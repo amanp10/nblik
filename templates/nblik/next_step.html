@@ -9,73 +9,91 @@ body
 	text-align: center;
 	display: -webkit-box;
 	-webkit-box-pack:center;
-	background: rgb(210,217,236);
+	background-image: url('{% static "images/bg2.jpg" %}');
+	background-size: 100%;
+	background-attachment: fixed;
 }
 .body_div
 {
 	position:absolute;
 	top:150px;
 	left:50%;
-	margin-left: -340px;
-	background: rgb(70,94,170);
-	width:680px;
+	margin-left: -400px;
+	margin-bottom: 50px;
+	background:rgba(255,255,255,0.5);
+	width:800px;
 	height:450px;
 	padding: 15px;
-	color:white;
+	color:rgb(56,77,137);
 	font-size: 16px;
-	-webkit-border-radius:10px;
-}
-#form1
-{
-	z-index: -10;
+	border:4px solid rgb(70,94,170);
 }
 #form2
 {
 	padding-top: 50px;
+	visibility: visible;
+}
+#form1
+{
+	visibility: hidden;
 }
 input
 {
 	padding: 1px 3px 1px 3px;
-	color: black;
+	color: rgb(75,75,75);
 }
 input[type="number"]
 {
 	width:70px;
 }
-h2
+input[type="file"]
 {
-	/*font-family: ;*/
+	display: inline;
+}
+input[type="button"],input[type="submit"]
+{
+	background: transparent;
+	color: rgb(56,77,137);
+	font-weight: bold;
+	border:2px solid rgb(56,77,137);
+}
+input[type="button"]:hover,input[type="submit"]:hover
+{
+	background: rgb(56,77,137);
+	color:white;
 }
 </style>
-<h2>Make your profile</h2>
-<form method="post" action="/nblik/next_step/">
+<h2>Make your Profile</h2>
+<form method="post" action="/nblik/next_step/"  enctype="multipart/form-data">
 	{% csrf_token %}
 <div id="form1" class="body_div">
 	<h3>Your prefered categories :</h3>
 	{% for c in cat_list %}
-	{{ c.name }} <input type="checkbox" name="category" value="{{ c.id }}"> &nbsp
+	<font color="black">{{ c.name }}</font> <input type="checkbox" name="category" value="{{ c.id }}"> &nbsp
 	{% endfor %}<br><br>
-	<h3>Choose prefered language : </h3><input type="radio" name="language" value="1"> English<br>
-	<input type="radio" name="language" value="2"> Hindi<br>
-	<input type="radio" name="language" value="3"> Both<br><br>
-	<input type="button" value="BACK" id="back"> &nbsp<input type="submit" value="Submit">
+	<h3>Choose prefered language : </h3><input type="radio" name="language" value="1"> <font color="black">English</font><br>
+	<input type="radio" name="language" value="2"> <font color="black">Hindi</font><br>
+	<input type="radio" name="language" value="3"> <font color="black">Both</font><br><br>
+	<input type="button" value="Back" id="back"> &nbsp<input type="submit" value="Submit">
 </div>
 <div id="form2" class="body_div">
 	<input type="text" placeholder="Email" name="email" value="{{ email }}"><br><br>
 	<input type="text" placeholder="Name" name="name" value="{{ name }}"><br><br>
-	Date of Birth : &nbsp Date: <input type="number" name="dob_date"> Month: <input type="number" name="dob_month"> Year: <input type="number" name="dob_year"><br><br>
-	Profile picture: <input type="file" name="picture"><br>
+	Date of Birth : &nbsp Date: <input type="number" name="dob_date" min="1" max="31"> Month: <input type="number" name="dob_month" min="1" max="12"> Year: <input type="number" name="dob_year" min="1900"><br><br>
+	Profile picture: <input type="file" name="picture"><br><br>
 	<input type="text" placeholder="Describe yourself in a line" name="profile_tag"><br><br>
-	<input type="button" id="next" style="color:black;" value="NEXT">
+	<input type="button" id="next" value="Next">
 </div>
 </form>
     <script src="{% static "js/jquery-1.11.3.min.js" %}"></script>
     <script type="text/javascript">
     $('#next').click(function(){
-    	$('#form2').css("z-index","-100");
+    	$('#form2').css("visibility","hidden");
+    	$('#form1').css("visibility","visible");
     });
     $('#back').click(function(){
-    	$('#form2').css("z-index","100");
+    	$('#form2').css("visibility","visible");
+    	$('#form1').css("visibility","hidden");
     });
     </script>
 {% endblock %}

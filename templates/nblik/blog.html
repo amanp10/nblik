@@ -14,16 +14,46 @@ div#delete.show
     height:auto;
     padding: 2px;
 }
+#blog_div_main
+{
+    padding: 40px;
+    background: white;
+    max-width: 95%;
+    margin-top:40px;
+    margin-bottom: 40px;
+    margin-left:20px;
+    -webkit-box-shadow:2px 2px 3px rgb(100,100,100);
+    -webkit-border-radius:5px;
+}
+p
+{
+    font-family: georgia;
+    font-size: 16px;
+    margin-bottom: 0;
+}
+.edit_del
+{
+    border:2px solid rgb(150,150,150);
+    padding: 3px;
+    color:rgb(150,150,150);
+    background: transparent;
+}
+.edit_del:hover
+{
+    color:black;
+    border-color:black;
+    text-decoration: none;
+}
 </style>
 <script src="{% static "js/jquery-1.11.3.min.js" %}"></script>
 <link href="{% static "css/index.css" %}" rel="stylesheet">
-<div style="padding-top:50px;">
+<div id="blog_div_main" style="padding-top:50px;">
 <p style="text-align:left;font-family:'Montserrat',tahoma;color:rgb(75,75,75);font-size:20px;letter-spacing:1px;font-weight:700;">{{ blog.category }}</p>
 <h1>{{ blog.title }}</h1>
         {% if user == blog.written_by %}
-        <a href="/nblik/edit_blog/{{ blog.slug }}">Edit</a> &nbsp
-        <button id="delete_dialog">Delete</button><br>
-        <div id="delete">Are you sure?<br><a href="/nblik/delete_blog/{{ blog.slug }}">Yes</a> <a id="no" href="">No</a> </div>
+        <a href="/nblik/edit_blog/{{ blog.slug }}" class="edit_del">Edit</a> &nbsp
+        <button id="delete_dialog" class="edit_del">Delete</button><br>
+        <div id="delete">Are you sure?<br><a href="/nblik/delete_blog/{{ blog.slug }}">Yes</a> <a id="no" href="">No</a> </div><br>
         {% endif %}
 		{% if blog.image %}
         <br />
@@ -34,8 +64,8 @@ div#delete.show
 <span style='float:right;color:gray;'>{{ b_time }}</span>
 {% endif %}
 <p class='text-left' style="color:gray;"> <img src="{{ blog.written_by.userprofile.picture.url }}" class="pro_pic"/>
--{{ blog.written_by.userprofile.name }}</p>
-<blog class="blog_text">{{ blog.blog_content|safe }}</blog>
+-{{ blog.written_by.userprofile.name }}</p><br>
+<p class="blog_text" style="font-family:georgia;">{{ blog.blog_content|safe }}</p>
 <br/><br/>
 <span id="{{ blog.id }}" style="color:black;font-weight:bold;">{{ blog.likes }}</span><font style="color:gray;"> like(s)</font>
 {% if user.is_authenticated %}
@@ -59,17 +89,19 @@ div#delete.show
 {% endif %}
 <div>
 	<div class="panel">
-        <br />
+        <br />      
                     <div class="panel-heading">
+                    {% if comments %}
                     <h3 class="panel-title">Commments:</h3>
+                    {% endif %}
                     <div class="panel-body">
                         <div class="list-group">
                             <div id="wrapper">
                             {% if comments %}
                             {% for comment,comment_by_name in comments %}
-                                <div class="list-group-item">
+                                <div class="list-group-item" style="width:75%">
                                     <h4 class="list-group-item-heading"><img src="{{ comment.comment_by.userprofile.picture.url }}" class="pro_pic_2"/> {{ comment_by_name }}</h4>
-									<p class="list-group-item-text">{{ comment.comment_text }}</p>
+									<p class="list-group-item-text" style="font-family:georgia;">{{ comment.comment_text|safe }}</p>
 									<p style="color:gray;"><span id="{{ comment.id }}" style="color:black">{{ comment.likes }}</span> like(s)</p>
                                     {% if user.is_authenticated %}
                                     {% for key,value in show_comment.items %}

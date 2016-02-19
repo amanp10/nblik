@@ -4,19 +4,18 @@
 {% block body_block %}
 <link href="{% static "css/index.css" %}" rel="stylesheet">
 	    {% if user.is_authenticated %}
-        <div id="quick_blog">
+        <div id="quick_blog" class="blog_div">
         <form role="form" accept-charset="utf-8" method="post" action="/nblik/quick_add_blog/" class="simform">
             {% csrf_token %}
-            <span>Enlighten Us...</span><br />
-            <textarea name="quick_blog_text" style="width:90%" rows="4"></textarea><br />
+            <textarea name="quick_blog_text" style="width:90%" rows="4" placeholder="Enlighten us..."></textarea><br />
             <button type="submit">Done!</button>
         </form>
         </div>
-        <hr/>
 		{% else %}
 		{% endif %}
 		{% if blogs %}
                 {% for blog,b_time,show in zipped_data %}
+                <div class="blog_div">
                     <a id="cat" href="{% url 'category' blog.category.slug %}" style='text-align:left;color:rgb(75,75,75);font-weight:normal;font-size:20px;letter-spacing:1px;'>{{ blog.category }}</a>
                     <span style='float:right;color:gray;'>{{ b_time }}</span>
                 <h3 style="font-family:arial;">
@@ -51,8 +50,7 @@
 {% endif %} 
 
                 <br/>
-                <br/>
-                <hr noshade size=9>
+            </div>
                 {% endfor %}
 		{% else %}
 		    <strong>There are no blogs present.</strong>

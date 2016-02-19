@@ -13,7 +13,7 @@
 	</head>
 
 	<body>
-	    <div class ="navbar navbar-inverse navbar-fixed-top" role = "navigation" style="background:rgb(70,94,170);height:55px;">
+	    <div class ="navbar navbar-inverse navbar-fixed-top" role = "navigation" style="background:white;height:60px;border-bottom:2px solid rgb(70,94,170);">
 		    <div class="container-fluid" style="display:-webkit-box;display:-moz-box;width:100%;">
 			    <div class="nav-header" style="-webkit-box-flex:1;-moz-box-flex:1;">
 				    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -26,38 +26,37 @@
 					
 				    		<div id="search_top_div" style="position:relative;">
 				    		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-			                <input type="text" name="search-top" id="suggestion_search" placeholder="Search"/>
+			                <input type="text" name="search-top" id="suggestion_search"/>
 			                <div id="search_results" style="width:190px;height:auto;max-height:500px;overflow:auto;"></div>
 			                </div>
 				</div>
 				<div class="navbar-collapse collapse" style="-webkit-box-flex:1;-moz-box-flex:1;">
-				    <u1 class="nav navbar-nav navbar-right"  style="background:rgb(70,94,170);">
+				    <u1 class="nav navbar-nav navbar-right"  style="background:white;">
               <li><a href="{% url 'discussions' %}"><span class="glyphicon glyphicon-blackboard"></span>&nbsp Discussions</a></li>
 			                {% if user.is_authenticated %}
 			                {% if category %}
-				    	    <li><a href="/nblik/{{ category.slug }}/add_blog/"><span class="glyphicon glyphicon-pencil"></span>&nbsp Write </a></li>
+				    	    <li><a href="/nblik/{{ category.slug }}/add_blog/"><span class="glyphicon glyphicon-pencil"></span> Write </a></li>
 				    	    {% else %}
-				    	    <li><a href="/nblik/none/add_blog/"><span class="glyphicon glyphicon-pencil"></span>&nbsp Write </a></li>
+				    	    <li><a href="/nblik/none/add_blog/"><span class="glyphicon glyphicon-pencil"></span> Write </a></li>
 				    	    {% endif %}
 				    	    {% else %}
-				    	    <li><a href="/nblik/login_signup"><span class="glyphicon glyphicon-pencil"></span>&nbsp Write </a></li>
+				    	    <li><a href="/nblik/login_signup"><span class="glyphicon glyphicon-pencil"></span> Write </a></li>
 				    	    {% endif %}
 				    	    {% if user.is_authenticated %}
-                                <li><a href="/{{ user.username }}/"><span class="glyphicon glyphicon-user"></span>&nbsp Profile</a></li>
+                                <li><a href="/{{ user.username }}/"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 			                {% else %}
-			                    <li><a href="{% url 'login_signup' %}"><span class="glyphicon glyphicon-lock"></span>&nbsp SignIn/SignUp</a></li>
+			                    <li><a href="{% url 'login_signup' %}"><span class="glyphicon glyphicon-lock"></span> SignIn/SignUp</a></li>
 			                {% endif %}
 				    </u1>
 		         </div>
 		    </div>
 	    </div>
 		<div class="container-fluid">
-		    <div class="col-sm-3 col-md-2 sidebar" style="overflow-y:auto;background:rgb(210,217,236);-moz-box-sizing:content-box;">
-			<u1 class="nav nav-list">
-			    <li class="nav-header" style="font-family:tahoma;font-weight:bold;font-size:16px;color:black;">Find a Category</li>
+		    <div class="col-sm-3 col-md-2 sidebar" style="overflow-y:auto;background:rgb(234,237,247);-moz-box-sizing:content-box;">
+		    	<br>
+			<u1 class="nav nav-list" style="style:inline-table;">
 				<form>
-				<li><input class="search-query span10" type="text" name="suggestion" value="" id="suggestion_id"
-					placeholder="Enter Category"/></li>
+				<li><span class="glyphicon glyphicon-search" aria-hidden="true"></span> &nbsp<input class="search-query span10" type="text" name="suggestion" value="" id="suggestion_id" placeholder="Category"/></li>
 				</form>
 			</u1>
 			<div id="cats">
@@ -66,18 +65,23 @@
 			  {% endblock %}
 			</div>
 			</div>
-		</div>
-		    <div class="col-sm-6 col-sm-offset-3 col-md-offset-2 col-md-8 main">
-			    <div>
-
-            </div>
+		    <div class="col-sm-6 col-sm-offset-3 col-md-offset-2 col-md-8 main" style="padding:20px 0 0 0;">
 				    {% block body_block %}
 					{% endblock %}
+
+				<div id="body_footer">
+					<div id="footer_table">
+						<div><a href="">About</a></div>
+						<div><a href="">Contact Us</a></div>
+						<div><a href="">Privacy Policy</a></div>
+						<div><a href="">Copyrights</a></div>
+					</div>
 				</div>
-			</div>
-			<div class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 sidebar" style="background:rgb(210,217,236);">
+				</div>
+			<div class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 sidebar" style="background:rgb(234,237,247);">
 				<u1 class="nav nav-list">
-			    <li class="nav-header" style="font-family:tahoma;font-weight:bold;font-size:16px;color:black;">Featured Blogs</li>
+			    <li class="nav-header" style="font-family:tahoma;font-weight:bold;font-size:16px;">Featured Blogs</li>
+			    <hr style="margin:2px 2px 0 2px;border-color:black;">
 			    </u1>
 				<div id="featured_blogs">
         	{% block side_block2_1 %}
@@ -87,6 +91,7 @@
           <u1 class="nav nav-list">
   			    <li class="nav-header" style="font-family:tahoma;font-weight:bold;"></li>
   			    </u1>
+  			    <br>
   			    {% if user.is_authenticated %}
           <div id="to_follow">
             {% block side_block2_2 %}

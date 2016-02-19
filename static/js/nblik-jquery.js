@@ -160,9 +160,10 @@ $(".discuss-lyk").click(function(event){
     blog_id = $(this).attr("data-blogid");
     up_name=$(this).attr("data-uname");
     console.log("up_name");
-    comment_text=$('#comment_text').val();
+    comment_text=$('#comment_text').val().replace(/\r\n|\r|\n/g,"<br />");
+    console.log(comment_text);
     $.get('/nblik/comment/',{user_id: user_id,blog_id:blog_id,comment_text:comment_text},function(newdata){
-      $('<div class="list-group-item"><h4 class="list-group-item-heading" id="new_comment_by" >'+up_name+'</h4><p class="list-group-item-text" id="new_comment_text" >'+comment_text+'</p><br /><p style="color:gray;"><font color="black" id="new_comment_like">'+newdata+'</font> like(s)</p></div>').appendTo("#wrapper");
+      $('<div class="list-group-item" style="width:75%"><h4 class="list-group-item-heading" id="new_comment_by" >'+up_name+'</h4><p class="list-group-item-text" id="new_comment_text" >'+comment_text+'</p><br /><p style="color:gray;"><font color="black" id="new_comment_like">'+newdata+'</font> like(s)</p></div>').appendTo("#wrapper");
       /*$('#new_comment_like').html(data);
       $('#new_comment_text').html(comment_text);
       $('#new_comment_by').html(up_name);
@@ -175,9 +176,9 @@ $(".discuss-lyk").click(function(event){
     up_name=$(this).attr('data-upname');
     user_id = $(this).attr("data-upid");
     discussion_id = $(this).attr("data-discussionid");
-    discuss_text=$('#discuss_text').val();
+    discuss_text=$('#discuss_text').val().replace(/\r\n|\r|\n/g,"<br />");
     $.get('/nblik/discuss/',{user_id:user_id,discussion_id:discussion_id,discuss_text:discuss_text},function(data){
-      $('<div class="list-group-item"><h4 class="list-group-item-heading" id="new_discuss_by" > '+up_name+'</h4><p class="list-group-item-text" id="new_discuss_text" >'+discuss_text+'</p><br /><p style="color:gray;"><font color="black" id="new_discuss_like">'+data+'</font> like(s)</p></div>').appendTo('#wrapper');
+      $('<div class="list-group-item" style="width:75%;"><h4 class="list-group-item-heading" id="new_discuss_by" > '+up_name+'</h4><p class="list-group-item-text" id="new_discuss_text" >'+discuss_text+'</p><br /><p style="color:gray;"><font color="black" id="new_discuss_like">'+data+'</font> like(s)</p></div>').appendTo('#wrapper');
       /*$('#new_discuss_like').html(data);
       $('#new_discuss_text').html(discuss_text);
       $('#new_discuss_by').html(up_name);
@@ -236,6 +237,7 @@ $(".discuss-lyk").click(function(event){
   $('.text_div').click(function(event)
   {
     $(this).toggleClass('active_text');
+    event.stopImmediatePropagation();
   });
 
 

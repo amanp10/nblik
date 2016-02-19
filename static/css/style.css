@@ -26,7 +26,7 @@ html {
   display: block;
   background: #FFF;
   position: relative;
-  max-width: 550px;
+  max-width: 475px;
   border-radius: 4px;
   box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
   margin: 120px auto;
@@ -46,8 +46,9 @@ html {
   height: 48px;
 }
 .logmod__container {
-  overflow: hidden;
+  overflow: auto;
   width: 100%;
+  position: relative;
 }
 .logmod__container::after {
   clear: both;
@@ -65,7 +66,8 @@ html {
 .logmod__tab-wrapper {
   width: 100%;
   height: auto;
-  overflow: hidden;
+  overflow: auto;
+  position: relative;
 }
 .logmod__tab.show {
   opacity: 1;
@@ -128,24 +130,21 @@ html {
   content: "";
   display: table;
 }
-.logmod__alter .connect:last-child {
-  border-radius: 0 0 4px 4px;
-}
 
 .connect {
   overflow: hidden;
   position: relative;
   display: block;
-  width: 100%;
+  width: 50%;
   height: 72px;
   line-height: 72px;
   text-decoration: none;
 }
-.connect::after {
+/*.connect::after {
   clear: both;
   content: "";
   display: table;
-}
+}*/
 .connect:focus, .connect:hover, .connect:visited {
   color: #FFF;
   text-decoration: none;
@@ -215,7 +214,6 @@ html {
   width: 50%;
   padding: 0 10px;
   margin: 9px 0 0 0;
-  color: #8C979E;
   text-align: center;
   line-height: 24px;
 }
@@ -226,7 +224,7 @@ html {
 }
 
 .sminputs {
-  border-bottom: 1px solid #E5E5E5;
+  border-bottom: 1px solid transparent;
 }
 .sminputs::after {
   clear: both;
@@ -237,7 +235,7 @@ html {
   display: block;
   position: relative;
   width: 50%;
-  height: 71px;
+  height: auto;
   padding: 11px 24px;
   border-right: 1px solid #e5e5e5;
   border-bottom: none;
@@ -274,7 +272,6 @@ html {
 .sminputs .input input {
   postion: relative;
   display: inline-block;
-  height: 24px;
   font-size: 15px;
   line-height: 19.2px;
   color: #555;
@@ -282,10 +279,10 @@ html {
   vertical-align: middle;
   box-shadow: none;
   box-sizing: border-box;
-  width: 100%;
+  width: 90%;
   height: auto;
   border: none;
-  padding: 0;
+  padding: 2px;
   cursor: pointer;
   background-color: transparent;
   color: rgba(75, 89, 102, 0.85);
@@ -302,7 +299,6 @@ html {
   overflow: hidden;
   color: #444;
   cursor: pointer;
-  margin-top: 12px;
   line-height: 48px;
 }
 
@@ -572,7 +568,7 @@ html {
   color: #f44336;
   position: relative;
   text-decoration: none;
-  transition: all 0.15s ease-out;
+  /*transition: all 0.15s ease-out;*/
 }
 .special:before {
   content: "";
@@ -581,13 +577,15 @@ html {
   height: 1px;
   bottom: 0px;
   left: 0;
-  background: #f00;
+  background:transparent;
   visibility: hidden;
-  transform: scaleX(0);
-  transition: all 0.3s ease-in-out 0s;
+  /*transform: scaleX(0);
+  transition: all 0.3s ease-in-out 0s;*/
 }
-.special:hover {
-  transition: all 0.15s ease-out;
+a.special:hover {
+  color:#f44336;
+  text-decoration: underline;
+  /*transition: all 0.15s ease-out;*/
 }
 .special:hover:before {
   visibility: visible;
@@ -604,4 +602,9 @@ html {
   height: 100%;
   z-index: 999999;
   background-image: url(http://basehold.it/i/24);
+}
+.logmod__alter-container{
+  width:100%;
+  display: -webkit-box;
+  -webkit-box-orient:horizontal;
 }

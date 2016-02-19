@@ -3,6 +3,7 @@
 {% block title %} {{ category_name }} {% endblock %}
 {% block body_block %}
 <link href="{% static "css/index.css" %}" rel="stylesheet">
+<div class="blog_div" id="category_div">
     <h2>{{ category_name }}</h2>
 		<p>
 		<strong id="category_like_count">{{ category.likes }} </strong> people like this category
@@ -17,12 +18,14 @@
 	    {% endif %}
 		</p>
 		<br/>
+	</div>
 		<br/>
 		<div id="blog">
 		{% if category %}
 		    {% if zipped_data %}
 			<u1>
 			    {% for blog,b_time,show in zipped_data %}
+			    <div class="blog_div">
 				    <span style='float:right;color:gray;'>{{ b_time }}</span>
                     <h3>
 	    	        <a href="{% url 'blog' blog.slug %}" class="blog_title">{{ blog.title }}</a>
@@ -55,7 +58,7 @@
 {% else %}
     <a id="share" href="{% url 'socialauth_begin' 'facebook' %}"> <span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Share</a>
 {% endif %}
-                    <hr noshade size=9>
+                </div>
                 {% endfor %}
 			</u1>
 		    {% else %}

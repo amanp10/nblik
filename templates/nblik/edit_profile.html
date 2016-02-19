@@ -1,0 +1,85 @@
+{% extends 'nblik/base2.html' %}
+{% load staticfiles %}
+{% block title %}- Edit Profile{% endblock %}
+{% block body_block %}
+<style type="text/css">
+body
+{
+	width:100%;
+	text-align: center;
+	display: -webkit-box;
+	-webkit-box-pack:center;
+	background-image: url('{% static "images/bg2.jpg" %}');
+	background-size: 100%;
+	background-attachment: fixed;
+}
+.body_div
+{
+	position:fixed;
+	top:100px;
+	left:50%;
+	margin-left: -400px;
+	margin-bottom: 50px;
+	background:rgba(255,255,255,0.5);
+	width:800px;
+	/*height:450px;*/
+	padding: 15px;
+	color:rgb(56,77,137);
+	font-size: 16px;
+	border:4px solid rgb(70,94,170);
+}
+#form2
+{
+	/*padding-top: 50px;*/
+}
+input
+{
+	padding: 1px 3px 1px 3px;
+	color: rgb(75,75,75);
+}
+input[type="number"]
+{
+	width:70px;
+}
+input[type="file"]
+{
+	display: inline;
+}
+#next
+{
+	background: transparent;
+	color: rgb(56,77,137);
+	font-weight: bold;
+	border:2px solid rgb(56,77,137);
+}
+#next:hover
+{
+	background: rgb(56,77,137);
+	color: white;
+}
+</style>
+<form method="post" action="/nblik/update_profile/" enctype="multipart/form-data">
+	{% csrf_token %}
+<div id="form2" class="body_div">
+	<h2 style="color:rgb(56,77,137);">Edit your profile</h2><br>
+	<input type="text" placeholder="Name" name="name" value="{{ name }}"><br><br>
+	Date of Birth : &nbsp Date: <input type="number" value="{{ date }}" name="dob_date" min="1" max="31"> Month: <input type="number" name="dob_month" value="{{ month }}" min="1" max="12"> Year: <input type="number" name="dob_year" value="{{ year }}" min="1900"><br><br>
+	<img src="{{ pic }}" height="100px" width="100px"><br><br>
+	Profile picture: <input type="file" name="picture" value="Choose pic" ><br>
+	<h3>Choose prefered language : </h3><input type="radio" name="language" value="1"> English
+	<input type="radio" name="language" value="2"> Hindi
+	<input type="radio" name="language" value="3"> Both<br><br>
+	<input type="text" placeholder="Describe yourself in a line" name="profile_tag" value="{{ tag }}"><br><br>
+	<input type="submit" id="next">
+</div>
+</form>
+    <script src="{% static "js/jquery-1.11.3.min.js" %}"></script>
+    <script type="text/javascript">
+    $('input[value="{{ language }}"]').attr('checked','true');
+    /*$('input[type="file"]').bind('change', function() {
+
+  //this.files[0].size gets the size of your file.
+  alert(this.files[0].size);
+});*/
+    </script>
+{% endblock %}

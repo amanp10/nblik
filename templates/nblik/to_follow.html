@@ -4,9 +4,10 @@
 #wrapper
 {
 	overflow:hidden;
-	width:150px;
-	height:150px;
+	width:153px;
+	height:153px;
 	position: relative;
+	-webkit-border-radius:10px 0 0 10px;
 }
 .follow_div
 {
@@ -16,10 +17,8 @@
 	padding: 15px;
 	position: absolute;
 	background: white;
-	-webkit-border-radius:5px;
-	-moz-border-radius:5px;
-	-ms-border-radius:5px;
-	border-radius:5px;
+	-webkit-border-radius:10px 0 0 10px;
+	-webkit-box-shadow: 1px 1px 2px rgb(100,100,100);
 	font-weight: bold;
 }
 .btn-primary
@@ -28,11 +27,12 @@
 	font-size: 14px;
 }
 </style>
-<font style="font-size:14px;font-weight:bold;">Follow:</font>
+<font style="font-size:14px;font-weight:bold;">Follow</font>
+<hr style="margin:2px 2px 5px 2px;border-color:black;">
 <div id="wrapper">
 	<div class="follow_div">No more to follow.</div>
 	{% for up in userprofiles %}
-	    <div id="{{ up.id }}" class="follow_div"><img src="{{ up.picture.url }}" class="pro_pic"/> &nbsp-<a id="written_by" href="/{{ up.name }}/">{{ up.name }}</a><br><br>
+	    <div id="{{ up.id }}" class="follow_div"><img src="{{ up.picture.url }}" class="pro_pic"/> &nbsp-<a id="written_by" href="/{{ up.user }}/">{{ up.name }}</a><br><br>
       	<button class="follow_user btn btn-primary" data-userprofileid="{{ up.id }}" type="button">Follow</button>&nbsp<button type="button" class="skip btn btn-primary" data-userprofileid="{{ up.id }}">Skip</button>
   		</div>
 	{% endfor %}

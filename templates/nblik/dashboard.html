@@ -8,7 +8,7 @@
 body
 {
 	text-align: center;
-  background: rgb(210,217,236);
+  background: rgb(234,237,247);
   padding: 80px;
 }
 img[style]
@@ -134,7 +134,6 @@ div[id^="d"]:last-child
 .language1
 {
   padding: 0;
-  background: rgb(200,200,200);
   -webkit-border-radius:0 5px 5px 0;
   -moz-border-radius:0 5px 5px 0;
   border-radius:0 5px 5px 0;
@@ -144,25 +143,52 @@ div[id^="d"]:last-child
 .language2
 {
   padding: 10px;
-  background: rgb(200,200,200);
   -webkit-border-radius:0 5px 5px 0;
   -moz-border-radius:0 5px 5px 0;
   border-radius:0 5px 5px 0;
   height:auto;
+}
+#edit_lang
+{
+  color: rgb(150,150,150);
+  font-weight: bold;
+  border:2px solid  rgb(150,150,150); 
+  margin-top: 5px;
+  background: transparent;
+  padding: 3px;
+  -webkit-border-radius:3px;
+}
+#edit_lang:hover
+{
+  color:black;
+  border-color: black;
+}
+#d4 a:link,#d4 a:visited,#d3 a:link,#d3 a:visited
+{
+  color:rgb(150,150,150);
+}
+#d4 a:hover,#d3 a:hover
+{
+  color:black;
+  text-decoration: none;
 }
 </style>
 {% if userprofile.picture %}
 <img style="height:150px;width:150px;" src="{{ userprofile.picture.url }}"/>
 {% endif %}<br/><br />
 <span id="name">{{ userprofile.name }}</span><br>
-<span id="tag">{{ userprofile.profile_tag_line }}</span><br/><br />
+<span id="tag">{{ userprofile.profile_tag_line }}</span><br/>
+{% if user == user_m %}
+<a href="/nblik/edit_profile/">Edit</a>
+{% endif %}
+<br />
 <div id="wrapper">
 <div id="nav">
 <ul>
 <li data-id="5">About</li>
 <li data-id="4">Following</li>
 <li data-id="3">Followers</li>
-<li data-id="2">Tags</li>
+<!--<li data-id="2">Tags</li>-->
 <li data-id="1">Settings</li>
 </ul>
 </div>
@@ -186,21 +212,21 @@ div[id^="d"]:last-child
 </form>
 </div>
 </div>
-<div id="d2">
+<!--<div id="d2">
 {% for tag in followed_tags %}
 <span class="data">{{ tag.name }}</span>,
 {% endfor %}
-</div>
+</div>-->
 <div id="d3"><span class="data">No of followers : {{ userprofile_follow.no_followed }}</span><br><br>
   {% for up_follow in followers %}
 <img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up_follow.userprofile.userprofile.picture.url }}"> &nbsp &nbsp
-<span class="data">{{ up_follow.userprofile.username }}</span><br /><hr><br />
+<a href="/{{ up_follow.userprofile }}/"><span class="data">{{ up_follow.userprofile.userprofile.name }}</span></a><br /><hr><br />
 {% endfor %}
 </div>
 <div id="d4">{% for up in followed_list %}
 <img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up.picture.url }}"> &nbsp &nbsp
-<span class="data">{{ up.user }}</span><br /><hr><br />
-{% endfor %}<div style="height:40px;background:rgb(210,217,236);margin:-20px;"></div></div>
+<a href="/{{ up.user }}/"><span class="data">{{ up.name }}</span></a><br /><hr><br />
+{% endfor %}</div>
 <div id="d5">
   About the user
 </div>

@@ -7,50 +7,47 @@ u1.nav.nav-sidebar>li.active>a:link
 	font-family: 'Montserrat',arial;
 	font-weight: 700;
 	background:rgb(34,47,83);
-	border-right-color:rgb(34,47,83);
-	-webkit-border-radius:7px 0 0 7px;
-	-moz-border-radius:7px 0 0 7px;
-	-ms-border-radius:7px 0 0 7px;
-	-o-border-radius:7px 0 0 7px;
-	border-radius:7px 0 0 7px;
 }
 u1.nav.nav-sidebar>li.active>a:hover
 {
 	font-weight: bold;
 	background:rgb(34,47,83);
-	border-right-color:rgb(34,47,83);
 }
 u1.nav.nav-sidebar>li.active>a:visited
 {
 	background:rgb(34,47,83);
-	border-right-color:rgb(34,47,83);
 }
 u1.nav.nav-sidebar>li.inactive>a:link
 {
-	color:rgb(245,245,245);
+	color:black;
 	font-family: 'Montserrat',arial;
-	font-weight: 400;
-	background:rgb(56,77,137);
+	font-weight: 600;
+	background:white;
 	padding-right: 15px;
-	border-right: 5px solid rgb(128,147,202);
-	margin:10px 0 10px 0;
-	-webkit-border-radius:7px 0 0 7px;
-	-moz-border-radius:7px 0 0 7px;
-	-ms-border-radius:7px 0 0 7px;
-	-o-border-radius:7px 0 0 7px;
-	border-radius:7px 0 0 7px;
+	border-bottom: 1px solid rgb(200,200,200);
+}
+u1.nav.nav-sidebar>li.inactive:last-of-type>a:last-of-type:link
+{
+	border-bottom: 1px solid white;
 }
 u1.nav.nav-sidebar>li.inactive>a:visited
 {
-	color:rgb(245,245,245);
-	background: rgb(56,77,137);
+	color:black;
+	background:white;
 	padding-right: 15px;
-	border-right: 5px solid rgb(128,147,202);
+	border-bottom: 1px solid rgb(200,200,200);
+}
+u1.nav.nav-sidebar>li.inactive:last-of-type>a:visited
+{
+	border-bottom: 1px solid white;
 }
 u1.nav.nav-sidebar>li.inactive>a:hover
 {
-	border-right:5px solid rgb(34,47,83);
-	background: rgb(56,77,137);
+	background:white;
+}
+u1.nav.nav-sidebar>li.inactive:last-of-type>a:hover
+{
+	border-bottom: 1px solid white;
 }
 </style>
 {% if cats %}

@@ -39,6 +39,45 @@ body
     font-size: 16px;
     resize:none;
 }
+#submit_no_cat
+{
+    color:white;
+    font-weight: bold;
+    border:2px solid #337ab7; 
+    margin-top: 5px;
+    background: #337ab7;
+    padding: 3px;
+    -webkit-border-radius:3px;
+}
+#submit_no_cat:hover
+{
+    color:#337ab7;
+    background:transparent;
+}
+#click_here
+{
+    color:black;
+}
+#click_here:hover
+{
+    cursor:pointer;
+}
+#help_text
+{
+    background: rgb(200,200,200);
+    max-width: 200px;
+    -webkit-border-radius:5px;
+    position: relative;
+    left:50%;
+    margin-left: -100px;
+    height: 0;
+    overflow: hidden;
+}
+div#help_text.show
+{
+    height:auto;
+    padding: 3px;
+}
 </style>
     <script src="{% static "js/jquery-1.11.3.min.js" %}"></script>
 <strong>Select a category :</strong><select id="select-category" name="dropdown">
@@ -56,13 +95,14 @@ body
     {{ myform.blog_content }}
     </div>
     <input name="blog_id" value="{{ blog_id }}" hidden>
-    <button id="submit_no_cat" class= "btn btn-primary" type = "submit" name ="submit">Done!</button>
+    <button id="submit_no_cat" type = "submit" name ="submit">Done!</button>
 </form>
+<font style="color:rgb(150,150,150);">For uploading images/flash content</font> <span id="click_here">click here</span><div id="help_text">Click on the image/flash icon in the editor. Then go to Upload. Choose the file and click on 'Send it to the Server'. Then adjust the parameters as you wish and click 'OK'.</div>
 <script type="text/javascript">
-$('#select-category').val("{{ blog_category }}");
-$('#id_title').val("{{ blog_title }}");
-$('#id_blog_content').html("{{ blog_text|safe }}");
-var url= "/nblik/"+ "{{ blog_category }}" + "/update_blog/" ;
+$('#select-category').val('{{ blog_category }}');
+$('#id_title').val('{{ blog_title }}');
+$('#id_blog_content').html('{{ blog_text|safe }}');
+var url= '/nblik/'+ '{{ blog_category }}' + '/update_blog/' ;
 $('#blog_form2').attr("action",url);
 $('#submit_no_cat').click(function(event){
     if($('#select-category').val()=="")
@@ -74,6 +114,11 @@ $('#submit_no_cat').click(function(event){
     {
         $("#blog_form2").submit();
     }
+});
+$('#click_here').click(function(event)
+{
+$('#help_text').toggleClass('show');
+event.stopImmediatePropagation();
 });
 </script>
 {% endblock %}

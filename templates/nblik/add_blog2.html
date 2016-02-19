@@ -39,9 +39,49 @@ body
     font-size: 16px;
     resize:none;
 }
+button[type="submit"]
+{
+    color:white;
+    font-weight: bold;
+    border:2px solid  #337ab7; 
+    margin-top: 5px;
+    background: #337ab7;
+    padding: 3px;
+    -webkit-border-radius:3px;
+}
+button[type="submit"]:hover
+{
+    color:#337ab7;
+    background:transparent;
+}
+#click_here
+{
+    color:black;
+}
+#click_here:hover
+{
+    cursor:pointer;
+}
+#help_text
+{
+    background: rgb(200,200,200);
+    max-width: 200px;
+    -webkit-border-radius:5px;
+    position: relative;
+    left:50%;
+    margin-left: -100px;
+    height: 0;
+    overflow: hidden;
+}
+div#help_text.show
+{
+    height:auto;
+    padding: 3px;
+}
 </style>
 <script src="{% static "js/jquery-1.11.3.min.js" %}"></script>
 {% if category %}
+<h3>{{ category }}</h3>
 <form role="form" id="blog_form" method = "post" action = '/nblik/{{ category.slug }}/add_blog/' enctype = "multipart/form-data">
     <div id="blog_area_div">
         {% csrf_token %}
@@ -49,11 +89,11 @@ body
         {{ myform.title }}<br>
         {{ myform.blog_content }}
     </div>
-        <button id="submit_cat" class = "btn btn-primary" type = "submit" name ="submit">DONE!</button>
+        <button id="submit_cat" type = "submit" name ="submit">DONE!</button>
 </form>
-
+<font style="color:rgb(150,150,150);">For uploading images/flash content</font> <span id="click_here">click here</span><div id="help_text">Click on the image/flash icon in the editor. Then go to Upload. Choose the file and click on 'Send it to the Server'. Then adjust the parameters as you wish and click 'OK'.</div>
 {% else %}
-<strong>Select a category :</strong><select required id="select-category" name="dropdown">
+<select required id="select-category" name="dropdown">
     <option value="">-- Select a category --</option>
     {% for category in category_list %}
   <option value="{{ category.slug }}">{{ category.name }}</option>
@@ -67,10 +107,12 @@ body
     {{ myform.title }}<br>
     {{ myform.blog_content }}
     </div>
-    <button id="submit_no_cat" class= "btn btn-primary" type = "submit" name ="submit">Done!</button>
+    <button id="submit_no_cat" type = "submit" name ="submit">Done!</button>
 </form>
+<font style="color:rgb(150,150,150);">For uploading images/flash content</font> <span id="click_here">click here</span><div id="help_text">Click on the image/flash icon in the editor. Then go to Upload. Choose the file and click on 'Send it to the Server'. Then adjust the parameters as you wish and click 'OK'.</div>
+{% endif %}
 <script type="text/javascript">
-$('#id_blog_content').html("{{ quick_blog_text }}");
+$('#id_blog_content').html('{{ quick_blog_text }}');
 var url= "/nblik/"+ $("#select-category").val() + "/add_blog/" ;
 $('#blog_form2').attr("action",url);
 $('#submit_no_cat').click(function(event){
@@ -84,7 +126,17 @@ $('#submit_no_cat').click(function(event){
         $("#blog_form2").submit();
     }
 });
+$('#click_here').click(function(event)
+{
+$('#help_text').toggleClass('show');
+event.stopImmediatePropagation();
+});
+/*CKEDITOR.editorConfig = function( config )
+{
+config.language = 'fr';
+config.uiColor = '#AADC6E';
+config.colorButton_colors = 'CF5D4E,454545,FFF,CCC,DDD,CCEAEE,66AB16';
+};*/
 </script>
-{% endif %}
 {% endblock %}
 

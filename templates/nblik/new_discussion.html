@@ -4,6 +4,10 @@
 {% block body_block %}
 <style type="text/css">
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+body
+{
+	background: rgb(234,237,247);
+}
 input[required]
 {
 	font-size: 16px;
@@ -17,10 +21,12 @@ input[required]
 #new_discuss_topic
 {
 	width:90%;
+	border:none;
 }
 #new_discuss_intro
 {
 	resize:none;
+	border:none;
 }
 h2
 {
@@ -34,9 +40,33 @@ input[type="submit"]
 }
 select
 {
-	background: rgb(210,217,236);
+	background:#337ab7;
+	color:white;
+}
+.new_discussion
+{
+	background: white;
+	margin: 10px;
+	padding: 20px;
+	-webkit-box-shadow:2px 2px 3px rgb(100,100,100);
+}
+input[type="submit"]
+{
+	color:white;
+	font-weight: bold;
+	border:2px solid  rgb(70,94,170); 
+	margin-top: 5px;
+	background: rgb(70,94,170);
+	padding: 3px;
+	-webkit-border-radius:3px;
+}
+input[type="submit"]:hover
+{
+	color:rgb(70,94,170);
+	background:transparent;
 }
 </style>
+<div class="new_discussion">
 <h2>Start a Discussion...</h2>
 <form method="post" action="/nblik/new_discussion/" id="discussion_form">
 	{% csrf_token %}
@@ -49,4 +79,5 @@ select
 <textarea name="discuss_intro" id="new_discuss_intro" placeholder="Introduction" cols="90" rows="5" max-length="500" required></textarea><br><br>
 <input type="submit" value="Done!">
 </form>
+</div>
 {% endblock %}

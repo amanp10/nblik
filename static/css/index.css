@@ -2,11 +2,13 @@
 /*@import url(https://fonts.googleapis.com/css?family=Josefin+Sans:700italic);*/
 @import url(https://fonts.googleapis.com/css?family=Ubuntu:700);
 /*@import url(https://fonts.googleapis.com/css?family=Vollkorn:700);*/
-@import url(https://fonts.googleapis.com/css?family=Itim);
+/*@import url(https://fonts.googleapis.com/css?family=Itim);*/
 /*@import url(https://fonts.googleapis.com/css?family=Rhodium+Libre);*/
+/*georgia*/
 body
 {
-	padding:40px;
+	padding:40px 0 0 0;
+	background: rgb(234,237,247);
 }
 a.blog_title:link
 {
@@ -28,7 +30,7 @@ a.blog_title:active
 .blog_text
 {
 	color:rgb(75,75,75);
-	font-family:'Itim',arial;
+	font-family:georgia,arial;
 	font-weight:normal;
 	font-size: 16px;
 	letter-spacing: 1px;
@@ -54,24 +56,29 @@ h1
 #quick_blog
 {
 	margin-top: 20px;
+	-webkit-border-radius:5px;
 }
 #quick_blog textarea
 {
 	padding-left: 5px;
-	-webkit-border-radius:7px;
-	-moz-border-radius:7px;
-	-o-border-radius:7px;
-	-ms-border-radius:7px;
-	border-radius:7px;
+	border:none;
 	resize:none;
 	font-size: 16px;
 }
 #quick_blog button
 {
-	color: white;
+	color:white;
 	font-weight: bold;
-	background: rgb(70,94,170); 
+	border:2px solid  rgb(70,94,170); 
 	margin-top: 5px;
+	background: rgb(70,94,170);
+	padding: 3px;
+	-webkit-border-radius:3px;
+}
+#quick_blog button:hover
+{
+	color:rgb(70,94,170);
+	background:transparent;
 }
 #quick_blog span
 {
@@ -143,10 +150,22 @@ a#written_by:hover
 	padding: 10px;
 	margin-bottom:20px;
 }
+.text_div>p
+{
+	font-size: 16px;
+	font-family: georgia;
+	margin-bottom: 0;
+}
 .active_text
 {
 	height:150px;
 	overflow: hidden;
+}
+.active_text>p
+{
+	font-size: 16px;
+	font-family: georgia;
+	margin-bottom: 0;
 }
 .pro_pic
 {
@@ -155,4 +174,25 @@ a#written_by:hover
 	-webkit-border-radius:50% 50%;
 	-moz-border-radius:50% 50%;
 	border-radius:50% 50%;
+}
+.blog_div
+{
+	background: white;
+	margin: 10px;
+	padding: 20px;
+	-webkit-box-shadow:2px 2px 3px rgb(100,100,100);
+}
+#category_div
+{
+	text-align: center;
+	margin-bottom: 0;
+}
+.discussion_div
+{
+	background: white;
+	max-width: 98%;
+	padding: 20px;
+	-webkit-box-shadow:2px 2px 3px rgb(100,100,100);
+	-webkit-border-radius:5px;
+	margin: 10px;
 }

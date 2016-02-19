@@ -1,5 +1,5 @@
 from django.shortcuts import render,render_to_response
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseRedirect,HttpRequest
 from nblik.models import Category,Blog,UserProfile,Comment,Follow,Discussion,Discuss,Tag
 from nblik.forms import BlogForm
 from django.template.defaultfilters import slugify
@@ -39,7 +39,7 @@ def index(request):
         user1=User.objects.get(username=request.user)
         user2=UserProfile.objects.get(user=user1)
         liked_blogs_list=user2.liked_blogs.all()
-        #print len(blog_list)
+        ##print len(blog_list)
         for i in range(0,len(blog_list)):
             for lb in liked_blogs_list:
                 if lb == blog_list[i]:
@@ -50,8 +50,8 @@ def index(request):
     except:
         pass
     context_dict = {}
-    #print datetime.now()
-    #print show
+    ##print datetime.now()
+    ##print show
     context_dict['blogs']=blog_list
     comment_matrix=[]
     comments_number={}
@@ -98,7 +98,7 @@ def category(request,category_name_slug):
             user1=User.objects.get(username=request.user)
             user2=UserProfile.objects.get(user=user1)
             liked_blogs_list=user2.liked_blogs.all()
-            #print len(blog_list)
+            ##print len(blog_list)
             for i in range(0,len(blog_list)):
                 for lb in liked_blogs_list:
                     if lb == blog_list[i]:
@@ -143,9 +143,9 @@ def get_category_list(max_results=0,startswith=''):
     if startswith=='':
         cat_list = Category.objects.all()
     elif startswith:
-        #print "Hello"
+        ##print "Hello"
         cat_list = Category.objects.filter(name__istartswith=startswith)
-        #print cat_list1
+        ##print cat_list1
     if max_results>0:
         if len(cat_list)>max_results:
             cat_list=cat_list[:max_results]
@@ -157,7 +157,7 @@ def blog(request,blog_title_slug):
     b_time=None
     try:
         b=Blog.objects.get(slug=blog_title_slug)
-        print b.blog_content
+        ##print b.blog_content
         c=Comment.objects.filter(comment_to=b).order_by('-likes')
         comments_number=len(c)
         comment_by_name=[]
@@ -169,7 +169,7 @@ def blog(request,blog_title_slug):
         comments=zip(c,comment_by_name)
     except Blog.DoesNotExist:
         pass
-    #print type(b.text)
+    ##print type(b.text)
     try:
         b=Blog.objects.get(slug=blog_title_slug)
         us=request.user
@@ -192,7 +192,7 @@ def blog(request,blog_title_slug):
         us=None
         show=None
         show_comment=None
-    #print show_comment
+    ##print show_comment
     days=(datetime.now(utc)-b.datetime_added).days
     seconds=(datetime.now(utc) - b.datetime_added).seconds
     minutes=seconds/60
@@ -222,25 +222,25 @@ def like_category(request):
 
 def suggest_category(request):
     str=request.GET["query_string"]
-    #print str
+    ##print str
     result=get_category_list(100,str)
     cat_list=[]
     for name in result:
         cat=Category.objects.get(name=name)
         cat_list.append(cat)
-    #print cat_list
+    ##print cat_list
     return render(request,'nblik/category_list.html',{'cats':cat_list})
     #return HttpResponse(cat_list)
 
 @login_required
 def like_blog(request):
-    #print "Hello"
+    ##print "Hello"
     if request.method=="GET":
         blog_id=request.GET["blog_id"]
         blog=Blog.objects.get(id=int(blog_id))
         blog.likes+=1
         blog.save()
-        #print request.user
+        ##print request.user
         user1=User.objects.get(username=request.user)
         user2=UserProfile.objects.get(user=user1)
         user2.liked_blogs.add(blog)
@@ -249,13 +249,13 @@ def like_blog(request):
 
 @login_required
 def like_discussion(request):
-    #print "Hello"
+    ##print "Hello"
     if request.method=="GET":
         discussion_id=request.GET["discussion_id"]
         discussion=Discussion.objects.get(id=int(discussion_id))
         discussion.likes+=1
         discussion.save()
-        #print request.user
+        ##print request.user
         user1=User.objects.get(username=request.user)
         user2=UserProfile.objects.get(user=user1)
         user2.liked_discussions.add(discussion)
@@ -264,13 +264,13 @@ def like_discussion(request):
 
 @login_required
 def like_discuss(request):
-    #print "Hello"
+    ##print "Hello"
     if request.method=="GET":
         discuss_id=request.GET["discuss_id"]
         discuss=Discuss.objects.get(id=int(discuss_id))
         discuss.likes+=1
         discuss.save()
-        #print request.user
+        ##print request.user
         user1=User.objects.get(username=request.user)
         user2=UserProfile.objects.get(user=user1)
         user2.liked_discusses.add(discuss)
@@ -279,13 +279,13 @@ def like_discuss(request):
 
 @login_required
 def like_comment(request):
-    #print "Hello"
+    ##print "Hello"
     if request.method=="GET":
         comment_id=request.GET["comment_id"]
         comment=Comment.objects.get(id=int(comment_id))
         comment.likes+=1
         comment.save()
-        #print request.user
+        ##print request.user
         user1=User.objects.get(username=request.user)
         user2=UserProfile.objects.get(user=user1)
         user2.liked_comments.add(comment)
@@ -302,7 +302,7 @@ def add_blog(request,category_name_slug):
         if cat:
             blog_content=request.POST['blog_content']
             blog_title=request.POST['blog_title']
-            #print type(blog_content)
+            ##print type(blog_content)
             user = request.user._wrapped if hasattr(request.user,'_wrapped') else request.user
             blog1=Blog.objects.get_or_create(title=blog_title,
                                         category=cat,
@@ -400,7 +400,7 @@ def login_and_signup(request):
                 else:
                     return HttpResponse("Your Nblik account is disabled.")
             else:
-                print "Invalid login details: {0}, {1}".format(login_username,login_password)
+                #print "Invalid login details: {0}, {1}".format(login_username,login_password)
                 login_statement="Invalid username password combination"
         else:
             registered = False
@@ -433,7 +433,7 @@ def login_and_signup(request):
                         company.save()
                     user1 = authenticate(username = signup_username,password=signup_password1)
                     #user1 = authenticate(username = signup_username,password=signup_password1)
-                    print user1
+                    #print user1
                     login(request,user1)
                     cat_list=Category.objects.all()
                     return render(request,'nblik/next_step.html',{'email':signup_email,'name':signup_name,'cat_list':cat_list}) 
@@ -445,13 +445,13 @@ def login_and_signup(request):
 
 def google_login(request):
     if request.method=="POST":
-        #print "Hello"
+        ##print "Hello"
         email=request.POST['email']
         image_url=request.POST['image_url']
         name=request.POST['name']
         google_id=request.POST['id']
         response_dict={}
-        print "email=",email
+        #print "email=",email
         try:
             u=User.objects.get(email=email)
             up=UserProfile.objects.get(user=u)
@@ -463,7 +463,7 @@ def google_login(request):
                 up.google_registered=True
                 up.login=1
                 up.save()
-                    #print "Hello"
+                    ##print "Hello"
             user = authenticate(username = up.user.username,password=up.user.password)
             if user:
                 if user.is_active:
@@ -475,14 +475,14 @@ def google_login(request):
                     response=HttpResponse(json.dumps(response_dict), content_type='application/javascript')
 
         except:
-            print "In except"
+            #print "In except"
             signup_username=create_signup_username(name)
-            print signup_username,email
+            #print signup_username,email
             user=User.objects.create_user(username=signup_username,email=email)
             user.set_password("password")
             user.save()
             user1=User.objects.get(username=signup_username)
-            print "user1=", user1
+            #print "user1=", user1
             profile=UserProfile(user=user1,level=1)
             profile.name=name
             profile.google_id=google_id
@@ -501,7 +501,7 @@ def google_login(request):
 
 def search_top(request):
     str=request.GET["query_string"]
-    #print str
+    ##print str
     result=get_category_list(100,str)
     cat_list=[]
     for name in result:
@@ -522,13 +522,13 @@ def search_top(request):
     for u in user_list:
         if u.name.lower().startswith(str.lower()):
            u_list.append(u)
-    #print cat_list,b_list,u_list
-    #print cat_list
+    ##print cat_list,b_list,u_list
+    ##print cat_list
     context_dict={}
     context_dict['cats']=cat_list
     context_dict['blogs']=b_list
     context_dict['users']=u_list
-    #print context_dict
+    ##print context_dict
     #return HttpResponse("Results")
     return render(request,"nblik/search_results.html", context_dict)
 
@@ -536,7 +536,7 @@ def search_top(request):
 
 def user_logout(request):
     logout(request)
-    print "Hello"
+    #print "Hello"
     return HttpResponseRedirect('/nblik/')
 
 
@@ -545,41 +545,40 @@ def follow_user(request):
         user_id=request.GET["user_id"]
         userprofile=UserProfile.objects.get(id=int(user_id))
         u=User.objects.get(username=userprofile.user.username)
-        #print u
+        ##print u
         up_follow=Follow.objects.get(userprofile=u)
         up=UserProfile.objects.get(user=u)
-        #print up_follow
+        ##print up_follow
         up_follow.followers=up_follow.followers+1
-        #print up_follow.followers
+        ##print up_follow.followers
         current_up_follow=Follow.objects.get(userprofile=request.user)
-        #print current_up_follow
+        ##print current_up_follow
         current_up_follow.followed.add(up)
         current_up_follow.no_followed=current_up_follow.no_followed+1
-        #print current_up_follow.no_followed
+        ##print current_up_follow.no_followed
         current_up_follow.save()
         up_follow.save()
-        #print request.user
+        ##print request.user
         return HttpResponse("followed")
 
 
 def dashboard(request,username):
     context_dict={}
     try:
-        user=User.objects.get(username=username)
-        userprofile=UserProfile.objects.get(user=user)
-        userprofile_follow=Follow.objects.get(userprofile=user)
+        user_m=User.objects.get(username=username)
+        userprofile=UserProfile.objects.get(user=user_m)
+        userprofile_follow=Follow.objects.get(userprofile=user_m)
         followed_tags=userprofile.followed_tags.all()
         followed_list=userprofile_follow.followed.all()
         followers=userprofile.follow_set.all()
-        #print followers
     except:
-        user=None
+        user_m=None
         userprofile=None
         userprofile_follow=None
         followed_tags=None
         followed_list=None
         followers=None
-    context_dict['user']=user
+    context_dict['user_m']=user_m
     context_dict['userprofile']=userprofile
     context_dict['userprofile_follow']=userprofile_follow
     context_dict['followed_tags']=followed_tags
@@ -589,24 +588,18 @@ def dashboard(request,username):
 
 def comment(request):
     if request.method=="GET":
-        #print "Hello"
+        ##print "Hello"
         blog_id=request.GET["blog_id"]
-        #print blog_id
+        ##print blog_id
         user_id=request.GET["user_id"]
-        #print user_id
+        ##print user_id
         comment_text=request.GET["comment_text"]
         b=Blog.objects.get(id=int(blog_id))
-        #print b
+        ##print b
         u=User.objects.get(id=int(user_id))
-        print b,u
+        ##print b,u
         c=Comment.objects.get_or_create(comment_text=comment_text,comment_by=u,comment_to=b,likes=0)
         return HttpResponse(0)
-
-def add_propic(request):
-    return HttpResponse("hello")
-    #return render(request,'nblik/add_propic.html',{})
-    #return HttpResponse("hello")
-    return render(request,"nblik/add_propic.html",{})
 
 def discussions(request):
     discussions=Discussion.objects.all()
@@ -617,7 +610,7 @@ def new_discussion(request):
         user=request.user
         user_pro=UserProfile.objects.get(user=user)
         topic=request.POST.get('discuss_topic')
-        intro=request.POST.get('discuss_intro')
+        intro=request.POST.get('discuss_intro').replace("\r\n","<br />").replace("\r","<br />").replace("\n","<br />")
         cat=request.POST.get('category')
         category=Category.objects.get(id=int(cat))
         discussion=Discussion(topic=topic,started_by=user_pro,category=category,intro=intro)
@@ -647,59 +640,60 @@ def discussion(request,discussion_slug):
             if dscs==discuss:
                 show_discuss[discuss.id]=None
                 break
-    #print discuss_list
-    #print "\n"
-    #print show_discuss
+    ##print discuss_list
+    ##print "\n"
+    ##print show_discuss
     return render(request,'nblik/discussion.html',{'discuss_list':discuss_list,'up':up,'discussion':d,'show':show,'show_discuss':show_discuss})
 
 def discuss(request):
     if request.method=="GET":
-        print "Hello"
+        #print "Hello"
         discussion_id=request.GET["discussion_id"]
-        print discussion_id
+        #print discussion_id
         up_id=request.GET["user_id"]
-        print up_id
+        #print up_id
         discuss_text=request.GET["discuss_text"]
         dn=Discussion.objects.get(id=int(discussion_id))
-        print dn
+        #print dn
         up=UserProfile.objects.get(id=int(up_id))
-        print up
+        #print up
         d=Discuss.objects.get_or_create(discuss_text=discuss_text,discuss_by=up,discuss_on=dn,likes=0)
         return HttpResponse(0)
 
-# def next_step(request):
-#     u=request.user
-#     if request.method=="POST":
-#         up=UserProfile(user=u,level=1)
-#         name = request.POST.get('name')
-#         email = request.POST.get('email')
-#         dob_date = request.POST.get('dob_date')
-#         dob_month = request.POST.get('dob_month')
-#         dob_year = request.POST.get('dob_year')
-#         profile_pic_url=request.FILES['picture']
-#         print profile_pic_url
-#         languages=request.POST.get('language')
-#         profile_tagline=request.POST.get('profile_tag')
-#         liked_category_ids=request.POST.getlist('category')
-#         up.name=name
-#         up.dob_date=int(dob_date)
-#         up.dob_month=int(dob_month)
-#         up.dob_year=int(dob_year)
-#         up.languages=int(languages) 
-#         up.profile_tag_line=profile_tagline
-#         up.save()
-#         up_follow=Follow(userprofile=u)
-#         up_follow.save()
-#         return HttpResponseRedirect('/nblik/')
-#     else:
-#         #try:
-#            # up=UserProfile.objects.get(user=u)
-#            # return HttpResponseRedirect('/nblik/')
-#         #except:
-#         context_dict={}
-#         cat_list=Category.objects.all()
-#         context_dict['cat_list']=cat_list
-#         return render(request,'nblik/next_step.html',context_dict)
+def next_step(request):
+    u=request.user
+    if request.method=="POST":
+        up=UserProfile(user=u,level=1)
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        dob_date = request.POST.get('dob_date')
+        dob_month = request.POST.get('dob_month')
+        dob_year = request.POST.get('dob_year')
+        if len(request.FILES) != 0:
+            up.picture=request.FILES['picture']
+            ##print profile_pic_url
+        languages=request.POST.get('language')
+        profile_tagline=request.POST.get('profile_tag')
+        liked_category_ids=request.POST.getlist('category')
+        up.name=name
+        up.dob_date=int(dob_date)
+        up.dob_month=int(dob_month)
+        up.dob_year=int(dob_year)
+        up.languages=int(languages) 
+        up.profile_tag_line=profile_tagline
+        up.save()
+        up_follow=Follow(userprofile=u)
+        up_follow.save()
+        return HttpResponseRedirect('/nblik/')
+    else:
+        #try:
+           # up=UserProfile.objects.get(user=u)
+           # return HttpResponseRedirect('/nblik/')
+        #except:
+        context_dict={}
+        cat_list=Category.objects.all()
+        context_dict['cat_list']=cat_list
+        return render(request,'nblik/next_step.html',context_dict)
             
 def quick_add_blog(request):
     if request.method=="POST":
@@ -707,7 +701,8 @@ def quick_add_blog(request):
         form=BlogForm()
         context_dict={}
         context_dict['category_list'] = Category.objects.all()
-        context_dict['quick_blog_text']= blog_text
+        context_dict['quick_blog_text']= (str(blog_text)).replace("\r\n","<br>")
+        #print blog_text
         context_dict['category']= None
         context_dict['myform']=form
         context_dict['blog_list']=Blog.objects.all()
@@ -748,7 +743,6 @@ def discussion_topic(request):
         if disc.slug == title:
             resp="error"
             break
-    print "yo"
     return HttpResponse(resp)
 
 def edit_language(request):
@@ -769,7 +763,6 @@ def edit_blog(request,blog_slug):
     form=BlogForm()
     context_dict['myform']=form
     context_dict['blog_id']=str(blog.id)
-    print context_dict['blog_text']
     return render(request,'nblik/edit_blog.html',context_dict)
 
 def update_blog(request,category_name_slug):
@@ -799,3 +792,32 @@ def delete_blog(request,blog_slug):
     blog=Blog.objects.get(slug=blog_slug)
     blog.delete()
     return HttpResponseRedirect('/nblik/')
+
+def edit_profile(request):
+    user=request.user
+    userpro=UserProfile.objects.get(user=user)
+    context_dict={}
+    context_dict['name']=str(userpro.name)
+    context_dict['tag']=str(userpro.profile_tag_line)
+    context_dict['language']=str(userpro.languages)
+    context_dict['date']=str(userpro.dob_date)
+    context_dict['month']=str(userpro.dob_month)
+    context_dict['year']=str(userpro.dob_year)
+    context_dict['pic']=str(userpro.picture.url)
+    return render(request,'nblik/edit_profile.html',context_dict)
+
+def update_profile(request):
+    user=request.user
+    userpro=UserProfile.objects.get(user=user)
+    userpro.name=request.POST.get('name')
+    userpro.dob_date=int(request.POST.get('dob_date'))
+    userpro.dob_month=int(request.POST.get('dob_month'))
+    userpro.dob_year=int(request.POST.get('dob_year'))
+    userpro.languages=int(request.POST.get('language'))
+    userpro.profile_tag_line=request.POST.get('profile_tag')
+    if len(request.FILES) != 0:
+        userpro.picture=request.FILES['picture']
+        ##print profile_pic_url
+    userpro.save()
+    return HttpResponseRedirect('/nblik/')
+

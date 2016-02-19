@@ -3,7 +3,14 @@
 
 {% block title %}- Login/Signup{% endblock %}
 {% block body_block %}
-
+<style type="text/css">
+body
+{
+  background: url('{% static "images/batman.jpg"%}');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+</style>
     <link rel="stylesheet" href="{% static "css/normalize.css" %}">
     <link rel='stylesheet' href="{% static "css/font-awesome.min.css" %}">
     <link rel="stylesheet" href="{% static "css/style.css" %}">
@@ -37,23 +44,23 @@
               </div>
               <div class="sminputs">
                 <div class="input full">
-                  <label class="string optional" for="signup_email" style="letter-spacing:0px;">Email*</label>
+                  <!--<label class="string optional" for="signup_email" style="letter-spacing:0px;">Email*</label>-->
                   <input class="string optional" maxlength="255" id="signup_email" placeholder="Email" type="email" size="50" name='signup_email' />
                 </div>
               </div>
               <div class="sminputs">
                 <div class="input full">
-                  <label class="string optional" for="signup_name" style="letter-spacing:0px;">Name*</label>
+                  <!--<label class="string optional" for="signup_name" style="letter-spacing:0px;">Name*</label>-->
                   <input class="string optional" maxlength="255" id="signup_name" placeholder="Name" name="signup_name" size="50" />
                 </div>
               </div>
               <div class="sminputs">
                 <div class="input string optional">
-                  <label class="string optional" for="signup_password1" style="letter-spacing:0px;">Password *</label>
+                  <!--<label class="string optional" for="signup_password1" style="letter-spacing:0px;">Password *</label>-->
                   <input class="string optional" maxlength="255" id="signup_password1" placeholder="Password" name='signup_password1'type="password" size="50" />
                 </div>
                 <div class="input string optional">
-                  <label class="string optional" for="signup_password2" style="letter-spacing:0px;">Repeat password *</label>
+                  <!--<label class="string optional" for="signup_password2" style="letter-spacing:0px;">Repeat password *</label>-->
                   <input class="string optional" maxlength="255" id="signup_password2" placeholder="Repeat password" name='signup_password2' type="password" size="50" />
                 </div>
               </div>
@@ -99,14 +106,14 @@
             {% csrf_token %}
             <div class="sminputs">
               <div class="input full">
-                <label class="string optional" for="id_username_or_email" style="letter-spacing:0px;">Email Or Username*</label>
-                <input class="string optional" maxlength="255" id="id_username_or_email" name="login_username_or_email" size="50" />
+                <!--<label class="string optional" for="id_username_or_email" style="letter-spacing:0px;">Email Or Username*</label>-->
+                <input class="string optional" maxlength="255" id="id_username_or_email" name="login_username_or_email" size="50" placeholder="Email or Username"/>
               </div>
             </div>
             <div class="sminputs">
               <div class="input full">
-                <label class="string optional" for="id_password" style="letter-spacing:0px;">Password *</label>
-                <input class="string optional" maxlength="255" id="id_password" type="password" size="50" name="login_password" />
+                <!--<label class="string optional" for="id_password" style="letter-spacing:0px;">Password *</label>-->
+                <input class="string optional" maxlength="255" id="id_password" type="password" size="40" name="login_password" placeholder="Password"/>
                 						<span class="hide-password">Show</span>
               </div>
             </div>
@@ -116,14 +123,13 @@
             </div>
           </form>
         </div>
-        <a href="{% url 'socialauth_begin' 'google-oauth2' %}">Login with Google</a>
+        <!--<a href="{% url 'socialauth_begin' 'google-oauth2' %}">Login with Google</a>
 <a href="{% url 'socialauth_begin' 'twitter' %}">Login with Twitter</a>
 <a href="{% url 'socialauth_begin' 'facebook' %}">Login with Facebook</a>
-<a href="{% url 'socialauth_begin' 'linkedin' %}">Login with LinkedIn</a>
-</div>  
-        <div class="logmod__alter">
+<a href="{% url 'socialauth_begin' 'linkedin' %}">Login with LinkedIn</a>-->
+<div class="logmod__alter">
           <div class="logmod__alter-container">
-            <a href="#" class="connect facebook">
+            <a href="{% url 'socialauth_begin' 'facebook' %}" class="connect facebook">
               <div class="connect__icon">
                 <i class="fa fa-facebook"></i>
               </div>
@@ -131,7 +137,7 @@
                 <span>Sign in with <strong>Facebook</strong></span>
               </div>
             </a>
-            <a href="#" class="connect googleplus">
+            <a href="{% url 'socialauth_begin' 'google-oauth2' %}" class="connect googleplus">
               <div class="connect__icon">
                 <i class="fa fa-google-plus"></i>
               </div>
@@ -141,11 +147,10 @@
             </a>
           </div>
         </div>
+</div>  
           </div>
       </div>
     </div>
-  </div>
-</div>
 
 <script src="{% static "js/jquery.min.js" %}"></script>
 <script src="{% static "js/index.js" %}"></script>
