@@ -175,7 +175,7 @@ div[id^="d"]:last-child
   text-decoration: none;
 }
 </style>
-{% if userprofile.picture %}
+{% if userprofile.picture.url %}
 <img style="height:150px;width:150px;" src="{{ userprofile.picture.url }}"/>
 {% endif %}<br/><br />
 <span id="name">{{ userprofile.name }}</span><br>

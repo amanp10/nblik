@@ -567,15 +567,19 @@ def dashboard(request,username):
     try:
         user_m=User.objects.get(username=username)
         userprofile=UserProfile.objects.get(user=user_m)
-        userprofile_follow=Follow.objects.get(userprofile=user_m)
-        followed_tags=userprofile.followed_tags.all()
-        followed_list=userprofile_follow.followed.all()
-        followers=userprofile.follow_set.all()
     except:
         user_m=None
         userprofile=None
-        userprofile_follow=None
+    try:
+        followed_tags=userprofile.followed_tags.all()
+    except:
         followed_tags=None
+    try:
+        userprofile_follow=Follow.objects.get(userprofile=user_m)
+        followed_list=userprofile_follow.followed.all()
+        followers=userprofile.follow_set.all()
+    except:
+        userprofile_follow=None
         followed_list=None
         followers=None
     context_dict['user']=request.user
