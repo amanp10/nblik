@@ -45,17 +45,17 @@ class Blog(models.Model):
 
 
 class Tag(models.Model):
-    name=models.CharField(max_length=50)
+    name=models.CharField(max_length=500)
     category=models.ForeignKey(Category)
     def __unicode__(self):
         return self.name
 
 class Company(models.Model):
     user=models.OneToOneField(User)
-    name=models.CharField(max_length=200)
+    name=models.CharField(max_length=500)
     logo=models.ImageField(upload_to='logo_images',blank=True)
     date_registered=models.DateTimeField(null=True,blank=True)
-    address=models.CharField(max_length=300)
+    address=models.CharField(max_length=1500)
     about=models.TextField()
     def __unicode__(self):
         return self.name
@@ -119,7 +119,7 @@ class UserProfile(models.Model):
     level=models.IntegerField(default=1)
     date_registered=models.DateTimeField(null=True,blank=True)
     google_registered=models.BooleanField(default=False)
-    profile_tag_line=models.CharField(max_length=300,null=True,blank=True)
+    profile_tag_line=models.TextField(null=True,blank=True)
     languages=models.IntegerField(default=1)#English=1,Hindi=2,English And Hindi both =3
     followed_tags=models.ManyToManyField(Tag,blank=True)
     login=models.IntegerField(default=0)#0=manual,1=google,2=facebook,3=linkedin,4=twitter
