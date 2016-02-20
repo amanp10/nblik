@@ -9,6 +9,10 @@
     overflow: hidden;
     padding: 0;
 }
+h1
+{
+    
+}
 div#delete.show
 {
     height:auto;
@@ -24,6 +28,8 @@ div#delete.show
     margin-left:20px;
     -webkit-box-shadow:2px 2px 3px rgb(100,100,100);
     -webkit-border-radius:5px;
+    -moz-box-shadow:2px 2px 3px rgb(100,100,100);
+    -moz-border-radius:5px;
 }
 p
 {
@@ -50,7 +56,7 @@ p
 <div id="blog_div_main" style="padding-top:50px;">
 <p style="text-align:left;font-family:'Montserrat',tahoma;color:rgb(75,75,75);font-size:20px;letter-spacing:1px;font-weight:700;">{{ blog.category }}</p>
 <h1>{{ blog.title }}</h1>
-        {% if user == blog.written_by %}
+        {% if u == blog.written_by %}
         <a href="/nblik/edit_blog/{{ blog.slug }}" class="edit_del">Edit</a> &nbsp
         <button id="delete_dialog" class="edit_del">Delete</button><br>
         <div id="delete">Are you sure?<br><a href="/nblik/delete_blog/{{ blog.slug }}">Yes</a> <a id="no" href="">No</a> </div><br>

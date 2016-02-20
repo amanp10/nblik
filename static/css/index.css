@@ -7,8 +7,9 @@
 /*georgia*/
 body
 {
-	padding:40px 0 0 0;
+	padding:40px 0 0 10px;
 	background: rgb(234,237,247);
+	word-break:break-all;
 }
 a.blog_title:link
 {
@@ -57,6 +58,8 @@ h1
 {
 	margin-top: 20px;
 	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
 }
 #quick_blog textarea
 {
@@ -74,6 +77,8 @@ h1
 	background: rgb(70,94,170);
 	padding: 3px;
 	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
 }
 #quick_blog button:hover
 {
@@ -181,6 +186,8 @@ a#written_by:hover
 	margin: 10px;
 	padding: 20px;
 	-webkit-box-shadow:2px 2px 3px rgb(100,100,100);
+	-moz-box-shadow:2px 2px 3px rgb(100,100,100);
+	box-shadow:2px 2px 3px rgb(100,100,100);
 }
 #category_div
 {
@@ -194,5 +201,9 @@ a#written_by:hover
 	padding: 20px;
 	-webkit-box-shadow:2px 2px 3px rgb(100,100,100);
 	-webkit-border-radius:5px;
+	-moz-box-shadow:2px 2px 3px rgb(100,100,100);
+	-moz-border-radius:5px;
+	box-shadow:2px 2px 3px rgb(100,100,100);
+	border-radius:5px;
 	margin: 10px;
 }

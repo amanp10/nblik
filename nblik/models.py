@@ -4,10 +4,13 @@ from django.contrib.auth.models import User
 from datetime import datetime
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
+from imagekit.models import ProcessedImageField
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=128,unique=True)
+    name = models.CharField(max_length=1000,unique=True)
     likes = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
     def save(self, *args, **kwargs):
@@ -21,7 +24,7 @@ class Category(models.Model):
 
 class Blog(models.Model):
     category = models.ForeignKey(Category)
-    title = models.CharField(max_length=2000)
+    title = models.TextField()
     written_by=models.ForeignKey(User)
     views = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
@@ -60,7 +63,7 @@ class Company(models.Model):
 
 class UnPostedBlog(models.Model):
     category = models.ForeignKey(Category)
-    title = models.CharField(max_length=128)
+    title = models.TextField()
     written_by=models.ForeignKey(User)
     views = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
@@ -83,9 +86,9 @@ class BlogId(models.Model):
         return self.id1
 
 class Discussion(models.Model):
-    topic=models.CharField(max_length=2000)
+    topic=models.TextField()
     slug=models.SlugField(unique=True)
-    intro=models.CharField(max_length=3000,default="None")
+    intro=models.TextField(default="None")
     started_by=models.ForeignKey('nblik.UserProfile')
     started_on=models.DateTimeField(null=True,blank=True)
     likes=models.IntegerField(default=0)
@@ -110,7 +113,7 @@ class Discuss(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     name = models.CharField(max_length=200)
-    picture = models.ImageField(upload_to='profile_images',default='media/profile_images/default.jpg')
+    picture = ProcessedImageField(upload_to='profile_images',processors=[ResizeToFill(300,300)],format='JPEG',options={'quality': 90})
     liked_blogs=models.ManyToManyField(Blog,blank=True)
     liked_categories=models.ManyToManyField(Category,blank=True)
     level=models.IntegerField(default=1)

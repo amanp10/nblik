@@ -578,6 +578,7 @@ def dashboard(request,username):
         followed_tags=None
         followed_list=None
         followers=None
+    context_dict['user']=request.user
     context_dict['user_m']=user_m
     context_dict['userprofile']=userprofile
     context_dict['userprofile_follow']=userprofile_follow
@@ -819,5 +820,5 @@ def update_profile(request):
         userpro.picture=request.FILES['picture']
         ##print profile_pic_url
     userpro.save()
-    return HttpResponseRedirect('/nblik/')
+    return HttpResponseRedirect('/'+str(user)+'/')
 

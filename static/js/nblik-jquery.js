@@ -141,10 +141,10 @@ $(".discuss-lyk").click(function(event){
     }
   });
 
-  $('#suggestion_search').blur(function(event){
+  /*$('#search_results').focusout(function(event){
     $('#search_results').html("");
     $('#suggestion_search').val("");
-  });
+  });*/
 
   $('.follow_user').click(function(event){
 		var user_id;

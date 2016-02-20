@@ -9,6 +9,7 @@
 body
 {
 	overflow: auto;
+	word-break:break-all;
 }
 #navbar-brand-id
 {
@@ -136,6 +137,7 @@ body
 #search_top_div
 {
 	display: -webkit-box;
+	display: -moz-box;
 	position: relative;
 	left:20%;
 	margin-top: 15px;
@@ -215,6 +217,8 @@ padding: 3px;
 {
 	border:none;
 	-webkit-border-radius:0;
+	-moz-border-radius:0;
+	border-radius:0;
 }
 .blog_text
 {
@@ -249,8 +253,10 @@ a#written_by:hover
 #footer_table
 {
 	display:-webkit-box;
+	display:-webkit-box;
 	margin-top: 0;
 	-webkit-box-orient:horizontal;
+	-moz-box-orient:horizontal;
 	padding: 0;
 }
 #footer_table>div
@@ -258,6 +264,9 @@ a#written_by:hover
 	display:-webkit-box;
 	-webkit-box-pack: center;
 	-webkit-box-flex:1;
+	display:-moz-box;
+	-moz-box-pack: center;
+	-moz-box-flex:1;
 	margin:0;
 }
 #footer_table a:link

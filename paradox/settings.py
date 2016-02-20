@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'social_auth',
     'ckeditor',
     'ckeditor_uploader',
+    'imagekit',
 )
 
 AUTHENTICATION_BACKENDS = (
