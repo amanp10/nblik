@@ -1,6 +1,6 @@
 from django.shortcuts import render,render_to_response
 from django.http import HttpResponse,HttpResponseRedirect,HttpRequest
-from nblik.models import Category,Blog,UserProfile,Comment,Follow,Discussion,Discuss,Tag
+from nblik.models import Category,Blog,UserProfile,Comment,Follow,Discussion,Discuss,Tag,NblikInfo
 from nblik.forms import BlogForm
 from django.template.defaultfilters import slugify
 from django.contrib.auth import authenticate,login, logout
@@ -547,14 +547,15 @@ def follow_user(request):
         u=User.objects.get(username=userprofile.user.username)
         ##print u
         up_follow=Follow.objects.get(userprofile=u)
-        up=UserProfile.objects.get(user=u)
         ##print up_follow
         up_follow.followers=up_follow.followers+1
         ##print up_follow.followers
         current_up_follow=Follow.objects.get(userprofile=request.user)
         ##print current_up_follow
-        current_up_follow.followed.add(up)
+        current_up_follow.followed.add(userprofile)
+        print current_up_follow.no_followed
         current_up_follow.no_followed=current_up_follow.no_followed+1
+        print current_up_follow.no_followed
         ##print current_up_follow.no_followed
         current_up_follow.save()
         up_follow.save()
@@ -668,7 +669,7 @@ def discuss(request):
 def next_step(request):
     u=request.user
     if request.method=="POST":
-        up=UserProfile(user=u,level=1)
+        up=UserProfile.objects.get(user=u)
         name = request.POST.get('name')
         email = request.POST.get('email')
         dob_date = request.POST.get('dob_date')
@@ -687,8 +688,6 @@ def next_step(request):
         up.languages=int(languages) 
         up.profile_tag_line=profile_tagline
         up.save()
-        up_follow=Follow(userprofile=u)
-        up_follow.save()
         return HttpResponseRedirect('/nblik/')
     else:
         #try:
@@ -706,7 +705,7 @@ def quick_add_blog(request):
         form=BlogForm()
         context_dict={}
         context_dict['category_list'] = Category.objects.all()
-        context_dict['quick_blog_text']= (str(blog_text)).replace("\r\n","<br>")
+        context_dict['quick_blog_text']= (str(blog_text)).replace("\r\n","<br />")
         #print blog_text
         context_dict['category']= None
         context_dict['myform']=form
@@ -826,3 +825,36 @@ def update_profile(request):
     userpro.save()
     return HttpResponseRedirect('/'+str(user)+'/')
 
+def nblik_info(request,nblik_slug):
+    nblik_o=NblikInfo.objects.get(slug=nblik_slug)
+    return render(request,'nblik/nblik_info.html',{'nblik_o':nblik_o})
+
+def edit_discussion(request,discussion_slug):
+    discussion=Discussion.objects.get(slug=discussion_slug)
+    context_dict={}
+    context_dict['discussion']=discussion
+    context_dict['discussion_intro']=str(discussion.intro).replace("<br />","\r\n").replace("<br>","\r\n")
+    context_dict['discussion_topic']=str(discussion.topic)
+    context_dict['discussion_category']=discussion.category
+    context_dict['category_list']=Category.objects.all()
+    context_dict['discussion_id']=str(discussion.id)
+    #print discussion.category.slug
+    return render(request,'nblik/edit_discussion.html',context_dict)
+
+def delete_discussion(request,discussion_slug):
+    discussion1=Discussion.objects.get(slug=discussion_slug)
+    discussion1.delete()
+    return HttpResponseRedirect('/nblik/')
+
+def update_discussion(request):
+    if request.method=="POST":
+        topic = request.POST.get('discuss_topic')
+        intro = request.POST.get('discuss_intro')
+        cat=request.POST.get('category')
+        d_id=request.POST.get('discussion_id')
+        discussion1=Discussion.objects.get(id=int(d_id))
+        discussion1.topic=topic
+        discussion1.intro=intro.replace("\r\n","<br />").replace("\r","<br />").replace("\n","<br />")
+        discussion1.category=Category.objects.get(slug=cat)
+        discussion1.save()
+        return discussion(request,discussion1.slug)

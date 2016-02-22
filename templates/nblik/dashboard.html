@@ -219,18 +219,22 @@ div[id^="d"]:last-child
 <span class="data">{{ tag.name }}</span>,
 {% endfor %}
 </div>-->
-<div id="d3"><span class="data">No of followers : {{ userprofile_follow.no_followed }}</span><br><br>
+<div id="d3"><span class="data">Followers : {{ userprofile_follow.followers }}</span><br><br>
   {% for up_follow in followers %}
 <img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up_follow.userprofile.userprofile.picture.url }}"> &nbsp &nbsp
 <a href="/{{ up_follow.userprofile }}/"><span class="data">{{ up_follow.userprofile.userprofile.name }}</span></a><br /><hr><br />
 {% endfor %}
 </div>
-<div id="d4">{% for up in followed_list %}
+<div id="d4"><span class="data">Following : {{ userprofile_follow.no_followed }}</span><br><br>
+  {% for up in followed_list %}
 <img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up.picture.url }}"> &nbsp &nbsp
 <a href="/{{ up.user }}/"><span class="data">{{ up.name }}</span></a><br /><hr><br />
 {% endfor %}</div>
 <div id="d5">
-  About the user
+  About the user:
+{% if user == user_m %}
+<br><strong>Your Username: </strong>{{ user }}<br>
+{% endif %}
 </div>
 </div>
 </div>

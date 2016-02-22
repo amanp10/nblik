@@ -149,3 +149,9 @@ class Follow(models.Model):
     def __unicode__(self):
         return self.userprofile.username
 
+class NblikInfo(models.Model):
+    heading=models.CharField(max_length=200)
+    slug=models.SlugField(unique=True)
+    info=models.TextField()
+    def __unicode__(self):
+        return self.heading

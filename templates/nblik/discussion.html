@@ -20,12 +20,47 @@ body{
     -moz-box-shadow:2px 2px 3px rgb(100,100,100);
     -moz-border-radius:5px;
 }
+.edit_del
+{
+    border:2px solid rgb(150,150,150);
+    padding: 3px;
+    color:rgb(150,150,150);
+    background: transparent;
+}
+.edit_del:hover
+{
+    color:black;
+    border-color:black;
+    text-decoration: none;
+}
+#delete
+{
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+}
+div#delete.show
+{
+    height:auto;
+    padding: 2px;
+}
+h4
+{
+    font-weight: bold;
+    color: rgb(150,150,150);
+}
 </style>
 <div>
 	<div class="panel">
         <br/>
                     <div class="panel-heading">
+                        <h4>{{ discussion.category.name }}</h4><br>
                     <h3 class="panel-title" style="color:black;font-family: 'Ubuntu', sans-serif;font-size: 24px;">{{ discussion.topic }}</h3><br>
+                    {% if user == discussion.started_by.user %}
+        <a href="/nblik/edit_discussion/{{ discussion.slug }}" class="edit_del">Edit</a> &nbsp
+        <button id="delete_dialog" class="edit_del">Delete</button><br>
+        <div id="delete">Are you sure?<br><a href="/nblik/delete_discussion/{{ discussion.slug }}">Yes</a> <a id="no" href="">No</a> </div><br>
+        {% endif %}
                     <span style="color:gray;">started by</span> <img src="{{ discussion.started_by.picture.url }}" class="pro_pic"/> <a href="/{{ discussion.started_by.user }}/"><span style="font-weight:bold;font-size:16px;color:black;">{{ discussion.started_by.name }}</span></a><br><br>
                     <p style="word-wrap:break-word;font-size:16px;font-family:georgia;margin-bottom:0;"><span style="color:gray;">on</span> {{ discussion.intro|safe }}</p> <br>
                     <span id="discussion_like_count" style="font-weight:bold;">{{ discussion.likes }}</span> <font style="color:grey;">like(s)</font> &nbsp
@@ -78,6 +113,4 @@ body{
                 </div>
             </div>
 		</div>
-    </div>
-
 {% endblock %}

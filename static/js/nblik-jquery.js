@@ -146,12 +146,23 @@ $(".discuss-lyk").click(function(event){
     $('#suggestion_search').val("");
   });*/
 
+  $("#delete_dialog").click(function(event){
+        $("#delete").toggleClass("show");
+        console.log("yo");
+        });
+        $('#no').click(function(event){
+            event.preventDefault();
+            $('#delete').toggleClass("show");
+        });
+
   $('.follow_user').click(function(event){
 		var user_id;
+    console.log("yo");
 		user_id = $(this).attr("data-userprofileid");
 		$.get('/nblik/follow_user/',{user_id: user_id},function(data){
 		    $("#"+user_id).hide();
 			});
+    event.stopImmediatePropagation();
     });
 
   $('#comment').click(function(){

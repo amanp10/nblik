@@ -1,0 +1,90 @@
+{% extends 'nblik/base.html' %}
+{% load staticfiles %}
+{% block title %}- Discuss{% endblock %}
+{% block body_block %}
+<style type="text/css">
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+body
+{
+	background: rgb(234,237,247);
+	padding-left: 10px;
+}
+input[required]
+{
+	font-size: 16px;
+	color:black;
+	padding: 1px 3px 1px 3px;
+}
+#discussion_form
+{
+	margin: 20px;
+}
+#new_discuss_topic
+{
+	width:90%;
+	border:none;
+}
+#new_discuss_intro
+{
+	resize:none;
+	border:none;
+}
+h2
+{
+	font-family: 'Montserrat',tahoma,arial;
+}
+input[type="submit"]
+{
+	background:rgb(70,94,170);
+	color:white;
+	font-weight: bold;
+}
+select
+{
+	background:#337ab7;
+	color:white;
+}
+.new_discussion
+{
+	background: white;
+	margin: 10px;
+	padding: 20px;
+	-webkit-box-shadow:2px 2px 3px rgb(100,100,100);
+	-moz-box-shadow:2px 2px 3px rgb(100,100,100);
+	box-shadow:2px 2px 3px rgb(100,100,100);
+}
+input[type="submit"]
+{
+	color:white;
+	font-weight: bold;
+	border:2px solid  rgb(70,94,170); 
+	margin-top: 5px;
+	background: rgb(70,94,170);
+	padding: 3px;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+}
+input[type="submit"]:hover
+{
+	color:rgb(70,94,170);
+	background:transparent;
+}
+</style>
+<div class="new_discussion">
+<h2>Edit Discussion...</h2>
+<form method="post" action="/nblik/update_discussion/" id="discussion_form">
+	{% csrf_token %}
+<strong>Select a Category : </strong><select id="select-category" name="category">
+<option value="{{ discussion_category.slug }}">{{ discussion_category.name }}</option>
+{% for cat in category_list %}
+<option value="{{ cat.slug }}">{{ cat.name }}</option>
+{% endfor %}
+</select><br><br>
+<input type="text" name="discuss_topic" id="new_discuss_topic" placeholder="Topic" max-length="100" value="{{ discussion_topic }}" required><br><br>
+<textarea name="discuss_intro" id="new_discuss_intro" placeholder="Introduction" cols="90" rows="5" max-length="500" required>{{ discussion_intro }}</textarea><br><br>
+<input name="discussion_id" value="{{ discussion_id }}" hidden>
+<input type="submit" value="Done!">
+</form>
+</div>
+{% endblock %}

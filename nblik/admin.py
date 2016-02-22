@@ -1,5 +1,5 @@
 from django.contrib import admin
-from nblik.models import Category,Blog,Comment,UserProfile,Follow,Tag,Discussion,Discuss
+from nblik.models import Category,Blog,Comment,UserProfile,Follow,Tag,Discussion,Discuss,NblikInfo
 
 class BlogAdmin (admin.ModelAdmin):
     list_display = ('title','category','written_by','likes','slug')
@@ -10,6 +10,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Category,CategoryAdmin)
 admin.site.register(Comment)
+admin.site.register(NblikInfo)
 admin.site.register(Blog,BlogAdmin)
 admin.site.register(UserProfile)
 admin.site.register(Follow)

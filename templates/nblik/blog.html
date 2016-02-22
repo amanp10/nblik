@@ -9,10 +9,6 @@
     overflow: hidden;
     padding: 0;
 }
-h1
-{
-    
-}
 div#delete.show
 {
     height:auto;
@@ -142,14 +138,4 @@ p
             </div>
 		</div>
     </div>
-    <script type="text/javascript">
-        $('#delete_dialog').click(function(){
-        $('#delete').toggleClass("show");
-        console.log("yo");
-        });
-        $('#no').click(function(event){
-            event.preventDefault();
-            $('#delete').toggleClass("show");
-        });
-        </script>
 {% endblock %}

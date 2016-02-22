@@ -1,0 +1,14 @@
+{% extends 'nblik/base2.html' %}
+{% load staticfiles %}
+{% block title %}{{ nblik_o.heading }}{% endblock %}
+{% block body_block %}
+<style type="text/css">
+body{
+text-align: center;
+background: white;
+padding: 80px 40px;
+}
+</style>
+<h1>{{ nblik_o.heading }}</h1><br>
+<p>{{ nblik_o.info|safe }}</p>
+{% endblock %}
