@@ -66,7 +66,7 @@ h4
                     <span id="discussion_like_count" style="font-weight:bold;">{{ discussion.likes }}</span> <font style="color:grey;">like(s)</font> &nbsp
                     {% if show %}
                     {% if user.is_authenticated %}
-                        <button id="discussion_like" data-blogid="{{ discussion.id }}" class="btn btn-primary" type="button" style="font-size:14px;padding:2px;">
+                        <button id="discussion_like" data-blogid="{{ discussion.id }}" class="like" type="button" style="font-size:14px;padding:2px;">
                         <span class="glyphicon glyphicon-thumbs-up"> </span>
                         Like</button>
                     {% endif %}
@@ -88,7 +88,7 @@ h4
 									<p style="color:gray;"><span id="{{ discuss.id }}" style="color:black">{{ discuss.likes }}</span> like(s)</p>
                         {% for key,value in show_discuss.items %}
                         {% if key == discuss.id and value == "yes" %}
-                        <button id="discuss {{ discuss.id }}" data-blogid="{{ discuss.id }}" class="btn btn-primary discuss-lyk" type="button" style="font-size:14px;padding:2px;">
+                        <button id="discuss {{ discuss.id }}" data-blogid="{{ discuss.id }}" class="discuss-lyk" type="button" style="font-size:14px;padding:2px;">
                         <span class="glyphicon glyphicon-thumbs-up"> </span>
                         Like</button>
                         {% endif %}
@@ -106,7 +106,7 @@ h4
                             <div class="list-group">
                                 <h4 class="list-group-item-heading" style="font-weight:bold;">{{ up.name }}:</h4>
                                 <p class="list-group-item-text"><textarea id="discuss_text" cols="90" rows="6" style="resize:none;"></textarea><br/></p>
-                                <button id="discuss" type="button" data-discussionid="{{ discussion.id }}" data-upid="{{ up.id }}" data-upname="{{ up.name }}"class="btn btn-primary" style="padding:6px;">Post</button>
+                                <button id="discuss" type="button" data-discussionid="{{ discussion.id }}" data-upid="{{ up.id }}" data-upname="{{ up.name }}" class="post" style="padding:6px;">Post</button>
                             </div>
                         </div>
                     </div>

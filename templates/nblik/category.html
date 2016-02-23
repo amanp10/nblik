@@ -9,12 +9,12 @@
 		<strong id="category_like_count">{{ category.likes }} </strong> people like this category
 		{% if user.is_authenticated %}
 		{% if show_cat %}
-		     <button id="category_like" data-catid="{{ category.id }}" class="btn btn-primary" type="button">
+		     <button id="category_like" data-catid="{{ category.id }}" type="button">
 			 <span class="glyphicon glyphicon-thumbs-up"> </span>
 			 Like</button>
 		{% endif %}
 		{% else %}
-		<a href="/nblik/login_signup" class='btn btn-primary blog_like'><span class="glyphicon glyphicon-thumbs-up"> </span> Like</a>
+		<a href="/nblik/login_signup" class='blog_like'><span class="glyphicon glyphicon-thumbs-up"> </span> Like</a>
 	    {% endif %}
 		</p>
 		<br/>
@@ -36,12 +36,12 @@
                     <font style="color:gray;"> like(s)</font>
                     {% if user.is_authenticated %}
                     {% if show %}
-		                <button data-blogid="{{ blog.id }}" class="btn btn-primary blog_like" type="button">
+		                <button data-blogid="{{ blog.id }}" class="blog_like" type="button">
 			            <span class="glyphicon glyphicon-thumbs-up"> </span>
 			            Like</button>
 	                {% endif %}
 	                {% else %}
-		<a href="/nblik/login_signup" class='btn btn-primary blog_like'><span class="glyphicon glyphicon-thumbs-up"> </span> Like</a>
+		<a href="/nblik/login_signup" class='blog_like'><span class="glyphicon glyphicon-thumbs-up"> </span> Like</a>
 	                {% endif %},&nbsp
 	                <font style="color:black;font-weight:bold;">
                 {% for key,value in comments_number.items %}

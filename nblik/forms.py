@@ -7,7 +7,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 class BlogForm(forms.ModelForm):
     title = forms.CharField(max_length=10000,help_text="Please enter the title of the blog",required=True)
     views = forms.IntegerField(widget=forms.HiddenInput,initial=0, required=False)
-    slug = forms.CharField(widget=forms.HiddenInput, required=False)
+    slug = forms.CharField(max_length=11000,widget=forms.HiddenInput, required=False)
     #content = RichTextField()
     blog_content=RichTextUploadingField()
     likes=forms.IntegerField(widget=forms.HiddenInput,initial=0, required=False)

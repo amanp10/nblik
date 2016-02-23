@@ -500,9 +500,9 @@ def google_login(request):
 
 
 def search_top(request):
-    str=request.GET["query_string"]
+    q_str=request.GET["query_string"]
     ##print str
-    result=get_category_list(100,str)
+    result=get_category_list(100,q_str)
     cat_list=[]
     for name in result:
         cat=Category.objects.get(name=name)
@@ -513,14 +513,14 @@ def search_top(request):
     for blog in blog_list:
         title=blog.title
         for word in title.split():
-            if word.lower().startswith(str.lower()):
+            if word.lower().startswith(q_str.lower()):
                 b_list.append(blog)
                 break
 
     user_list = UserProfile.objects.all()
     u_list=[]
     for u in user_list:
-        if u.name.lower().startswith(str.lower()):
+        if u.name.lower().startswith(q_str.lower()):
            u_list.append(u)
     ##print cat_list,b_list,u_list
     ##print cat_list
@@ -568,6 +568,8 @@ def dashboard(request,username):
     try:
         user_m=User.objects.get(username=username)
         userprofile=UserProfile.objects.get(user=user_m)
+        blog_list=Blog.objects.filter(written_by=user_m)
+        discussion_list=Discussion.objects.filter(started_by=userprofile)
     except:
         user_m=None
         userprofile=None
@@ -590,6 +592,10 @@ def dashboard(request,username):
     context_dict['followed_tags']=followed_tags
     context_dict['followed_list']=followed_list
     context_dict['followers']=followers
+    context_dict['blogs']=blog_list
+    context_dict['discussions']=discussion_list
+    context_dict['l_blogs']=len(blog_list)
+    context_dict['l_dis']=len(discussion_list)
     return render(request,'nblik/dashboard.html',context_dict)
 
 def comment(request):

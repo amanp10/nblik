@@ -93,25 +93,37 @@ h1
 }
 .blog_like,#category_like
 {
-	padding: 3px;
-	font-size:13px;
-	background: rgb(0,123,255);
-	border:none;
-	font-weight: bold;
+	color:white;
+    font-weight: bold;
+    border:2px solid rgb(0,123,255); 
+    margin-top: 5px;
+    background: rgb(0,123,255);
+    padding: 3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
 }
 .blog_like:hover,#category_like:hover
 {
-	background: rgb(70,94,170);
+	color:rgb(0,123,255);
+    background:transparent;
 }
-#comment
+#comment,.post
 {
-	background: rgb(0,123,255);
-	border:none;
-	font-weight: bold;
+	color:white;
+    font-weight: bold;
+    border:2px solid rgb(70,94,170); 
+    margin-top: 5px;
+    background: rgb(70,94,170);
+    padding: 3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
 }
-#comment:hover
+#comment:hover,.post:hover
 {
-	background: rgb(70,94,170);
+	color:rgb(70,94,170);
+    background:transparent;
 }
 #share:link
 {
@@ -206,4 +218,21 @@ a#written_by:hover
 	box-shadow:2px 2px 3px rgb(100,100,100);
 	border-radius:5px;
 	margin: 10px;
+}
+button.like
+{
+    color:white;
+    font-weight: bold;
+    border:2px solid rgb(0,123,255); 
+    margin-top: 5px;
+    background: rgb(0,123,255);
+    padding: 3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+}
+button.like:hover
+{
+    color:rgb(0,123,255);
+    background:transparent;
 }

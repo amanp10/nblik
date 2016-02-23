@@ -164,18 +164,21 @@ body
 }
 #share:link
 {
-background: rgb(0,123,255);
--webkit-border-radius:3px;
--moz-border-radius:3px;
-border-radius:3px;
-color:white;
-font-weight: bold;
-padding: 3px;
+	color:white;
+    font-weight: bold;
+    border:2px solid rgb(0,123,255); 
+    margin-top: 5px;
+    background: rgb(0,123,255);
+    padding: 3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
 }
-#share:hover
+a#share:hover
 {
-	background: rgb(70,94,170);
-	text-decoration: none;
+	color:rgb(0,123,255);
+    background:transparent;
+    text-decoration: none;
 }
 #share:visited
 {
@@ -203,15 +206,20 @@ padding: 3px;
 }
 #discussion_like,.comment-lyk,.discuss-lyk
 {
-	padding: 3px;
-	font-size:13px;
-	background: rgb(0,123,255);
-	border:none;
-	font-weight: bold;
+	color:white;
+    font-weight: bold;
+    border:2px solid rgb(0,123,255); 
+    margin-top: 5px;
+    background: rgb(0,123,255);
+    padding: 3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
 }
 #discussion_like:hover,.comment-lyk:hover,.discuss-lyk:hover
 {
-	background: rgb(70,94,170);
+	color:rgb(0,123,255);
+    background:transparent;
 }
 #suggestion_id
 {
@@ -295,4 +303,38 @@ a#written_by:hover
 #featured_blogs>.nav-sidebar>li>a.written_by:hover
 {
 	color: black;
+}
+button.like
+{
+    color:white;
+    font-weight: bold;
+    border:2px solid rgb(0,123,255); 
+    margin-top: 5px;
+    background: rgb(0,123,255);
+    padding: 3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+}
+button.like:hover
+{
+    color:rgb(0,123,255);
+    background:transparent;
+}
+button.post
+{
+	color:white;
+    font-weight: bold;
+    border:2px solid rgb(70,94,170); 
+    margin-top: 5px;
+    background: rgb(70,94,170);
+    padding: 3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+}
+button.post:hover
+{
+	color:rgb(70,94,170);
+    background:transparent;
 }

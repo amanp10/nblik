@@ -174,6 +174,17 @@ div[id^="d"]:last-child
   color:black;
   text-decoration: none;
 }
+#d2 a:link,#d2 a:visited,#d6 a:link,#d6 a:visited
+{
+  color:rgb(100,100,100);
+  font-weight: bold;
+  font-size: 20px;
+}
+#d2 a:hover,#d6 a:hover
+{
+  color:black;
+  text-decoration: none;
+}
 </style>
 {% if userprofile.picture.url %}
 <img style="height:150px;width:150px;" src="{{ userprofile.picture.url }}"/>
@@ -190,18 +201,19 @@ div[id^="d"]:last-child
 <li data-id="5">About</li>
 <li data-id="4">Following</li>
 <li data-id="3">Followers</li>
-<!--<li data-id="2">Tags</li>-->
+<li data-id="2">Blogs</li>
+<li data-id="6">Discussions</li>
 <li data-id="1">Settings</li>
 </ul>
 </div>
 <div id="ata">
 <div id="d1">
   <ul id="settings_list">
-  <li><a id="logout_link" href="#"><span class="glyphicon glyphicon-share"></span>&nbsp Account</a></li>
-  <li><a id="logout_link" href="#"><span class="glyphicon glyphicon-share"></span>&nbsp Privacy</a></li>
-  <li><a id="logout_link" href="#"><span class="glyphicon glyphicon-share"></span>&nbsp Notification</a></li>
-  <li><span id="edit_language"><span class="glyphicon glyphicon-share"></span>&nbsp Language</span></li>
-  <li><a id="logout_link" href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span>&nbsp Logout</a></li>
+  <li><a id="logout_link" href="/nblik/info/contact_us/">Contact Us</a></li>
+  <li><a id="logout_link" href="/nblik/info/privacy_policy/">Privacy Policy</a></li>
+  <li><a id="logout_link" href="/nblik/info/copyrights/">Copyrights</a></li>
+  <li><span id="edit_language">Language</span></li>
+  <li><a id="logout_link" href="{% url 'logout' %}">Logout</a></li>
 </ul>
 <div id="language_id" class="language1">
   <form method="post" action="/nblik/edit_language/">
@@ -214,27 +226,35 @@ div[id^="d"]:last-child
 </form>
 </div>
 </div>
-<!--<div id="d2">
-{% for tag in followed_tags %}
-<span class="data">{{ tag.name }}</span>,
+<div id="d6">
+  <span class="data">Discussions: {{ l_dis }}</span><br><br>
+{% for discussion in discussions %}
+<a href="/nblik/discussion/{{ discussion.slug }}">{{ discussion.topic }}</a><br><hr><br>
 {% endfor %}
-</div>-->
+</div>
+<div id="d2">
+  <span class="data">Blogs: {{ l_blogs }}</span><br><br>
+{% for blog in blogs %}
+<a href="/nblik/blog/{{ blog.slug }}">{{ blog.title }}</a><br><hr><br>
+{% endfor %}
+</div>
 <div id="d3"><span class="data">Followers : {{ userprofile_follow.followers }}</span><br><br>
   {% for up_follow in followers %}
-<img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up_follow.userprofile.userprofile.picture.url }}"> &nbsp &nbsp
-<a href="/{{ up_follow.userprofile }}/"><span class="data">{{ up_follow.userprofile.userprofile.name }}</span></a><br /><hr><br />
+<br><img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up_follow.userprofile.userprofile.picture.url }}"> &nbsp &nbsp
+<a href="/{{ up_follow.userprofile }}/"><span class="data">{{ up_follow.userprofile.userprofile.name }}</span></a><br /><hr>
 {% endfor %}
 </div>
 <div id="d4"><span class="data">Following : {{ userprofile_follow.no_followed }}</span><br><br>
   {% for up in followed_list %}
-<img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up.picture.url }}"> &nbsp &nbsp
-<a href="/{{ up.user }}/"><span class="data">{{ up.name }}</span></a><br /><hr><br />
+<br><img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up.picture.url }}"> &nbsp &nbsp
+<a href="/{{ up.user }}/"><span class="data">{{ up.name }}</span></a><br /><hr>
 {% endfor %}</div>
 <div id="d5">
   About the user:
 {% if user == user_m %}
-<br><strong>Your Username: </strong>{{ user }}<br>
+<br><br><strong>Your Username: </strong>{{ user }}<br>
 {% endif %}
+<br><strong>Birthday: </strong> {{ userprofile.dob_date }}/{{ userprofile.dob_month }}/{{ userprofile.dob_year }}
 </div>
 </div>
 </div>

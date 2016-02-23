@@ -72,7 +72,7 @@ p
 <span id="{{ blog.id }}" style="color:black;font-weight:bold;">{{ blog.likes }}</span><font style="color:gray;"> like(s)</font>
 {% if user.is_authenticated %}
 {% if show %}
-<button data-blogid="{{ blog.id }}" class="btn btn-primary blog_like" type="button">
+<button data-blogid="{{ blog.id }}" class="like blog_like" type="button">
                         <span class="glyphicon glyphicon-thumbs-up"> </span>
                         Like</button>
                     {% endif %}
@@ -108,7 +108,7 @@ p
                                     {% if user.is_authenticated %}
                                     {% for key,value in show_comment.items %}
                                     {% if key == comment.id and value == "yes" %}
-                                    <button id="comment {{ comment.id }}" data-blogid="{{ comment.id }}" class="btn btn-primary comment-lyk" type="button">
+                                    <button id="comment {{ comment.id }}" data-blogid="{{ comment.id }}" class="like comment-lyk" type="button">
                                     <span class="glyphicon glyphicon-thumbs-up"></span>
                                     Like</button>
                                     {% endif %}
@@ -129,7 +129,7 @@ p
                                 <p class="list-group-item-text">
                                     <textarea id="comment_text" cols="75" rows="4" style="resize:none;"></textarea><br />
                                 </p>
-                                <button id="comment" type="button" data-blogid="{{ blog.id }}" data-uid="{{ u.id }}" data-uname="{{ up.name }}" class="btn btn-primary">Comment</button>
+                                <button id="comment" type="button" data-blogid="{{ blog.id }}" data-uid="{{ u.id }}" data-uname="{{ up.name }}" class="post">Comment</button>
                             </div>
                             {% endif %}
                         </div>
