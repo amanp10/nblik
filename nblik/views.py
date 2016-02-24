@@ -33,7 +33,7 @@ def index(request):
     if request.method=="POST":
         blog_text=request.POST.get('blog_text')
         return render(request,'nblik/add_blog.html',{'blog_text':blog_text})
-    blog_list = Blog.objects.order_by('-likes')[:10]
+    blog_list = Blog.objects.order_by('-id')[:15]
     show=[True]*len(blog_list)
     try:
         user1=User.objects.get(username=request.user)
@@ -90,7 +90,7 @@ def category(request,category_name_slug):
     try:
         category = Category.objects.get(slug=category_name_slug)
         context_dict['category_name']=category.name
-        blog_list = Blog.objects.filter(category=category).order_by('-likes')
+        blog_list = Blog.objects.filter(category=category).order_by('-id')
         context_dict['category']=category
         context_dict['category_name_slug']=category.slug
         show=[True]*len(blog_list)
@@ -212,10 +212,14 @@ def like_category(request):
     if request.method=="GET":
         category_id=request.GET["category_id"]
         category1=Category.objects.get(id=int(category_id))
-        category1.likes+=1
-        category1.save()
         user1=User.objects.get(username=request.user)
         user2=UserProfile.objects.get(user=user1)
+        lke_list=user2.liked_categories.all()
+        for lke in lke_list:
+            if lke == category1:
+                return HttpResponse(category1.likes)
+        category1.likes+=1
+        category1.save()
         user2.liked_categories.add(category1)
         user2.save()
         return HttpResponse(category1.likes)
@@ -238,13 +242,16 @@ def like_blog(request):
     if request.method=="GET":
         blog_id=request.GET["blog_id"]
         blog=Blog.objects.get(id=int(blog_id))
-        blog.likes+=1
-        blog.save()
-        ##print request.user
         user1=User.objects.get(username=request.user)
         user2=UserProfile.objects.get(user=user1)
+        user_liked=user2.liked_blogs.all()
+        for blg in user_liked:
+            if blog == blg:
+                return HttpResponse(blog.likes)
         user2.liked_blogs.add(blog)
         user2.save()
+        blog.likes+=1
+        blog.save()
         return HttpResponse(blog.likes)
 
 @login_required
@@ -253,11 +260,14 @@ def like_discussion(request):
     if request.method=="GET":
         discussion_id=request.GET["discussion_id"]
         discussion=Discussion.objects.get(id=int(discussion_id))
-        discussion.likes+=1
-        discussion.save()
-        ##print request.user
         user1=User.objects.get(username=request.user)
         user2=UserProfile.objects.get(user=user1)
+        liked_discussions=user2.liked_discussions.all()
+        for dis in liked_discussions:
+            if dis == discussion:
+                return HttpResponse(discussion.likes)
+        discussion.likes+=1
+        discussion.save()
         user2.liked_discussions.add(discussion)
         user2.save()
         return HttpResponse(discussion.likes)
@@ -268,11 +278,14 @@ def like_discuss(request):
     if request.method=="GET":
         discuss_id=request.GET["discuss_id"]
         discuss=Discuss.objects.get(id=int(discuss_id))
-        discuss.likes+=1
-        discuss.save()
-        ##print request.user
         user1=User.objects.get(username=request.user)
         user2=UserProfile.objects.get(user=user1)
+        l_list=user2.liked_discusses.all()
+        for lke in l_list:
+            if lke == discuss:
+                return HttpResponse(discuss.likes)
+        discuss.likes+=1
+        discuss.save()
         user2.liked_discusses.add(discuss)
         user2.save()
         return HttpResponse(discuss.likes)
@@ -283,11 +296,14 @@ def like_comment(request):
     if request.method=="GET":
         comment_id=request.GET["comment_id"]
         comment=Comment.objects.get(id=int(comment_id))
-        comment.likes+=1
-        comment.save()
-        ##print request.user
         user1=User.objects.get(username=request.user)
         user2=UserProfile.objects.get(user=user1)
+        l_list=user2.liked_comments.all()
+        for lke in l_list:
+            if lke == comment:
+                return HttpResponse(comment.likes)
+        comment.likes+=1
+        comment.save()
         user2.liked_comments.add(comment)
         user2.save()
         return HttpResponse(comment.likes)

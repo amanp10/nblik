@@ -9,7 +9,7 @@
 body
 {
 	overflow: auto;
-	word-break:break-all;
+	/*word-break:break-all;*/
 }
 #navbar-brand-id
 {

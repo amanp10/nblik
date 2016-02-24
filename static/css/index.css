@@ -9,7 +9,7 @@ body
 {
 	padding:40px 0 0 10px;
 	background: rgb(234,237,247);
-	word-break:break-all;
+	/*word-break:break-all;*/
 }
 a.blog_title:link
 {
@@ -200,6 +200,8 @@ a#written_by:hover
 	-webkit-box-shadow:2px 2px 3px rgb(100,100,100);
 	-moz-box-shadow:2px 2px 3px rgb(100,100,100);
 	box-shadow:2px 2px 3px rgb(100,100,100);
+	overflow: hidden;
+	height: auto;
 }
 #category_div
 {

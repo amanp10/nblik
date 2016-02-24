@@ -130,6 +130,9 @@ class UserProfile(models.Model):
     liked_discussions=models.ManyToManyField(Discussion,blank=True)
     liked_discusses=models.ManyToManyField(Discuss,blank=True)
     liked_comments=models.ManyToManyField('nblik.Comment',blank=True)
+    from_place=models.TextField(blank=True)
+    lives_in=models.TextField(blank=True)
+    who=models.TextField(blank=True)
     def __unicode__(self):
         return self.user.username
 
@@ -155,3 +158,6 @@ class NblikInfo(models.Model):
     info=models.TextField()
     def __unicode__(self):
         return self.heading
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.heading)
+        super(NblikInfo, self).save(*args,**kwargs)

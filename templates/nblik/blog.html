@@ -46,6 +46,16 @@ p
     border-color:black;
     text-decoration: none;
 }
+.text-left a:link,a:visited,h4 a:link,a:visited
+{
+    color: rgb(100,100,100);
+    font-weight: bold;
+}
+.text-left a:hover,h4 a:hover
+{
+    color: black;
+    text-decoration: none;
+}
 </style>
 <script src="{% static "js/jquery-1.11.3.min.js" %}"></script>
 <link href="{% static "css/index.css" %}" rel="stylesheet">
@@ -57,16 +67,16 @@ p
         <button id="delete_dialog" class="edit_del">Delete</button><br>
         <div id="delete">Are you sure?<br><a href="/nblik/delete_blog/{{ blog.slug }}">Yes</a> <a id="no" href="">No</a> </div><br>
         {% endif %}
-		{% if blog.image %}
+		<!--{% if blog.image %}
         <br />
 		    <img src="{{ blog.image.url }}" width="400px"/><br />
 		    <i style="color:gray;">"{{ blog.image_description }}"</i><br /><br />
-		{% endif %}
+		{% endif %}-->
 {% if b_time %}
 <span style='float:right;color:gray;'>{{ b_time }}</span>
 {% endif %}
 <p class='text-left' style="color:gray;"> <img src="{{ blog.written_by.userprofile.picture.url }}" class="pro_pic"/>
--{{ blog.written_by.userprofile.name }}</p><br>
+-<a href="/{{ blog.written_by }}/">{{ blog.written_by.userprofile.name }}</a></p><br>
 <p class="blog_text" style="font-family:georgia;">{{ blog.blog_content|safe }}</p>
 <br/><br/>
 <span id="{{ blog.id }}" style="color:black;font-weight:bold;">{{ blog.likes }}</span><font style="color:gray;"> like(s)</font>
@@ -94,7 +104,7 @@ p
         <br />      
                     <div class="panel-heading">
                     {% if comments %}
-                    <h3 class="panel-title">Commments:</h3>
+                    <h3 class="panel-title">Comments:</h3>
                     {% endif %}
                     <div class="panel-body">
                         <div class="list-group">
@@ -102,7 +112,7 @@ p
                             {% if comments %}
                             {% for comment,comment_by_name in comments %}
                                 <div class="list-group-item" style="width:75%">
-                                    <h4 class="list-group-item-heading"><img src="{{ comment.comment_by.userprofile.picture.url }}" class="pro_pic_2"/> {{ comment_by_name }}</h4>
+                                    <h4 class="list-group-item-heading"><img src="{{ comment.comment_by.userprofile.picture.url }}" class="pro_pic_2"/> <a href="/{{ comment.comment_by }}/">{{ comment_by_name }}</a></h4>
 									<p class="list-group-item-text" style="font-family:georgia;">{{ comment.comment_text|safe }}</p>
 									<p style="color:gray;"><span id="{{ comment.id }}" style="color:black">{{ comment.likes }}</span> like(s)</p>
                                     {% if user.is_authenticated %}

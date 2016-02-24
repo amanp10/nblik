@@ -211,7 +211,7 @@ div[id^="d"]:last-child
   <ul id="settings_list">
   <li><a id="logout_link" href="/nblik/info/contact_us/">Contact Us</a></li>
   <li><a id="logout_link" href="/nblik/info/privacy_policy/">Privacy Policy</a></li>
-  <li><a id="logout_link" href="/nblik/info/copyrights/">Copyrights</a></li>
+  <li><a id="logout_link" href="/nblik/info/terms-and-services/">Terms and Services</a></li>
   <li><span id="edit_language">Language</span></li>
   <li><a id="logout_link" href="{% url 'logout' %}">Logout</a></li>
 </ul>
@@ -227,34 +227,44 @@ div[id^="d"]:last-child
 </div>
 </div>
 <div id="d6">
-  <span class="data">Discussions: {{ l_dis }}</span><br><br>
+  <span class="data">Discussions ({{ l_dis }})</span><br><br>
 {% for discussion in discussions %}
 <a href="/nblik/discussion/{{ discussion.slug }}">{{ discussion.topic }}</a><br><hr><br>
 {% endfor %}
 </div>
 <div id="d2">
-  <span class="data">Blogs: {{ l_blogs }}</span><br><br>
+  <span class="data">Blogs ({{ l_blogs }})</span><br><br>
 {% for blog in blogs %}
 <a href="/nblik/blog/{{ blog.slug }}">{{ blog.title }}</a><br><hr><br>
 {% endfor %}
 </div>
-<div id="d3"><span class="data">Followers : {{ userprofile_follow.followers }}</span><br><br>
+<div id="d3"><span class="data">Followers ({{ userprofile_follow.followers }})</span><br><br>
   {% for up_follow in followers %}
 <br><img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up_follow.userprofile.userprofile.picture.url }}"> &nbsp &nbsp
 <a href="/{{ up_follow.userprofile }}/"><span class="data">{{ up_follow.userprofile.userprofile.name }}</span></a><br /><hr>
 {% endfor %}
 </div>
-<div id="d4"><span class="data">Following : {{ userprofile_follow.no_followed }}</span><br><br>
+<div id="d4"><span class="data">Following ({{ userprofile_follow.no_followed }})</span><br><br>
   {% for up in followed_list %}
 <br><img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up.picture.url }}"> &nbsp &nbsp
 <a href="/{{ up.user }}/"><span class="data">{{ up.name }}</span></a><br /><hr>
 {% endfor %}</div>
 <div id="d5">
   About the user:
-{% if user == user_m %}
-<br><br><strong>Your Username: </strong>{{ user }}<br>
+  {% if userprofile.who %}
+<br><strong>{{ userprofile.who }}</strong><br>
 {% endif %}
-<br><strong>Birthday: </strong> {{ userprofile.dob_date }}/{{ userprofile.dob_month }}/{{ userprofile.dob_year }}
+{% if user == user_m %}
+<br><strong>Your Username: </strong>{{ user }}<br>
+{% endif %}
+<br><strong>Birthday: </strong> {{ userprofile.dob_date }}/{{ userprofile.dob_month }}/{{ userprofile.dob_year }}<br>
+{% if userprofile.from_place %}
+<br><strong>From:</strong> {{ userprofile.from_place }}<br>
+{% endif %}
+{% if userprofile.lives_in %}
+<br><strong>Lives in:</strong> {{ userprofile.lives_in }}
+{% endif %}
+<br>
 </div>
 </div>
 </div>
