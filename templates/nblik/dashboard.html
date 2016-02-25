@@ -203,14 +203,17 @@ div[id^="d"]:last-child
 <li data-id="3">Followers</li>
 <li data-id="2">Blogs</li>
 <li data-id="6">Discussions</li>
+{% if user == user_m %}
 <li data-id="1">Settings</li>
+{% endif %}
 </ul>
 </div>
 <div id="ata">
+  {% if user == user_m %}
 <div id="d1">
   <ul id="settings_list">
-  <li><a id="logout_link" href="/nblik/info/contact_us/">Contact Us</a></li>
-  <li><a id="logout_link" href="/nblik/info/privacy_policy/">Privacy Policy</a></li>
+  <li><a id="logout_link" href="/nblik/info/contact-us/">Contact Us</a></li>
+  <li><a id="logout_link" href="/nblik/info/privacy-policy/">Privacy Policy</a></li>
   <li><a id="logout_link" href="/nblik/info/terms-and-services/">Terms and Services</a></li>
   <li><span id="edit_language">Language</span></li>
   <li><a id="logout_link" href="{% url 'logout' %}">Logout</a></li>
@@ -226,6 +229,7 @@ div[id^="d"]:last-child
 </form>
 </div>
 </div>
+{% endif %}
 <div id="d6">
   <span class="data">Discussions ({{ l_dis }})</span><br><br>
 {% for discussion in discussions %}

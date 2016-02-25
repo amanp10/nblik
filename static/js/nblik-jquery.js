@@ -23,13 +23,11 @@ $(document).ready(function(){
 
     $('#id_title').change(function(){
         var blog_title=$('#id_title').val();
-        console.log(blog_title);
         $.ajax({
     type:"GET",
     url: "/nblik/blog_title/",
     data: {blog_title: blog_title},
     success: function(newData){
-      console.log(newData);
         if(newData=="error")
         {
             $('#id_title').val("");
@@ -41,13 +39,11 @@ $(document).ready(function(){
 
     $('#new_discuss_topic').change(function(){
         var discussion_topic=$('#new_discuss_topic').val();
-        console.log(discussion_topic);
         $.ajax({
     type:"GET",
     url: "/nblik/discussion_topic/",
     data: {discussion_topic: discussion_topic},
     success: function(newData){
-      console.log(newData);
         if(newData=="error")
         {
             $('#new_discuss_topic').val("");
@@ -134,7 +130,6 @@ $(".discuss-lyk").click(function(event){
     url: "/nblik/search_top/",
     data: {query_string: search_term},
     success: function(newData){
-        console.log(newData);
         $('#search_results').html(newData);
     }
             });
@@ -148,31 +143,19 @@ $(".discuss-lyk").click(function(event){
 
   $("#delete_dialog").click(function(event){
         $("#delete").toggleClass("show");
-        console.log("yo");
         });
         $('#no').click(function(event){
             event.preventDefault();
             $('#delete').toggleClass("show");
         });
 
-  $('.follow_user').click(function(event){
-		var user_id;
-    console.log("yo");
-		user_id = $(this).attr("data-userprofileid");
-		$.get('/nblik/follow_user/',{user_id: user_id},function(data){
-		    $("#"+user_id).hide();
-			});
-    event.stopImmediatePropagation();
-    });
 
   $('#comment').click(function(){
     var user_id,blog_id;
     user_id = $(this).attr("data-uid");
     blog_id = $(this).attr("data-blogid");
     up_name=$(this).attr("data-uname");
-    console.log("up_name");
     comment_text=$('#comment_text').val().replace(/\r\n|\r|\n/g,"<br />");
-    console.log(comment_text);
     $.get('/nblik/comment/',{user_id: user_id,blog_id:blog_id,comment_text:comment_text},function(newdata){
       $('<div class="list-group-item" style="width:75%"><h4 class="list-group-item-heading" id="new_comment_by" >'+up_name+'</h4><p class="list-group-item-text" id="new_comment_text" >'+comment_text+'</p><br /><p style="color:gray;"><font color="black" id="new_comment_like">'+newdata+'</font> like(s)</p></div>').appendTo("#wrapper");
       /*$('#new_comment_like').html(data);
@@ -198,26 +181,16 @@ $(".discuss-lyk").click(function(event){
   });
 
   $('#quick_add_blog').click(function(){
-    console.log('Hello');
     var blog_text = $('#quick_blog_text').val();
-    console.log(blog_text);
     window.open("/nblik/none/add_blog/","_self");
-    console.log('Hello1');
     $('#blog_area').html(blog_text);
   });
 
   $('#select-category').change(function(){
     var cat_slug = $('#select-category').val();
-    console.log('Hello');
     var url= "/nblik/"+ cat_slug + "/add_blog/" ;
     $('#blog_form2').attr("action",url);
   });
-
-  $('.skip').click(function(event){
-    var user_id;
-    user_id = $(this).attr("data-userprofileid");
-    $("#"+user_id).hide();
-    });
 
   $('#profile_edit').click(function() {
   	event.preventDefault();
@@ -231,7 +204,6 @@ $(".discuss-lyk").click(function(event){
     url: "/nblik/add_propic/",
     data: {},
     success: function(newData){
-        console.log(newData);
         $('#profile_data').html(newData);
     }
     });

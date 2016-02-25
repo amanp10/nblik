@@ -71,9 +71,9 @@
 
 				<div id="body_footer">
 					<div id="footer_table">
-						<div><a href="/nblik/info/about_us/">About</a></div>
-						<div><a href="/nblik/info/contact_us/">Contact Us</a></div>
-						<div><a href="/nblik/info/privacy_policy/">Privacy Policy</a></div>
+						<div><a href="/nblik/info/about-us/">About</a></div>
+						<div><a href="/nblik/info/contact-us/">Contact Us</a></div>
+						<div><a href="/nblik/info/privacy-policy/">Privacy Policy</a></div>
 						<div><a href="/nblik/info/terms-and-services/">Terms and Services</a></div>
 					</div>
 				</div>
@@ -102,6 +102,22 @@
 			</div>
 		</div>
     <script src="{% static "js/jquery-1.11.3.min.js" %}"></script>
+    <script type="text/javascript">
+    $('.follow_user').click(function(event){
+		var user_id;
+    console.log("yo");
+		user_id = $(this).attr("data-userprofileid");
+		$.get('/nblik/follow_user/',{user_id: user_id},function(data){
+		    $("#"+user_id).hide();
+			});
+    event.stopImmediatePropagation();
+    });
+    $('.skip').click(function(event){
+    var user_id;
+    user_id = $(this).attr("data-userprofileid");
+    $("#"+user_id).hide();
+    });
+    </script>
 		<script src="{% static "js/bootstrap.js" %}"></script>
 		<script src="{% static "js/bootstrap.min.js" %}"> </script>
 		<script src="{% static "js/nblik-jquery.js" %}"></script>

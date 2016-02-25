@@ -7,6 +7,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from imagekit.models import ProcessedImageField
+from unidecode import unidecode
 
 
 class Category(models.Model):
@@ -14,7 +15,7 @@ class Category(models.Model):
     likes = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        self.slug = slugify(unidecode(self.name))
         if(self.likes<0):
             self.likes=0
         super(Category, self).save(*args,**kwargs)
@@ -35,7 +36,7 @@ class Blog(models.Model):
     likes=models.IntegerField(default=0)
     datetime_added=models.DateTimeField(null=True,blank=True)
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = slugify(unidecode(self.title))
         if(self.likes<0):
             self.likes=0
         super(Blog, self).save(*args,**kwargs)
@@ -72,7 +73,7 @@ class UnPostedBlog(models.Model):
     likes=models.IntegerField(default=0)
     datetime_added=models.DateTimeField(null=True,blank=True)
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = slugify(unidecode(self.title))
         if(self.likes<0):
             self.likes=0
         super(Blog, self).save(*args,**kwargs)
@@ -96,7 +97,7 @@ class Discussion(models.Model):
     def __unicode__(self):
         return self.topic
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.topic)
+        self.slug = slugify(unidecode(self.topic))
         if(self.likes<0):
             self.likes=0
         super(Discussion, self).save(*args,**kwargs)

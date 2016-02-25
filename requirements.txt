@@ -14,3 +14,4 @@ python-social-auth
 requests==2.2.1
 pillow
 django-imagekit==3.3
+Unidecode==0.04.9

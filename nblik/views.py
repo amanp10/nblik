@@ -12,6 +12,7 @@ from datetime import datetime,date,tzinfo,timedelta
 from collections import Counter
 import json
 import facebook
+from unidecode import unidecode
 
 ZERO = timedelta(0)
 
@@ -331,7 +332,7 @@ def add_blog(request,category_name_slug):
             blog1=Blog.objects.get(title=blog_title)
             #blog1.save()
             #return HttpResponse('Hello')
-            return blog(request,slugify(blog1.title))
+            return blog(request,blog1.slug)
     else:
         context_dict={'category_list':Category.objects.all(),'category':cat}
         return render(request,'nblik/add_blog.html',context_dict)
@@ -353,7 +354,7 @@ def add_blog2(request,category_name_slug):
             blog1.category=cat
             blog1.written_by=request.user
             blog1.save()
-            return blog(request,slugify(blog1.title))
+            return blog(request,blog1.slug)
         else:
             form=BlogForm()
             cat=None
@@ -697,6 +698,9 @@ def next_step(request):
         dob_date = request.POST.get('dob_date')
         dob_month = request.POST.get('dob_month')
         dob_year = request.POST.get('dob_year')
+        who=request.POST.get('who')
+        lives_in=request.POST.get('lives_in')
+        from_place=request.POST.get('from_place')
         if len(request.FILES) != 0:
             up.picture=request.FILES['picture']
             ##print profile_pic_url
@@ -704,6 +708,9 @@ def next_step(request):
         profile_tagline=request.POST.get('profile_tag')
         liked_category_ids=request.POST.getlist('category')
         up.name=name
+        up.who=who
+        up.lives_in=lives_in
+        up.from_place=from_place
         up.dob_date=int(dob_date)
         up.dob_month=int(dob_month)
         up.dob_year=int(dob_year)
@@ -752,7 +759,7 @@ def post_to_facebook_discussion(request,discussion_id):
 
 
 def blog_title(request):
-    title=slugify(request.GET['blog_title'])
+    title=slugify(unidecode(request.GET['blog_title']))
     blogs=Blog.objects.all()
     resp="good"
     for blog in blogs:
@@ -762,7 +769,7 @@ def blog_title(request):
     return HttpResponse(resp)
 
 def discussion_topic(request):
-    title=slugify(request.GET['discussion_topic'])
+    title=slugify(unidecode(request.GET['discussion_topic']))
     discussions=Discussion.objects.all()
     resp="good"
     for disc in discussions:
@@ -782,8 +789,8 @@ def edit_language(request):
 def edit_blog(request,blog_slug):
     blog=Blog.objects.get(slug=blog_slug)
     context_dict={}
-    context_dict['blog_text']=(str(blog.blog_content)).replace("\r\n","")
-    context_dict['blog_title']=str(blog.title)
+    context_dict['blog_text']=(blog.blog_content).replace("\r\n","")
+    context_dict['blog_title']=(blog.title)
     context_dict['blog_category']=str(blog.category.slug)
     context_dict['category_list']=Category.objects.all()
     form=BlogForm()
@@ -810,9 +817,11 @@ def update_blog(request,category_name_slug):
             blog1.category=cat
             blog1.written_by=request.user
             blog1.save()
-            return blog(request,slugify(blog1.title))
+            return blog(request,blog1.slug)
         else:
-            return edit_blog(request,blog_id)
+            blog1=Blog.objects.get(id=int(request.POST.get('blog_id')))
+            blog_slug=blog1.slug
+            return edit_blog(request,blog_slug)
 
 def delete_blog(request,blog_slug):
     blog=Blog.objects.get(slug=blog_slug)
@@ -823,6 +832,7 @@ def edit_profile(request):
     user=request.user
     userpro=UserProfile.objects.get(user=user)
     context_dict={}
+    context_dict['userpro']=userpro
     context_dict['name']=str(userpro.name)
     context_dict['tag']=str(userpro.profile_tag_line)
     context_dict['language']=str(userpro.languages)
@@ -841,6 +851,9 @@ def update_profile(request):
     userpro.dob_year=int(request.POST.get('dob_year'))
     userpro.languages=int(request.POST.get('language'))
     userpro.profile_tag_line=request.POST.get('profile_tag')
+    userpro.who=request.POST.get('who')
+    userpro.lives_in=request.POST.get('lives_in')
+    userpro.from_place=request.POST.get('from_place')
     if len(request.FILES) != 0:
         userpro.picture=request.FILES['picture']
         ##print profile_pic_url
@@ -855,8 +868,8 @@ def edit_discussion(request,discussion_slug):
     discussion=Discussion.objects.get(slug=discussion_slug)
     context_dict={}
     context_dict['discussion']=discussion
-    context_dict['discussion_intro']=str(discussion.intro).replace("<br />","\r\n").replace("<br>","\r\n")
-    context_dict['discussion_topic']=str(discussion.topic)
+    context_dict['discussion_intro']=(discussion.intro).replace("<br />","\r\n").replace("<br>","\r\n")
+    context_dict['discussion_topic']=(discussion.topic)
     context_dict['discussion_category']=discussion.category
     context_dict['category_list']=Category.objects.all()
     context_dict['discussion_id']=str(discussion.id)

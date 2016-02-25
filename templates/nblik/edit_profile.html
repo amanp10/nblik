@@ -34,6 +34,10 @@ body
 {
 	/*padding-top: 50px;*/
 }
+input[type='text']
+{
+	width:50%;
+}
 input
 {
 	padding: 1px 3px 1px 3px;
@@ -71,7 +75,11 @@ input[type="file"]
 	<h3>Choose prefered language : </h3><input type="radio" name="language" value="1"> English
 	<input type="radio" name="language" value="2"> Hindi
 	<input type="radio" name="language" value="3"> Both<br><br>
-	<input type="text" placeholder="Describe yourself in a line" name="profile_tag" value="{{ tag }}"><br><br>
+	<input type="text" placeholder="Your moto in life.." name="profile_tag" value="{{ tag }}"><br><br>
+	<input type="text" placeholder="Who are you?" name="who" value="{{ userpro.who }}"><br><br>
+	<input type="text" placeholder="Living in.." name="lives_in" value="{{ userpro.lives_in }}"><br><br>
+	<input type="text" placeholder="You are from.." name="from_place" value="{{ userpro.from_place }}"><br>
+	<br>
 	<input type="submit" id="next">
 </div>
 </form>

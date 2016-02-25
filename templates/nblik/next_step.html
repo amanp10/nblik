@@ -39,6 +39,10 @@ body
 {
 	visibility: hidden;
 }
+input[type='text']
+{
+	width:50%;
+}
 input
 {
 	padding: 1px 3px 1px 3px;
@@ -69,10 +73,11 @@ input[type="button"]:hover,input[type="submit"]:hover
 <form method="post" action="/nblik/next_step/"  enctype="multipart/form-data">
 	{% csrf_token %}
 <div id="form1" class="body_div">
-	<h3>Your prefered categories :</h3>
-	{% for c in cat_list %}
-	<font color="black">{{ c.name }}</font> <input type="checkbox" name="category" value="{{ c.id }}"> &nbsp
-	{% endfor %}<br><br>
+	<br>
+	<input type="text" placeholder="Who are you?" name="who"><br><br>
+	<input type="text" placeholder="Living in? eg.Varanasi,India" name="lives_in"><br><br>
+	<input type="text" placeholder="You are from? eg.Varanasi,India" name="from_place">
+	<br><br>
 	<h3>Choose prefered language : </h3><input type="radio" name="language" value="1"> <font color="black">English</font><br>
 	<input type="radio" name="language" value="2"> <font color="black">Hindi</font><br>
 	<input type="radio" name="language" value="3"> <font color="black">Both</font><br><br>
@@ -83,7 +88,7 @@ input[type="button"]:hover,input[type="submit"]:hover
 	<input type="text" placeholder="Name" name="name" value="{{ name }}"><br><br>
 	Date of Birth : &nbsp Date: <input type="number" name="dob_date" min="1" max="31"> Month: <input type="number" name="dob_month" min="1" max="12"> Year: <input type="number" name="dob_year" min="1900"><br><br>
 	Profile picture: <input type="file" name="picture"><br><br>
-	<input type="text" placeholder="Describe yourself in a line" name="profile_tag"><br><br>
+	<input type="text" placeholder="Your moto in life.." name="profile_tag"><br><br>
 	<input type="button" id="next" value="Next">
 </div>
 </form>
