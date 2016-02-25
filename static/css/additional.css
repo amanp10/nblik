@@ -275,6 +275,9 @@ a#written_by:hover
 	display:-moz-box;
 	-moz-box-pack: center;
 	-moz-box-flex:1;
+	display:box;
+	box-pack: center;
+	box-flex:1;
 	margin:0;
 }
 #footer_table a:link
@@ -336,5 +339,60 @@ button.post
 button.post:hover
 {
 	color:rgb(70,94,170);
+    background:transparent;
+}
+button.blog_like.like[liked="yes"]
+{
+	color:white;
+    font-weight: bold;
+    border:2px solid rgb(150,150,150); 
+    margin-top: 5px;
+    background: rgb(150,150,150);
+    padding: 3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+}
+button.blog_like.like[liked="yes"]:hover
+{
+	color:black;
+	border-color:black;
+    background:transparent;
+}
+button.comment-lyk.like[liked="yes"],button.discuss-lyk[liked="yes"]
+{
+	color:white;
+    font-weight: bold;
+    border:2px solid rgb(150,150,150); 
+    margin-top: 5px;
+    background: rgb(150,150,150);
+    padding: 3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+}
+button.comment-lyk.like[liked="yes"]:hover,button.discuss-lyk[liked="yes"]:hover
+{
+	color:black;
+	border-color:black;
+    background:transparent;
+}
+.unfollow_user
+{
+	color:white;
+    font-weight: bold;
+    border:2px solid rgb(150,150,150); 
+    margin-top: 5px;
+    margin-left:20px;
+    background: rgb(150,150,150);
+    padding: 3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+}
+.unfollow_user:hover
+{
+	color:black;
+	border-color:black;
     background:transparent;
 }

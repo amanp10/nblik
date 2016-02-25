@@ -9,9 +9,12 @@
 		<strong id="category_like_count">{{ category.likes }} </strong> people like this category
 		{% if user.is_authenticated %}
 		{% if show_cat %}
-		     <button id="category_like" data-catid="{{ category.id }}" type="button">
+		     <button id="category_like" liked="no" data-catid="{{ category.id }}" type="button">
 			 <span class="glyphicon glyphicon-thumbs-up"> </span>
 			 Like</button>
+		{% else %}
+		<button id="category_like" liked="yes" data-catid="{{ category.id }}" type="button">
+			 Unlike</button>
 		{% endif %}
 		{% else %}
 		<a href="/nblik/login_signup" class='blog_like'><span class="glyphicon glyphicon-thumbs-up"> </span> Like</a>
@@ -36,9 +39,12 @@
                     <font style="color:gray;"> like(s)</font>
                     {% if user.is_authenticated %}
                     {% if show %}
-		                <button data-blogid="{{ blog.id }}" class="blog_like" type="button">
+		                <button data-blogid="{{ blog.id }}" liked="no" class="blog_like" type="button">
 			            <span class="glyphicon glyphicon-thumbs-up"> </span>
 			            Like</button>
+			            {% else %}
+                        <button data-blogid="{{ blog.id }}" liked="yes" class="blog_like" type="button">
+                        Unlike</button>
 	                {% endif %}
 	                {% else %}
 		<a href="/nblik/login_signup" class='blog_like'><span class="glyphicon glyphicon-thumbs-up"> </span> Like</a>

@@ -562,21 +562,16 @@ def follow_user(request):
         user_id=request.GET["user_id"]
         userprofile=UserProfile.objects.get(id=int(user_id))
         u=User.objects.get(username=userprofile.user.username)
-        ##print u
         up_follow=Follow.objects.get(userprofile=u)
-        ##print up_follow
-        up_follow.followers=up_follow.followers+1
-        ##print up_follow.followers
         current_up_follow=Follow.objects.get(userprofile=request.user)
-        ##print current_up_follow
+        for follo in current_up_follow.followed.all():
+            if userprofile==follo:
+                return HttpResponse("NotFollowed")
+        up_follow.followers=up_follow.followers+1
         current_up_follow.followed.add(userprofile)
-        print current_up_follow.no_followed
         current_up_follow.no_followed=current_up_follow.no_followed+1
-        print current_up_follow.no_followed
-        ##print current_up_follow.no_followed
         current_up_follow.save()
         up_follow.save()
-        ##print request.user
         return HttpResponse("followed")
 
 
@@ -893,3 +888,104 @@ def update_discussion(request):
         discussion1.category=Category.objects.get(slug=cat)
         discussion1.save()
         return discussion(request,discussion1.slug)
+
+def unlike_blog(request):
+    ##print "Hello"
+    if request.method=="GET":
+        blog_id=request.GET["blog_id"]
+        blog=Blog.objects.get(id=int(blog_id))
+        user1=User.objects.get(username=request.user)
+        user2=UserProfile.objects.get(user=user1)
+        try:
+            user2.liked_blogs.remove(blog)
+            user2.save()
+            blog.likes-=1
+            blog.save()
+        except:
+            pass
+        return HttpResponse(blog.likes)
+
+def unlike_discussion(request):
+    ##print "Hello"
+    if request.method=="GET":
+        discussion_id=request.GET["discussion_id"]
+        discussion=Discussion.objects.get(id=int(discussion_id))
+        user1=User.objects.get(username=request.user)
+        user2=UserProfile.objects.get(user=user1)
+        try:
+            user2.liked_discussions.remove(discussion)
+            user2.save()
+            discussion.likes-=1
+            discussion.save()
+        except:
+            pass
+        return HttpResponse(discussion.likes)
+
+def unlike_comment(request):
+    ##print "Hello"
+    if request.method=="GET":
+        comment_id=request.GET["comment_id"]
+        comment=Comment.objects.get(id=int(comment_id))
+        user1=User.objects.get(username=request.user)
+        user2=UserProfile.objects.get(user=user1)
+        try:
+            user2.liked_comments.remove(comment)
+            user2.save()
+            comment.likes-=1
+            comment.save()
+        except:
+            pass
+        return HttpResponse(comment.likes)
+
+def unlike_discuss(request):
+    ##print "Hello"
+    if request.method=="GET":
+        discuss_id=request.GET["discuss_id"]
+        discuss=Discuss.objects.get(id=int(discuss_id))
+        user1=User.objects.get(username=request.user)
+        user2=UserProfile.objects.get(user=user1)
+        try:
+            user2.liked_discusses.remove(discuss)
+            user2.save()
+            discuss.likes-=1
+            discuss.save()
+        except:
+            pass
+        return HttpResponse(discuss.likes)
+
+def unlike_category(request):
+    if request.method=="GET":
+        category_id=request.GET["category_id"]
+        category1=Category.objects.get(id=int(category_id))
+        user1=User.objects.get(username=request.user)
+        user2=UserProfile.objects.get(user=user1)
+        try:
+            user2.liked_categories.remove(category1)
+            user2.save()
+            category1.likes-=1
+            category1.save()
+        except:
+            pass
+        return HttpResponse(category1.likes)
+
+def unfollow_user(request):
+    if request.method=="GET":
+        user_id=request.GET["user_id"]
+        u=User.objects.get(id=int(user_id))
+        userprofile=UserProfile.objects.get(user=u)
+        ##print u
+        up_follow=Follow.objects.get(userprofile=u)
+        ##print up_follow
+        up_follow.followers=up_follow.followers-1
+        ##print up_follow.followers
+        current_up_follow=Follow.objects.get(userprofile=request.user)
+        ##print current_up_follow
+        current_up_follow.followed.remove(userprofile)
+        #print current_up_follow.no_followed
+        current_up_follow.no_followed=current_up_follow.no_followed-1
+        #print current_up_follow.no_followed
+        ##print current_up_follow.no_followed
+        current_up_follow.save()
+        up_follow.save()
+        ##print request.user
+        return HttpResponse(current_up_follow.no_followed)

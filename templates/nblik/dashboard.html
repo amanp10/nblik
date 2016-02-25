@@ -190,9 +190,13 @@ div[id^="d"]:last-child
 <img style="height:150px;width:150px;" src="{{ userprofile.picture.url }}"/>
 {% endif %}<br/><br />
 <span id="name">{{ userprofile.name }}</span><br>
+{% if userprofile.profile_tag_line %}
 <span id="tag">{{ userprofile.profile_tag_line }}</span><br/>
+{% endif %}
 {% if user == user_m %}
 <a href="/nblik/edit_profile/">Edit</a>
+{% else %}
+<button class="follow_user like" data-userprofileid="{{ userprofile.id }}" type="button">Follow</button><br>
 {% endif %}
 <br />
 <div id="wrapper">
@@ -248,10 +252,16 @@ div[id^="d"]:last-child
 <a href="/{{ up_follow.userprofile }}/"><span class="data">{{ up_follow.userprofile.userprofile.name }}</span></a><br /><hr>
 {% endfor %}
 </div>
-<div id="d4"><span class="data">Following ({{ userprofile_follow.no_followed }})</span><br><br>
+<div id="d4"><span id="follow_data" class="data">Following ({{ userprofile_follow.no_followed }})</span><br><br>
   {% for up in followed_list %}
+  <div id="follow_{{ up.user.id }}">
 <br><img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up.picture.url }}"> &nbsp &nbsp
-<a href="/{{ up.user }}/"><span class="data">{{ up.name }}</span></a><br /><hr>
+<a href="/{{ up.user }}/"><span class="data">{{ up.name }}</span></a> 
+{% if user == user_m %}
+<button class="unfollow_user" data-userid="{{ up.user.id }}" type="button">Unfollow</button>
+{% endif %}
+<br /><hr>
+</div>
 {% endfor %}</div>
 <div id="d5">
   About the user:
@@ -274,4 +284,15 @@ div[id^="d"]:last-child
 </div>
     <script src="{% static "js/jquery-1.11.3.min.js" %}"></script>
   <script src="{% static "js/nblik-jquery.js" %}"></script>
+  <script type="text/javascript">
+  $('.follow_user').click(function(event){
+    var user_id;
+    console.log("yo");
+    user_id = $(this).attr("data-userprofileid");
+    $.get('/nblik/follow_user/',{user_id: user_id},function(data){
+        $("#"+user_id).hide();
+      });
+    event.stopImmediatePropagation();
+    });
+  </script>
 {% endblock %}

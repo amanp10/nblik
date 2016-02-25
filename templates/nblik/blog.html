@@ -82,12 +82,15 @@ p
 <span id="{{ blog.id }}" style="color:black;font-weight:bold;">{{ blog.likes }}</span><font style="color:gray;"> like(s)</font>
 {% if user.is_authenticated %}
 {% if show %}
-<button data-blogid="{{ blog.id }}" class="like blog_like" type="button">
+<button data-blogid="{{ blog.id }}" class="like blog_like" liked="no" type="button">
                         <span class="glyphicon glyphicon-thumbs-up"> </span>
                         Like</button>
+                        {% else %}
+                        <button data-blogid="{{ blog.id }}" liked="yes" class="like blog_like" type="button">
+                        Unlike</button>
                     {% endif %}
                     {% else %}
-                    <a href="/nblik/login_signup" class='btn btn-primary blog_like'><span class="glyphicon glyphicon-thumbs-up"> </span> Like</a>
+                    <a href="/nblik/login_signup" class='like blog_like'><span class="glyphicon glyphicon-thumbs-up"> </span> Like</a>
                     {% endif %},&nbsp
                     <font style="color:black;font-weight:bold;">
                 {{ comments_number }}
@@ -117,10 +120,14 @@ p
 									<p style="color:gray;"><span id="{{ comment.id }}" style="color:black">{{ comment.likes }}</span> like(s)</p>
                                     {% if user.is_authenticated %}
                                     {% for key,value in show_comment.items %}
-                                    {% if key == comment.id and value == "yes" %}
-                                    <button id="comment {{ comment.id }}" data-blogid="{{ comment.id }}" class="like comment-lyk" type="button">
+                                    {% if key == comment.id and value == 'yes' %}
+                                    <button id="comment {{ comment.id }}" data-blogid="{{ comment.id }}" liked="no" class="like comment-lyk" type="button">
                                     <span class="glyphicon glyphicon-thumbs-up"></span>
                                     Like</button>
+                                    {% endif %}
+                                    {% if  key == comment.id and value != 'yes' %}
+                                    <button id="comment {{ comment.id }}" data-blogid="{{ comment.id }}" liked="yes" class="like comment-lyk" type="button">
+                                    Unlike</button>
                                     {% endif %}
                                     {% endfor %}
                                     {% endif %}

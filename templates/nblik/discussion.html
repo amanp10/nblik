@@ -59,6 +59,24 @@ a#starter:hover,h4 a:hover
     color: black;
     text-decoration: none;
 }
+#discussion_like[liked="yes"]
+{
+    color:white;
+    font-weight: bold;
+    border:2px solid rgb(150,150,150); 
+    margin-top: 5px;
+    background: rgb(150,150,150);
+    padding: 3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+}
+#discussion_like[liked="yes"]:hover
+{
+    color:black;
+    border-color:black;
+    background:transparent;
+}
 </style>
 <div>
 	<div class="panel">
@@ -74,12 +92,17 @@ a#starter:hover,h4 a:hover
                     <span style="color:gray;">started by</span> <img src="{{ discussion.started_by.picture.url }}" class="pro_pic"/> <a id="starter" href="/{{ discussion.started_by.user }}/"><span style="font-weight:bold;font-size:16px;">{{ discussion.started_by.name }}</span></a><br><br>
                     <p style="word-wrap:break-word;font-size:16px;font-family:georgia;margin-bottom:0;"><span style="color:gray;">on</span> {{ discussion.intro|safe }}</p> <br>
                     <span id="discussion_like_count" style="font-weight:bold;">{{ discussion.likes }}</span> <font style="color:grey;">like(s)</font> &nbsp
-                    {% if show %}
                     {% if user.is_authenticated %}
-                        <button id="discussion_like" data-blogid="{{ discussion.id }}" class="like" type="button" style="font-size:14px;padding:2px;">
+                    {% if show %}
+                        <button id="discussion_like" data-blogid="{{ discussion.id }}" class="like" type="button" liked="no" style="font-size:14px;padding:2px;">
                         <span class="glyphicon glyphicon-thumbs-up"> </span>
                         Like</button>
+                        {% else %}
+                        <button id="discussion_like" data-blogid="{{ discussion.id }}" class="like" type="button" liked="yes" style="font-size:14px;padding:2px;">
+                        Unlike</button>
                     {% endif %}
+                    {% else %}
+                    <a href="/nblik/login_signup" class='like blog_like'><span class="glyphicon glyphicon-thumbs-up"> </span> Like</a>
                     {% endif %}&nbsp
                     {% if user.is_authenticated %}
     <a id="share" href="/nblik/post_to_facebook_discussion/{{ discussion.id }}/"> <span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Share</a>
@@ -98,9 +121,13 @@ a#starter:hover,h4 a:hover
 									<p style="color:gray;"><span id="{{ discuss.id }}" style="color:black">{{ discuss.likes }}</span> like(s)</p>
                         {% for key,value in show_discuss.items %}
                         {% if key == discuss.id and value == "yes" %}
-                        <button id="discuss {{ discuss.id }}" data-blogid="{{ discuss.id }}" class="discuss-lyk" type="button" style="font-size:14px;padding:2px;">
+                        <button id="discuss {{ discuss.id }}" data-blogid="{{ discuss.id }}" class="discuss-lyk" type="button" liked="no" style="font-size:14px;padding:2px;">
                         <span class="glyphicon glyphicon-thumbs-up"> </span>
                         Like</button>
+                        {% endif %}
+                        {% if key == discuss.id and value != "yes" %}
+                        <button id="discuss {{ discuss.id }}" data-blogid="{{ discuss.id }}" class="discuss-lyk" type="button" liked="yes" style="font-size:14px;padding:2px;">
+                        Unlike</button>
                         {% endif %}
                         {% endfor %}
                                 </div>

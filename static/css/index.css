@@ -238,3 +238,21 @@ button.like:hover
     color:rgb(0,123,255);
     background:transparent;
 }
+button.blog_like[liked="yes"],button#category_like[liked="yes"]
+{
+	color:white;
+    font-weight: bold;
+    border:2px solid rgb(150,150,150); 
+    margin-top: 5px;
+    background: rgb(150,150,150);
+    padding: 3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+}
+button.blog_like[liked="yes"]:hover,button#category_like[liked="yes"]:hover
+{
+	color:black;
+	border-color:black;
+    background:transparent;
+}

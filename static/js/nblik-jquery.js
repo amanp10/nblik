@@ -53,58 +53,134 @@ $(document).ready(function(){
     });
     });
 
-    $('#category_like').click(function(){
+    $('#category_like').click(function(event){
 		var cat_id;
 		cat_id = $(this).attr("data-catid");
+    liked=$(this).attr('liked');
+    ele=$(this);
+    if(liked=='no')
+    {
 		$.get('/nblik/like_category/',{category_id: cat_id},function(data){
 		    $('#category_like_count').html(data);
-		    $('#category_like').hide();
+		    ele.attr('liked','yes');
+        ele.html('Unlike');
+        console.log('yo yo');
 			});
+    }
+    else
+    {
+      $.get('/nblik/unlike_category/',{category_id: cat_id},function(data){
+        $('#category_like_count').html(data);
+        ele.attr("liked","no");
+        ele.html('<span class="glyphicon glyphicon-thumbs-up"> </span> Like');
+        console.log('yo');
+      });
+    }
+    event.stopImmediatePropagation();
     });
 
-	$('.blog_like').click(function(){
+	$('.blog_like').click(function(event){
     //console.log("Hello");
 		var blog_id;
 		blog_id = $(this).attr("data-blogid");
+    blog_liked=$(this).attr("liked");
     blog=$(this);
+    if(blog_liked=='no')
+    {
 		$.get('/nblik/like_blog/',{blog_id: blog_id},function(data){
 		    $('#'+blog_id).html(data);
-		    blog.hide();
+		    blog.html("Unlike");
+        blog.attr("liked","yes");
+        //console.log('yo');
 			});
+    }
+    else
+    {
+      $.get('/nblik/unlike_blog/',{blog_id: blog_id},function(data){
+        $('#'+blog_id).html(data);
+        blog.html('<span class="glyphicon glyphicon-thumbs-up"> </span> Like');
+        blog.attr("liked","no");
+        //console.log('yo yo');
+      });
+    }
+    event.stopImmediatePropagation();
     });
 
 $(".comment-lyk").click(function(event){
     //console.log("Hello");
     var comment_id;
     comment_id = $(this).attr("data-blogid");
+    liked=$(this).attr('liked');
     var ele=$(this);
+    if(liked=='no')
+    {
     $.get('/nblik/like_comment/',{comment_id: comment_id},function(data){
-        ele.hide();
+        ele.attr("liked","yes");
+        ele.html("Unlike");
         $('#'+comment_id).html(data);
       });
+    }
+    else
+    {
+      $.get('/nblik/unlike_comment/',{comment_id: comment_id},function(data){
+        ele.attr("liked","no");
+        ele.html('<span class="glyphicon glyphicon-thumbs-up"> </span> Like');
+        $('#'+comment_id).html(data);
+      });
+    }
+    event.stopImmediatePropagation();
     });
 
-$('#discussion_like').click(function(){
+$('#discussion_like').click(function(event){
     //console.log("Hello");
     var discussion_id;
     discussion_id = $(this).attr("data-blogid");
+    liked=$(this).attr("liked");
+    discussion=$(this);
+    if(liked=='no')
+    {
     $.get('/nblik/like_discussion/',{discussion_id: discussion_id},function(data){
         //console.log(data);
         $('#discussion_like_count').html(data);
-        $('#discussion_like').hide();
+        discussion.html('Unlike');
+        discussion.attr("liked","yes");
       });
+    }
+    else
+    {
+      $.get('/nblik/unlike_discussion/',{discussion_id: discussion_id},function(data){
+        //console.log(data);
+        $('#discussion_like_count').html(data);
+        discussion.html('<span class="glyphicon glyphicon-thumbs-up"> </span> Like');
+        discussion.attr("liked","no");
+    });
+    }
+    event.stopImmediatePropagation();
     });
 
 $(".discuss-lyk").click(function(event){
     //console.log("Hello");
     var discuss_id;
     discuss_id = $(this).attr("data-blogid");
+    liked=$(this).attr('liked');
     var ele=$(this);
+    if(liked=='no')
+    {
     $.get('/nblik/like_discuss/',{discuss_id: discuss_id},function(data){
-        //console.log(data);
+        ele.attr("liked","yes");
+        ele.html("Unlike");
         $('#'+discuss_id).html(data);
-        ele.hide();
       });
+    }
+    else
+    {
+      $.get('/nblik/unlike_discuss/',{discuss_id: discuss_id},function(data){
+        ele.attr("liked","no");
+        ele.html('<span class="glyphicon glyphicon-thumbs-up"> </span> Like');
+        $('#'+discuss_id).html(data);
+      });
+    }
+    event.stopImmediatePropagation();
     });
 
 	$('#suggestion_id').keyup(function(){
@@ -192,7 +268,7 @@ $(".discuss-lyk").click(function(event){
     $('#blog_form2').attr("action",url);
   });
 
-  $('#profile_edit').click(function() {
+  $('#profile_edit').click(function(event) {
   	event.preventDefault();
     var all_div=$('div');
     all_div.css("opacity",".7");
@@ -230,3 +306,13 @@ $(".discuss-lyk").click(function(event){
       event.stopImmediatePropagation();
     });
 });
+
+  $('.unfollow_user').click(function(event){
+    var user_id;
+    user_id = $(this).attr("data-userid");
+    $.get('/nblik/unfollow_user/',{user_id: user_id},function(data){
+        $('#follow_data').html("Following ("+data+")");
+        $("#follow_"+user_id).hide();
+      });
+    event.stopImmediatePropagation();
+    });
