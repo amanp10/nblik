@@ -261,8 +261,9 @@ a#written_by:hover
 #footer_table
 {
 	display:-webkit-box;
-	display:-webkit-box;
+	display:-moz-box;
 	margin-top: 0;
+	margin-left:40px; 
 	-webkit-box-orient:horizontal;
 	-moz-box-orient:horizontal;
 	padding: 0;

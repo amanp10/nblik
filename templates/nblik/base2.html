@@ -4,7 +4,7 @@
 <html>
     <head lang="en">
 	    <meta charset="UTF-8">
-	    <title>Nblik {% block title %}{% endblock %}</title>
+	    <title>NbliK {% block title %}{% endblock %}</title>
 	  <link rel="shortcut icon" href="{% static "images/icon.jpg" %}" type="image/jpg"/>
 		<link href= "{% static "css/bootstrap.min.css" %}" rel="stylesheet">
 		<link href="{% static "css/dashboard.css" %}" rel="stylesheet">
@@ -23,8 +23,10 @@
 					</button>
 					<a class="navbar-brand" id="navbar-brand-id" href="/nblik/" style="height:auto;"><img src="{% static "images/nblik.jpg" %}"></a>
 					<div id="search_top_div" style="position:relative;">
+						<div>
 				    		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 			                <input type="text" value="" name="search-top" id="suggestion_search" style="padding:1px 5px 1px 5px;"/>
+			            </div>
 			                <div id="search_results" style="height:auto;max-height:700px;overflow:auto;"></div>
 			                </div>
 				</div>

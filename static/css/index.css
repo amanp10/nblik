@@ -7,7 +7,7 @@
 /*georgia*/
 body
 {
-	padding:40px 0 0 10px;
+	padding:40px 0 0 40px;
 	background: rgb(234,237,247);
 	/*word-break:break-all;*/
 }
@@ -220,6 +220,7 @@ a#written_by:hover
 	box-shadow:2px 2px 3px rgb(100,100,100);
 	border-radius:5px;
 	margin: 10px;
+	margin-left: 40px;
 }
 button.like
 {

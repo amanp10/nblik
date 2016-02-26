@@ -27,6 +27,10 @@ body
 	text-decoration: none;
 	color:rgb(90,90,90);
 }
+a:hover
+{
+  text-decoration: none;
+}
 </style>
 <br />
 {% if user.is_authenticated %}
@@ -47,6 +51,6 @@ body
 {% else %}
 <a class="discuss_topic" href="/nblik/login_signup">{{ discussion.topic }}</a>
 {% endif %}
-    &nbsp &nbsp <span style="color:gray;">started by</span> <img src="{{ discussion.started_by.picture.url }}" class="pro_pic"/> <a href="/{{ discussion.started_by.user }}/"><span style="font-weight:bold;font-size:16px;color:black;">{{ discussion.started_by.name }}</span></a><br />on <font color="black">{{ discussion.intro|safe }}</font><br />{{ discussion.likes }} like(s) </div>
+    &nbsp &nbsp <br><span style="color:gray;">started by</span> <img src="{{ discussion.started_by.picture.url }}" class="pro_pic"/> <a href="/{{ discussion.started_by.user }}/"><span style="font-weight:bold;font-size:16px;color:black;">{{ discussion.started_by.name }}</span></a><br /><br>on <font color="black">{{ discussion.intro|safe }}</font><br />{{ discussion.likes }} like(s) </div>
 {% endfor %}
 {% endblock %}

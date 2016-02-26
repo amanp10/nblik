@@ -607,4 +607,6 @@ a.special:hover {
   width:100%;
   display: -webkit-box;
   -webkit-box-orient:horizontal;
+  display: -moz-box;
+  -moz-box-orient:horizontal;
 }

@@ -577,11 +577,18 @@ def follow_user(request):
 
 def dashboard(request,username):
     context_dict={}
+    show='yes'
     try:
         user_m=User.objects.get(username=username)
         userprofile=UserProfile.objects.get(user=user_m)
         blog_list=Blog.objects.filter(written_by=user_m)
         discussion_list=Discussion.objects.filter(started_by=userprofile)
+        cat_list=userprofile.liked_categories.all()
+        follow=Follow.objects.get(userprofile=request.user)
+        for foll in follow.followed.all():
+            if foll==userprofile:
+                show=None
+                break
     except:
         user_m=None
         userprofile=None
@@ -597,6 +604,8 @@ def dashboard(request,username):
         userprofile_follow=None
         followed_list=None
         followers=None
+    context_dict['show']=show
+    context_dict['cat_list']=cat_list
     context_dict['user']=request.user
     context_dict['user_m']=user_m
     context_dict['userprofile']=userprofile
@@ -896,13 +905,12 @@ def unlike_blog(request):
         blog=Blog.objects.get(id=int(blog_id))
         user1=User.objects.get(username=request.user)
         user2=UserProfile.objects.get(user=user1)
-        try:
-            user2.liked_blogs.remove(blog)
-            user2.save()
-            blog.likes-=1
-            blog.save()
-        except:
-            pass
+        for blg in user2.liked_blogs.all():
+            if blg==blog:
+                user2.liked_blogs.remove(blog)
+                user2.save()
+                blog.likes-=1
+                blog.save()
         return HttpResponse(blog.likes)
 
 def unlike_discussion(request):
@@ -912,13 +920,12 @@ def unlike_discussion(request):
         discussion=Discussion.objects.get(id=int(discussion_id))
         user1=User.objects.get(username=request.user)
         user2=UserProfile.objects.get(user=user1)
-        try:
-            user2.liked_discussions.remove(discussion)
-            user2.save()
-            discussion.likes-=1
-            discussion.save()
-        except:
-            pass
+        for dis in user2.liked_discussions.all():
+            if dis==discussion:
+                user2.liked_discussions.remove(discussion)
+                user2.save()
+                discussion.likes-=1
+                discussion.save()
         return HttpResponse(discussion.likes)
 
 def unlike_comment(request):
@@ -928,13 +935,12 @@ def unlike_comment(request):
         comment=Comment.objects.get(id=int(comment_id))
         user1=User.objects.get(username=request.user)
         user2=UserProfile.objects.get(user=user1)
-        try:
-            user2.liked_comments.remove(comment)
-            user2.save()
-            comment.likes-=1
-            comment.save()
-        except:
-            pass
+        for comm in user2.liked_comments.all():
+            if comm==comment:
+                user2.liked_comments.remove(comment)
+                user2.save()
+                comment.likes-=1
+                comment.save()
         return HttpResponse(comment.likes)
 
 def unlike_discuss(request):
@@ -944,13 +950,12 @@ def unlike_discuss(request):
         discuss=Discuss.objects.get(id=int(discuss_id))
         user1=User.objects.get(username=request.user)
         user2=UserProfile.objects.get(user=user1)
-        try:
-            user2.liked_discusses.remove(discuss)
-            user2.save()
-            discuss.likes-=1
-            discuss.save()
-        except:
-            pass
+        for dis in user2.liked_discusses.all():
+            if discuss==dis:
+                user2.liked_discusses.remove(discuss)
+                user2.save()
+                discuss.likes-=1
+                discuss.save()
         return HttpResponse(discuss.likes)
 
 def unlike_category(request):
@@ -959,13 +964,13 @@ def unlike_category(request):
         category1=Category.objects.get(id=int(category_id))
         user1=User.objects.get(username=request.user)
         user2=UserProfile.objects.get(user=user1)
-        try:
-            user2.liked_categories.remove(category1)
-            user2.save()
-            category1.likes-=1
-            category1.save()
-        except:
-            pass
+        for cat in user2.liked_categories.all():
+            if category1==cat:
+                user2.liked_categories.remove(category1)
+                user2.save()
+                category1.likes-=1
+                category1.save()
+                break
         return HttpResponse(category1.likes)
 
 def unfollow_user(request):
