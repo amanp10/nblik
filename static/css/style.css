@@ -26,10 +26,10 @@ html {
   display: block;
   background: #FFF;
   position: relative;
-  max-width: 475px;
+  max-width: 400px;
   border-radius: 4px;
   box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
-  margin: 120px auto;
+  margin: 60px auto;
 }
 .logmod__close {
   display: block;
@@ -94,8 +94,8 @@ html {
   float: left;
   text-align: center;
   background: #D2D8D8;
-  line-height: 72px;
-  height: 72px;
+  line-height: 40px;
+  height: 40px;
   text-decoration: none;
   color: #809191;
   text-transform: uppercase;
@@ -108,14 +108,14 @@ html {
 }
 .logmod__heading {
   text-align: center;
-  padding: 12px 0 12px 0;
+  padding:0;
 }
 .logmod__heading-subtitle {
   display: block;
   font-weight: 400;
   font-size: 15px;
   color: #888;
-  line-height: 48px;
+  line-height: 40px;
 }
 .logmod__form {
   border-top: 1px solid #e5e5e5;
@@ -136,8 +136,8 @@ html {
   position: relative;
   display: block;
   width: 50%;
-  height: 72px;
-  line-height: 72px;
+  height: 40px;
+  line-height: 40px;
   text-decoration: none;
 }
 /*.connect::after {
@@ -185,7 +185,7 @@ html {
   position: relative;
 }
 .simform__actions {
-  padding: 15px;
+  padding: 8px;
   font-size: 14px;
 }
 .simform__actions::after {
@@ -194,10 +194,8 @@ html {
   display: table;
 }
 .simform__actions .sumbit {
-  height: 48px;
-  float: right;
+  height: 40px;
   color: #FFF;
-  width: 50%;
   font-weight: 700;
   font-size: 16px;
   background: #4CAF50;
@@ -236,7 +234,7 @@ html {
   position: relative;
   width: 50%;
   height: auto;
-  padding: 11px 24px;
+  padding: 5px 12px;
   border-right: 1px solid #e5e5e5;
   border-bottom: none;
   float: left;
@@ -279,7 +277,7 @@ html {
   vertical-align: middle;
   box-shadow: none;
   box-sizing: border-box;
-  width: 90%;
+  width: 100%;
   height: auto;
   border: none;
   padding: 2px;
@@ -299,7 +297,7 @@ html {
   overflow: hidden;
   color: #444;
   cursor: pointer;
-  line-height: 48px;
+  line-height:40px;
 }
 
 html {
@@ -322,7 +320,7 @@ html {
   font-weight: 400;
   box-shadow: none;
   min-width: 90px;
-  padding: 10px 14px;
+  padding: 0 7px;
 }
 .btn.full, .simform__actions .full.sumbit {
   width: 100%;

@@ -34,7 +34,10 @@ def index(request):
     if request.method=="POST":
         blog_text=request.POST.get('blog_text')
         return render(request,'nblik/add_blog.html',{'blog_text':blog_text})
-    blog_list = Blog.objects.order_by('-id')[:15]
+    if request.user.is_active:
+        blog_list = Blog.objects.order_by('-id')[:25]
+    else:
+        blog_list = Blog.objects.order_by('-id')[:10]
     show=[True]*len(blog_list)
     try:
         user1=User.objects.get(username=request.user)
@@ -91,7 +94,10 @@ def category(request,category_name_slug):
     try:
         category = Category.objects.get(slug=category_name_slug)
         context_dict['category_name']=category.name
-        blog_list = Blog.objects.filter(category=category).order_by('-id')
+        if request.user.is_active:
+            blog_list = Blog.objects.filter(category=category).order_by('-id')
+        else:
+            blog_list = Blog.objects.filter(category=category).order_by('-id')[:10]
         context_dict['category']=category
         context_dict['category_name_slug']=category.slug
         show=[True]*len(blog_list)
@@ -635,7 +641,10 @@ def comment(request):
         return HttpResponse(0)
 
 def discussions(request):
-    discussions=Discussion.objects.all()
+    if request.user.is_active:
+        discussions=Discussion.objects.order_by('-id')
+    else:
+        discussions=Discussion.objects.order_by('-id')[:10]
     return render(request,'nblik/discussions.html',{'discussions':discussions})
 
 def new_discussion(request):

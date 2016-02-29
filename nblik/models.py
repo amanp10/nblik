@@ -28,7 +28,7 @@ class Blog(models.Model):
     title = models.TextField()
     written_by=models.ForeignKey(User)
     views = models.IntegerField(default=0)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(max_length=1500,unique=True)
     #content = RichTextField()
     blog_content=RichTextUploadingField()
     #comments=models.ManyToManyField(Comment)
@@ -67,7 +67,7 @@ class UnPostedBlog(models.Model):
     title = models.TextField()
     written_by=models.ForeignKey(User)
     views = models.IntegerField(default=0)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(max_length=1500,unique=True)
     #comments=models.ManyToManyField(Comment)
     text = models.TextField()
     likes=models.IntegerField(default=0)
@@ -88,7 +88,7 @@ class BlogId(models.Model):
 
 class Discussion(models.Model):
     topic=models.TextField()
-    slug=models.SlugField(unique=True)
+    slug=models.SlugField(max_length=1500,unique=True)
     intro=models.TextField(default="None")
     started_by=models.ForeignKey('nblik.UserProfile')
     started_on=models.DateTimeField(null=True,blank=True)
