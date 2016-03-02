@@ -174,3 +174,41 @@ LINKEDIN_SCOPE = ['r_basicprofile', 'r_emailaddress',]
 CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 CKEDITOR_UPLOAD_PATH = "blog-uploads/"
 CKEDITOR_RESTRICT_BY_USER=True
+
+cloudinary.uploader.upload(
+  request.FILES['file'],      
+  public_id = 'sample_id', 
+  crop = 'limit',
+  width = 2000,
+  height = 2000,
+  eager = [
+    { 'width': 200, 'height': 200, 
+      'crop': 'thumb', 'gravity': 'face',
+      'radius': 20, 'effect': 'sepia' },
+    { 'width': 100, 'height': 150, 
+      'crop': 'fit', 'format': 'png' }
+  ],                                     
+  tags = ['special', 'for_homepage']
+)
+
+{
+ u'public_id': u'sample',
+ u'version': 1312461204,
+ u'width': 864
+ u'height': 576,
+ u'format': u'jpg',
+ u'bytes': 120253,       
+ u'url': u'http://res.cloudinary.com/demo/image/upload/v1371281596/sample.jpg',
+ u'secure_url': u'https://res.cloudinary.com/demo/image/upload/v1371281596/sample.jpg',       
+}
+
+cloudinary.CloudinaryImage("sample.jpg").image(alt = "Sample Image")
+
+
+cloudinary.CloudinaryImage("sample.jpg").image(width = 100, height = 150, crop = 'fill')
+
+{% cloudinary "sample.jpg" width=100 height=150 crop="fill" %}
+
+cloudinary.CloudinaryImage("sample.jpg").image( version = 1315746344 )
+
+CLOUDINARY_URL=cloudinary://183635269811787:RYWk8VBQewWPiUgxyWh51OyN_YE@nblik

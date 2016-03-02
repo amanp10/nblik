@@ -13,6 +13,9 @@ from collections import Counter
 import json
 import facebook
 from unidecode import unidecode
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 ZERO = timedelta(0)
 
@@ -852,7 +855,7 @@ def edit_profile(request):
     context_dict['date']=str(userpro.dob_date)
     context_dict['month']=str(userpro.dob_month)
     context_dict['year']=str(userpro.dob_year)
-    context_dict['pic']=str(userpro.picture.url)
+    context_dict['pic']=str(userpro.picture)
     return render(request,'nblik/edit_profile.html',context_dict)
 
 def update_profile(request):
@@ -868,7 +871,8 @@ def update_profile(request):
     userpro.lives_in=request.POST.get('lives_in')
     userpro.from_place=request.POST.get('from_place')
     if len(request.FILES) != 0:
-        userpro.picture=request.FILES['picture']
+        context_dict1 = cloudinary.uploader.upload(request.FILES['picture'],public_id = str(user))
+        userpro.picture = str(context_dict1['url'])
         ##print profile_pic_url
     userpro.save()
     return HttpResponseRedirect('/'+str(user)+'/')

@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'ckeditor',
     'ckeditor_uploader',
     'imagekit',
+    'cloudinary',
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -178,5 +179,5 @@ LINKEDIN_SCOPE = ['r_basicprofile', 'r_emailaddress',]
 #                       ('headline', 'headline'),
 #                      ('industry', 'industry')]
 CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
-CKEDITOR_UPLOAD_PATH = "blog-uploads/"
+CKEDITOR_UPLOAD_PATH = "/blog-uploads/"
 CKEDITOR_RESTRICT_BY_USER=True

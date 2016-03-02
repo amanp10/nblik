@@ -1,5 +1,6 @@
 {% extends 'nblik/base2.html' %}
 {% load staticfiles %}
+{% load cloudinary %}
 {% block title %}- {{ userprofile.name }}{% endblock %}
 {% block body_block %}
 <br/>
@@ -190,8 +191,8 @@ a:hover
   text-decoration: none;
 }
 </style>
-{% if userprofile.picture.url %}
-<img style="height:150px;width:150px;" src="{{ userprofile.picture.url }}"/>
+{% if userprofile.picture %}
+<img style="height:150px;width:150px;" src="{{ userprofile.picture }}"/>
 {% endif %}<br/><br />
 <span id="name">{{ userprofile.name }}</span><br>
 {% if userprofile.profile_tag_line %}
