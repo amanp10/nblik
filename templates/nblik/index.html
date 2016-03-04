@@ -22,7 +22,7 @@
                 <h3 style="font-family:arial;">
             <a href="{% url 'blog' blog.slug %}" class="blog_title"><strong>{{ blog.title }}</strong></a>
                 </h3>
-                <p class='text-left' style="color:gray;"> &nbsp<img src="{{ blog.written_by.userprofile.picture.url }}" class="pro_pic"/> -<a id="written_by" href="/{{ blog.written_by }}/">{{ blog.written_by.userprofile.name }}</a></p>
+                <p class='text-left' style="color:gray;"> &nbsp<img src="{{ blog.written_by.userprofile.picture }}" class="pro_pic"/> -<a id="written_by" href="/{{ blog.written_by }}/">{{ blog.written_by.userprofile.name }}</a></p>
                 <div class="active_text text_div"><p class="blog_text">{{ blog.blog_content|safe }}</p></div>
                 <span id="{{ blog.id }}" style="color:black;font-weight:bold;">
                 {{ blog.likes }}</span> <font style="color:gray;">like(s)</font>

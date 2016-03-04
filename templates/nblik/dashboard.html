@@ -254,14 +254,14 @@ a:hover
 </div>
 <div id="d3"><span class="data">Followers ({{ userprofile_follow.followers }})</span><br><br>
   {% for up_follow in followers %}
-<br><img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up_follow.userprofile.userprofile.picture.url }}"> &nbsp &nbsp
+<br><img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up_follow.userprofile.userprofile.picture }}"> &nbsp &nbsp
 <a href="/{{ up_follow.userprofile }}/"><span class="data">{{ up_follow.userprofile.userprofile.name }}</span></a><br /><hr>
 {% endfor %}
 </div>
 <div id="d4"><span id="follow_data" class="data">Following ({{ userprofile_follow.no_followed }})</span><br><br>
   {% for up in followed_list %}
   <div id="follow_{{ up.user.id }}">
-<br><img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up.picture.url }}"> &nbsp &nbsp
+<br><img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up.picture }}"> &nbsp &nbsp
 <a href="/{{ up.user }}/"><span class="data">{{ up.name }}</span></a> 
 {% if user == user_m %}
 <button class="unfollow_user" data-userid="{{ up.user.id }}" type="button">Unfollow</button>

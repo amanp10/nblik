@@ -42,7 +42,7 @@
 <div id="wrapper">
 	<div class="follow_div">No more to <br>follow.</div>
 	{% for up in userprofiles %}
-	    <div id="{{ up.id }}" class="follow_div"><div id="inner"><img src="{{ up.picture.url }}" class="pro_pic"/> &nbsp-<a id="written_by" href="/{{ up.user }}/">{{ up.name }}</a></div><br>
+	    <div id="{{ up.id }}" class="follow_div"><div id="inner"><img src="{{ up.picture }}" class="pro_pic"/> &nbsp-<a id="written_by" href="/{{ up.user }}/">{{ up.name }}</a></div><br>
       	<button class="follow_user like" data-userprofileid="{{ up.id }}" type="button">Follow</button>&nbsp<button type="button" class="skip like" data-userprofileid="{{ up.id }}">Skip</button>
   		</div>
 	{% endfor %}

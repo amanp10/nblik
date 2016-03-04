@@ -718,7 +718,8 @@ def next_step(request):
         lives_in=request.POST.get('lives_in')
         from_place=request.POST.get('from_place')
         if len(request.FILES) != 0:
-            up.picture=request.FILES['picture']
+            context_dict1 = cloudinary.uploader.upload(request.FILES['picture'],public_id = 'profile_pic/'+str(user),width = 350, height = 350, crop = 'fill',gravity = 'faces')
+            userpro.picture = str(context_dict1['url'])
             ##print profile_pic_url
         languages=request.POST.get('language')
         profile_tagline=request.POST.get('profile_tag')
@@ -871,7 +872,7 @@ def update_profile(request):
     userpro.lives_in=request.POST.get('lives_in')
     userpro.from_place=request.POST.get('from_place')
     if len(request.FILES) != 0:
-        context_dict1 = cloudinary.uploader.upload(request.FILES['picture'],public_id = str(user))
+        context_dict1 = cloudinary.uploader.upload(request.FILES['picture'],public_id='profile_pic/'+str(user),width = 350, height = 350, crop = 'fill',gravity='faces')
         userpro.picture = str(context_dict1['url'])
         ##print profile_pic_url
     userpro.save()

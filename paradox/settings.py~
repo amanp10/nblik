@@ -212,3 +212,29 @@ cloudinary.CloudinaryImage("sample.jpg").image(width = 100, height = 150, crop =
 cloudinary.CloudinaryImage("sample.jpg").image( version = 1315746344 )
 
 CLOUDINARY_URL=cloudinary://183635269811787:RYWk8VBQewWPiUgxyWh51OyN_YE@nblik
+
+Local environment setup
+
+After provisioning the add-on it’s necessary to locally replicate the config vars so your development environment can operate against the service.
+
+You can use heroku config for displaying Cloudinary’s environment variables:
+
+$ heroku config | grep CLOUDINARY
+CLOUDINARY_URL      => cloudinary://123456789012345:abcdeghijklmnopqrstuvwxyz12@n07t21i7
+Though less portable it’s also possible to set local environment variables using export CLOUDINARY_URL=value.
+
+Use Heroku Local to configure, run and manage process types specified in your app’s Procfile. Heroku Local reads configuration variables from a .env file. Use the following command to add the Cloudinary values retrieved from heroku config to .env.
+
+$ heroku config -s | grep CLOUDINARY >> .env
+$ more .env
+Credentials and other sensitive configuration values should not be committed to a publicly available source-control. In Git exclude the .env file with: echo .env >> .gitignore.
+
+Management console
+
+The Management Console allows you to browse through uploaded images and generated transformations. You can also view your usage reports and cloud settings. Comprehensive documentation is also available.
+
+The dashboard can be accessed via the CLI:
+
+$ heroku addons:open cloudinary
+Opening cloudinary for myapp...
+or by visiting the Heroku Dashboard and selecting the application in question. Select Cloudinary from the Add-ons menu.

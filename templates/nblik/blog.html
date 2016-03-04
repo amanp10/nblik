@@ -76,7 +76,7 @@ p
 {% if b_time %}
 <span style='float:right;color:gray;'>{{ b_time }}</span>
 {% endif %}
-<p class='text-left' style="color:gray;"> <img src="{{ blog.written_by.userprofile.picture.url }}" class="pro_pic"/>
+<p class='text-left' style="color:gray;"> <img src="{{ blog.written_by.userprofile.picture }}" class="pro_pic"/>
 -<a href="/{{ blog.written_by }}/">{{ blog.written_by.userprofile.name }}</a></p><br>
 <p class="blog_text" style="font-family:georgia;">{{ blog.blog_content|safe }}</p>
 <br/><br/>
@@ -116,7 +116,7 @@ p
                             {% if comments %}
                             {% for comment,comment_by_name in comments %}
                                 <div class="list-group-item" style="width:75%">
-                                    <h4 class="list-group-item-heading"><img src="{{ comment.comment_by.userprofile.picture.url }}" class="pro_pic_2"/> <a href="/{{ comment.comment_by }}/">{{ comment_by_name }}</a></h4>
+                                    <h4 class="list-group-item-heading"><img src="{{ comment.comment_by.userprofile.picture }}" class="pro_pic_2"/> <a href="/{{ comment.comment_by }}/">{{ comment_by_name }}</a></h4>
 									<p class="list-group-item-text" style="font-family:georgia;">{{ comment.comment_text|safe }}</p>
 									<p style="color:gray;"><span id="{{ comment.id }}" style="color:black">{{ comment.likes }}</span> like(s)</p>
                                     {% if user.is_authenticated %}
