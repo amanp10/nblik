@@ -50,7 +50,7 @@ def modify_content(blog_id):
         str3=str1[i1+5:i3+5].replace('"','')
         #print str2
         #print str3
-        context_dict1=cloudinary.uploader.upload('/static/media/blog_uploads/'+str2,public_id='blog_uploads/'+str2,width = 700, height = 700, crop = 'limit')
+        context_dict1=cloudinary.uploader.upload('/media/blog_uploads/'+str2,public_id='blog_uploads/'+str2,width = 700, height = 700, crop = 'limit')
         url=context_dict1['url']
         #url='http://res.cloudinary.com/nblik/image/upload/blog_uploads/'+str2 ##
         str4=str1.replace(str3,url)
