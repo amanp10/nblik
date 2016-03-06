@@ -137,8 +137,8 @@ STATICFILES_DIRS = (
     STATIC_PATH,
 )
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-MEDIA_URL = ''
-MEDIA_ROOT = ''
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(STATIC_PATH,'media')
 #EMAIL_HOST = 'smtp.gmail.com'
 #EMAIL_USE_TLS = True
 #EMAIL_HOST_USER = 'nitingera1996@gmail.com'
@@ -179,5 +179,5 @@ LINKEDIN_SCOPE = ['r_basicprofile', 'r_emailaddress',]
 #                       ('headline', 'headline'),
 #                      ('industry', 'industry')]
 CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
-CKEDITOR_UPLOAD_PATH = "http://res.cloudinary.com/nblik/image/upload/blog_uploads/"
+CKEDITOR_UPLOAD_PATH = "blog_uploads/"
 CKEDITOR_RESTRICT_BY_USER=True

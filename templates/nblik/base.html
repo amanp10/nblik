@@ -46,7 +46,7 @@
 				    	    <li><a href="/nblik/login_signup"><span class="glyphicon glyphicon-pencil"></span> Write </a></li>
 				    	    {% endif %}
 				    	    {% if user.is_authenticated %}
-                                <li><a href="/{{ user.username }}/"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                                <li><a href="/{{ user.username }}/"><img src="{{ user.userprofile.picture }}" class="pro_icon"> Profile</a></li>
 			                {% else %}
 			                    <li><a href="{% url 'login_signup' %}"><span class="glyphicon glyphicon-lock"></span> SignIn/SignUp</a></li>
 			                {% endif %}

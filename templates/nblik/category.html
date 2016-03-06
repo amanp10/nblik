@@ -57,9 +57,8 @@
                 {% endif %}
                 {% endfor %}
             </font><font style="color:gray;">comment(s)</font>
-                    &nbsp
+                    &nbsp, <strong>{{ blog.views }}</strong> <font style="color:gray;">view(s)</font> ,&nbsp
                     {% if user.is_authenticated %}
-                
     <a id="share" href="/nblik/post_to_facebook/{{ blog.id }}/"> <span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Share</a>
 
 {% else %}

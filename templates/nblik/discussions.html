@@ -32,6 +32,24 @@ a:hover
 {
   text-decoration: none;
 }
+h2>a.cat:link
+{
+    text-align:left;
+    font-family:'Montserrat',tahoma;
+    color:rgb(75,75,75);
+    font-size:16px;
+    letter-spacing:1px;
+    font-weight:700;
+}
+h2>a.cat:visited
+{
+	color:rgb(75,75,75);;
+}
+h2>a.cat:hover
+{
+    text-decoration: none;
+    color:black;
+}
 </style>
 <br />
 {% if user.is_authenticated %}
@@ -46,12 +64,12 @@ a:hover
 <br />
 {% for discussion in discussions %}
 <div class="discussion_div">
-<h2 style="font-size:16px;">{{ discussion.category.name }}</h2>
+<h2 style="font-size:16px;"><a href="/nblik/category/{{ discussion.category.slug }}" class="cat">{{ discussion.category.name }}</a></h2>
 {% if user.is_authenticated %}
 <a id="discuss_topic_a" href="{% url 'discussion' discussion.slug %}">{{ discussion.topic }}</a>
 {% else %}
 <a class="discuss_topic" href="/nblik/login_signup">{{ discussion.topic }}</a>
 {% endif %}
-    &nbsp &nbsp <br><span style="color:gray;">started by</span> <img src="{{ discussion.started_by.picture }}" class="pro_pic"/> <a href="/{{ discussion.started_by.user }}/"><span style="font-weight:bold;font-size:16px;color:black;">{{ discussion.started_by.name }}</span></a><br /><br>on <font color="black">{{ discussion.intro|safe }}</font><br />{{ discussion.likes }} like(s) </div>
+    &nbsp &nbsp <br><span style="color:gray;">started by</span> <img src="{{ discussion.started_by.picture }}" class="pro_pic"/> <a href="/{{ discussion.started_by.user }}/"><span style="font-weight:bold;font-size:16px;color:black;">{{ discussion.started_by.name }}</span></a><br /><br><font color="black">{{ discussion.intro|safe }}</font><br />{{ discussion.likes }} like(s) </div>
 {% endfor %}
 {% endblock %}

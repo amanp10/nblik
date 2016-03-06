@@ -30,6 +30,7 @@ class Blog(models.Model):
     category = models.ForeignKey(Category)
     title = models.TextField()
     written_by=models.ForeignKey(User)
+    viewers=models.ManyToManyField('nblik.UserProfile')
     views = models.IntegerField(default=0)
     slug = models.SlugField(max_length=1500,unique=True)
     #content = RichTextField()

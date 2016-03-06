@@ -21,11 +21,11 @@ body
 	position:absolute;
 	top:150px;
 	left:50%;
-	margin-left: -400px;
+	margin-left: -350px;
 	margin-bottom: 50px;
 	background:rgba(255,255,255,0.5);
-	width:800px;
-	height:450px;
+	width:700px;
+	height:480px;
 	padding: 15px;
 	color:rgb(56,77,137);
 	font-size: 16px;
@@ -33,7 +33,7 @@ body
 }
 #form2
 {
-	padding-top: 50px;
+	padding-top: 20px;
 	visibility: visible;
 }
 #form1
@@ -74,22 +74,27 @@ input[type="button"]:hover,input[type="submit"]:hover
 <form method="post" action="/nblik/next_step/"  enctype="multipart/form-data">
 	{% csrf_token %}
 <div id="form1" class="body_div">
-	<br>
-	<input type="text" placeholder="Who are you?" name="who"><br><br>
-	<input type="text" placeholder="Living in? eg.Varanasi,India" name="lives_in"><br><br>
-	<input type="text" placeholder="You are from? eg.Varanasi,India" name="from_place">
-	<br><br>
+	<h3>Choose Preffered categories : </h3>
+	{% for cat in cat_list %}
+	<div style="display:inline;margin:0;">
+	<input type="checkbox" value="{{ cat.id }}" name="category">{{ cat.name }}
+	</div> &nbsp&nbsp
+	{% endfor %}
 	<h3>Choose prefered language : </h3><input type="radio" name="language" value="1"> <font color="black">English</font><br>
 	<input type="radio" name="language" value="2"> <font color="black">Hindi</font><br>
-	<input type="radio" name="language" value="3"> <font color="black">Both</font><br><br>
+	<input type="radio" name="language" value="3" checked> <font color="black">Both</font><br><br>
 	<input type="button" value="Back" id="back"> &nbsp<input type="submit" value="Submit">
 </div>
 <div id="form2" class="body_div">
 	<input type="text" placeholder="Email" name="email" value="{{ email }}"><br><br>
 	<input type="text" placeholder="Name" name="name" value="{{ name }}"><br><br>
-	Date of Birth : &nbsp Date: <input type="number" name="dob_date" min="1" max="31"> Month: <input type="number" name="dob_month" min="1" max="12"> Year: <input type="number" name="dob_year" min="1900"><br><br>
+	Date of Birth : &nbsp Date: <input type="number" name="dob_date" min="1" max="31" placeholder="1"> Month: <input type="number" name="dob_month" min="1" max="12" placeholder="1"> Year: <input type="number" name="dob_year" min="1900" placeholder="2000"><br><br>
 	Profile picture: <input type="file" name="picture"><br><br>
 	<input type="text" placeholder="Your moto in life.." name="profile_tag"><br><br>
+	<input type="text" placeholder="Who are you?" name="who"><br><br>
+	<input type="text" placeholder="Living in? eg.Varanasi,India" name="lives_in"><br><br>
+	<input type="text" placeholder="You are from? eg.Varanasi,India" name="from_place">
+	<br><br>
 	<input type="button" id="next" value="Next">
 </div>
 </form>

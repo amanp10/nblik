@@ -33,6 +33,33 @@ class MyRegistrationView(RegistrationView):
     def get(self):
         print self
 
+def modify_content(blog_id):
+    b=Blog.objects.get(id=int(blog_id))
+    str1=b.blog_content
+    repeat=0
+    if str1.find('src="/media/blog_uploads')!= -1:
+        repeat=1
+        i1=str1.find('src="/media/')
+        #print i1
+        i2=str1.find('/media/blog_uploads/')
+        i4=str1.find('style=',i1)
+        i3=str1.rfind('.',i2,i4)
+        #print i2
+        #print i3
+        str2=str1[i2+20:i3+5].replace('"','')
+        str3=str1[i1+5:i3+5].replace('"','')
+        #print str2
+        #print str3
+        context_dict1=cloudinary.uploader.upload('/static/media/blog_uploads/'+str2,public_id='blog_uploads/'+str2,width = 700, height = 700, crop = 'limit')
+        url=context_dict1['url']
+        #url='http://res.cloudinary.com/nblik/image/upload/blog_uploads/'+str2 ##
+        str4=str1.replace(str3,url)
+        #print str4
+        b.blog_content=str4
+        b.save()
+    if repeat==1:
+        modify_content(blog_id)
+
 def index(request):
     if request.method=="POST":
         blog_text=request.POST.get('blog_text')
@@ -165,13 +192,21 @@ def blog(request,blog_title_slug):
     b=None
     c=None
     b_time=None
+    b=Blog.objects.get(slug=blog_title_slug)
+    viewer_list=b.viewers.all()
+    b.views+=1
+    for viewer in viewer_list:
+        if viewer==request.user.userprofile:
+            b.views-=1
+            b.viewers.remove(viewer)
+    b.viewers.add(request.user.userprofile)
+    b.save()
     try:
         b=Blog.objects.get(slug=blog_title_slug)
         ##print b.blog_content
         c=Comment.objects.filter(comment_to=b).order_by('-likes')
         comments_number=len(c)
         comment_by_name=[]
-
         for co in c:
             u=co.comment_by
             up=UserProfile.objects.get(user=u)
@@ -182,6 +217,7 @@ def blog(request,blog_title_slug):
     ##print type(b.text)
     try:
         b=Blog.objects.get(slug=blog_title_slug)
+        #print b.blog_content
         us=request.user
         up=UserProfile.objects.get(user=request.user)
         liked_comments=up.liked_comments.all()
@@ -341,6 +377,7 @@ def add_blog(request,category_name_slug):
             blog1=Blog.objects.get(title=blog_title)
             #blog1.save()
             #return HttpResponse('Hello')
+            modify_content(blog1.id)
             return blog(request,blog1.slug)
     else:
         context_dict={'category_list':Category.objects.all(),'category':cat}
@@ -363,6 +400,7 @@ def add_blog2(request,category_name_slug):
             blog1.category=cat
             blog1.written_by=request.user
             blog1.save()
+            modify_content(blog1.id)
             return blog(request,blog1.slug)
         else:
             form=BlogForm()
@@ -613,6 +651,12 @@ def dashboard(request,username):
         userprofile_follow=None
         followed_list=None
         followers=None
+    if userprofile.languages == 1:
+        lang='English'
+    if userprofile.languages == 2:
+        lang='Hindi'
+    if userprofile.languages == 3:
+        lang='English and Hindi'
     context_dict['show']=show
     context_dict['cat_list']=cat_list
     context_dict['user']=request.user
@@ -624,6 +668,7 @@ def dashboard(request,username):
     context_dict['followers']=followers
     context_dict['blogs']=blog_list
     context_dict['discussions']=discussion_list
+    context_dict['lang']=lang
     context_dict['l_blogs']=len(blog_list)
     context_dict['l_dis']=len(discussion_list)
     return render(request,'nblik/dashboard.html',context_dict)
@@ -718,20 +763,26 @@ def next_step(request):
         lives_in=request.POST.get('lives_in')
         from_place=request.POST.get('from_place')
         if len(request.FILES) != 0:
-            context_dict1 = cloudinary.uploader.upload(request.FILES['picture'],public_id = 'profile_pic/'+str(user),width = 350, height = 350, crop = 'fill',gravity = 'faces')
+            context_dict1 = cloudinary.uploader.upload(request.FILES['picture'],public_id = 'profile_pic/'+str(user),width = 400, height = 400, crop = 'fill',gravity = 'faces')
             userpro.picture = str(context_dict1['url'])
             ##print profile_pic_url
         languages=request.POST.get('language')
         profile_tagline=request.POST.get('profile_tag')
         liked_category_ids=request.POST.getlist('category')
+        for i in liked_category_ids:
+            cat=Category.objects.get(id=int(i))
+            up.liked_categories.add(cat)
         up.name=name
         up.who=who
         up.lives_in=lives_in
         up.from_place=from_place
-        up.dob_date=int(dob_date)
-        up.dob_month=int(dob_month)
-        up.dob_year=int(dob_year)
-        up.languages=int(languages) 
+        try:
+            up.dob_date=int(dob_date)
+            up.dob_month=int(dob_month)
+            up.dob_year=int(dob_year)
+            up.languages=int(languages)
+        except:
+            pass 
         up.profile_tag_line=profile_tagline
         up.save()
         return HttpResponseRedirect('/nblik/')
@@ -834,6 +885,7 @@ def update_blog(request,category_name_slug):
             blog1.category=cat
             blog1.written_by=request.user
             blog1.save()
+            modify_content(blog1.id)
             return blog(request,blog1.slug)
         else:
             blog1=Blog.objects.get(id=int(request.POST.get('blog_id')))
@@ -863,16 +915,19 @@ def update_profile(request):
     user=request.user
     userpro=UserProfile.objects.get(user=user)
     userpro.name=request.POST.get('name')
-    userpro.dob_date=int(request.POST.get('dob_date'))
-    userpro.dob_month=int(request.POST.get('dob_month'))
-    userpro.dob_year=int(request.POST.get('dob_year'))
-    userpro.languages=int(request.POST.get('language'))
+    try:
+        userpro.dob_date=int(request.POST.get('dob_date'))
+        userpro.dob_month=int(request.POST.get('dob_month'))
+        userpro.dob_year=int(request.POST.get('dob_year'))
+        userpro.languages=int(request.POST.get('language'))
+    except:
+        pass
     userpro.profile_tag_line=request.POST.get('profile_tag')
     userpro.who=request.POST.get('who')
     userpro.lives_in=request.POST.get('lives_in')
     userpro.from_place=request.POST.get('from_place')
     if len(request.FILES) != 0:
-        context_dict1 = cloudinary.uploader.upload(request.FILES['picture'],public_id='profile_pic/'+str(user),width = 350, height = 350, crop = 'fill',gravity='faces')
+        context_dict1 = cloudinary.uploader.upload(request.FILES['picture'],public_id='profile_pic/'+str(user),width = 400, height = 400, crop = 'fill',gravity='faces')
         userpro.picture = str(context_dict1['url'])
         ##print profile_pic_url
     userpro.save()

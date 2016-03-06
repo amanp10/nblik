@@ -397,3 +397,11 @@ button.comment-lyk.like[liked="yes"]:hover,button.discuss-lyk[liked="yes"]:hover
 	border-color:black;
     background:transparent;
 }
+.pro_icon
+{
+	height: 25px;
+	width: 25px;
+	-webkit-border-radius:50% 50%;
+	-moz-border-radius:50% 50%;
+	border-radius:50% 50%;
+}

@@ -21,10 +21,10 @@ body
 	position: relative;
 	top:100px;
 	left:50%;
-	margin-left: -400px;
+	margin-left: -350px;
 	margin-bottom: 50px;
 	background:rgba(255,255,255,0.5);
-	width:800px;
+	width:700px;
 	/*height:450px;*/
 	padding: 15px;
 	color:rgb(56,77,137);
@@ -70,7 +70,7 @@ input[type="file"]
 <div id="form2" class="body_div">
 	<h2 style="color:rgb(56,77,137);">Edit your profile</h2><br>
 	<input type="text" placeholder="Name" name="name" value="{{ name }}"><br><br>
-	Date of Birth : &nbsp Date: <input type="number" value="{{ date }}" name="dob_date" min="1" max="31"> Month: <input type="number" name="dob_month" value="{{ month }}" min="1" max="12"> Year: <input type="number" name="dob_year" value="{{ year }}" min="1900"><br><br>
+	Date of Birth : &nbsp Date: <input type="number" value="{{ date }}" name="dob_date" min="1" max="31" placeholder="1"> Month: <input type="number" name="dob_month" value="{{ month }}" min="1" max="12" placeholder="1"> Year: <input type="number" name="dob_year" value="{{ year }}" min="1900" placeholder="2000"><br><br>
 	<img src="{{ pic }}" height="100px" width="100px"><br><br>
 	Profile picture: <input type="file" name="picture" value="Choose pic" ><br>
 	<h3>Choose prefered language : </h3><input type="radio" name="language" value="1"> English

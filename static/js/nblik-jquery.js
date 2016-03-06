@@ -54,6 +54,7 @@ $(document).ready(function(){
     });
 
     $('#category_like').click(function(event){
+      $(this).html('<span class="glyphicon glyphicon-time" style="margin-left:7px;margin-right:7px;" aria-hidden="true"></span>');
 		var cat_id;
 		cat_id = $(this).attr("data-catid");
     liked=$(this).attr('liked');
@@ -81,6 +82,7 @@ $(document).ready(function(){
 
 	$('.blog_like').click(function(event){
     //console.log("Hello");
+    $(this).html('<span class="glyphicon glyphicon-time" style="margin-left:7px;margin-right:7px;" aria-hidden="true"></span>');
 		var blog_id;
 		blog_id = $(this).attr("data-blogid");
     blog_liked=$(this).attr("liked");
@@ -107,6 +109,7 @@ $(document).ready(function(){
     });
 
 $(".comment-lyk").click(function(event){
+  $(this).html('<span class="glyphicon glyphicon-time" style="margin-left:7px;margin-right:7px;" aria-hidden="true"></span>');
     //console.log("Hello");
     var comment_id;
     comment_id = $(this).attr("data-blogid");
@@ -132,7 +135,9 @@ $(".comment-lyk").click(function(event){
     });
 
 $('#discussion_like').click(function(event){
+  $(this).html('<span class="glyphicon glyphicon-time" style="margin-left:7px;margin-right:7px;" aria-hidden="true"></span>');
     //console.log("Hello");
+    $(this).html('Wait');
     var discussion_id;
     discussion_id = $(this).attr("data-blogid");
     liked=$(this).attr("liked");
@@ -159,6 +164,7 @@ $('#discussion_like').click(function(event){
     });
 
 $(".discuss-lyk").click(function(event){
+  $(this).html('<span class="glyphicon glyphicon-time" style="margin-left:7px;margin-right:7px;" aria-hidden="true"></span>');
     //console.log("Hello");
     var discuss_id;
     discuss_id = $(this).attr("data-blogid");
@@ -308,9 +314,12 @@ $(".discuss-lyk").click(function(event){
 });
 
   $('.unfollow_user').click(function(event){
+    $(this).html('Wait');
     var user_id;
     user_id = $(this).attr("data-userid");
+    ele=$(this);
     $.get('/nblik/unfollow_user/',{user_id: user_id},function(data){
+        ele.hide();
         $('#follow_data').html("Following ("+data+")");
         $("#follow_"+user_id).hide();
       });

@@ -45,11 +45,6 @@ div#delete.show
     height:auto;
     padding: 2px;
 }
-h4
-{
-    font-weight: bold;
-    color: rgb(150,150,150);
-}
 a#starter:link,a#starter:visited,h4 a:link,a:visited
 {
     color: rgb(100,100,100);
@@ -78,12 +73,26 @@ a#starter:hover,h4 a:hover
     border-color:black;
     background:transparent;
 }
+a#cat:link
+{
+    text-align:left;
+    font-family:'Montserrat',tahoma;
+    color:rgb(75,75,75);
+    font-size:22px;
+    letter-spacing:1px;
+    font-weight:600;
+}
+a#cat:hover
+{
+    text-decoration: none;
+    color:black;
+}
 </style>
 <div>
 	<div class="panel">
         <br/>
                     <div class="panel-heading">
-                        <h4>{{ discussion.category.name }}</h4><br>
+                        <h4><a href="/nblik/category/{{ discussion.category.slug }}" id="cat">{{ discussion.category.name }}</a></h4>
                     <h3 class="panel-title" style="color:black;font-family: 'Ubuntu', sans-serif;font-size: 24px;">{{ discussion.topic }}</h3><br>
                     {% if user == discussion.started_by.user %}
         <a href="/nblik/edit_discussion/{{ discussion.slug }}" class="edit_del">Edit</a> &nbsp
@@ -91,7 +100,7 @@ a#starter:hover,h4 a:hover
         <div id="delete">Are you sure?<br><a href="/nblik/delete_discussion/{{ discussion.slug }}">Yes</a> <a id="no" href="">No</a> </div><br>
         {% endif %}
                     <span style="color:gray;">started by</span> <img src="{{ discussion.started_by.picture }}" class="pro_pic"/> <a id="starter" href="/{{ discussion.started_by.user }}/"><span style="font-weight:bold;font-size:16px;">{{ discussion.started_by.name }}</span></a><br><br>
-                    <p style="word-wrap:break-word;font-size:16px;font-family:georgia;margin-bottom:0;"><span style="color:gray;">on</span> {{ discussion.intro|safe }}</p> <br>
+                    <p style="word-wrap:break-word;font-size:16px;font-family:georgia;margin-bottom:0;"><span style="color:gray;"></span>{{ discussion.intro|safe }}</p> <br>
                     <span id="discussion_like_count" style="font-weight:bold;">{{ discussion.likes }}</span> <font style="color:grey;">like(s)</font> &nbsp
                     {% if user.is_authenticated %}
                     {% if show %}

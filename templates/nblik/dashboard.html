@@ -12,7 +12,11 @@ body
   background: rgb(234,237,247);
   padding: 80px;
 }
-img[style]
+p
+{
+  text-align: left;
+}
+img[style].pro_pic
 {
 	-webkit-border-radius:50% 50%;
   -moz-border-radius:50% 50%;
@@ -190,9 +194,14 @@ a:hover
 {
   text-decoration: none;
 }
+.blog
+{
+  max-height: 200px;
+  overflow: hidden;
+}
 </style>
 {% if userprofile.picture %}
-<img style="height:150px;width:150px;" src="{{ userprofile.picture }}"/>
+<img style="height:150px;width:150px;" src="{{ userprofile.picture }}" class="pro_pic"/>
 {% endif %}<br/><br />
 <span id="name">{{ userprofile.name }}</span><br>
 {% if userprofile.profile_tag_line %}
@@ -203,6 +212,9 @@ a:hover
 {% endif %}
 {% if show == "yes" and user != user_m %}
 <button class="follow_user like" data-userprofileid="{{ userprofile.id }}" type="button">Follow</button><br>
+{% endif %}
+{% if show != "yes" and user != user_m %}
+<button class="unfollow_user" data-userid="{{ userprofile.user.id }}" type="button">Unfollow</button><br>
 {% endif %}
 <br />
 <div id="wrapper">
@@ -222,9 +234,6 @@ a:hover
   {% if user == user_m %}
 <div id="d1">
   <ul id="settings_list">
-  <li><a id="logout_link" href="/nblik/info/contact-us/">Contact Us</a></li>
-  <li><a id="logout_link" href="/nblik/info/privacy-policy/">Privacy Policy</a></li>
-  <li><a id="logout_link" href="/nblik/info/terms-and-services/">Terms and Services</a></li>
   <li><span id="edit_language">Language</span></li>
   <li><a id="logout_link" href="{% url 'logout' %}">Logout</a></li>
 </ul>
@@ -243,13 +252,23 @@ a:hover
 <div id="d6">
   <span class="data">Discussions ({{ l_dis }})</span><br><br>
 {% for discussion in discussions %}
-<a href="/nblik/discussion/{{ discussion.slug }}">{{ discussion.topic }}</a><br><hr><br>
+<p style="text-align:left;">
+<a href="/nblik/discussion/{{ discussion.slug }}">{{ discussion.topic }}</a><br>
+{{ discussion.intro|safe }}<br>
+<strong>{{ discussion.likes }}</strong> <font color="gray">like(s)</font>
+</p>
+<hr><br>
 {% endfor %}
 </div>
 <div id="d2">
   <span class="data">Blogs ({{ l_blogs }})</span><br><br>
 {% for blog in blogs %}
-<a href="/nblik/blog/{{ blog.slug }}">{{ blog.title }}</a><br><hr><br>
+<div class="blog">
+<p style="text-align:left;">
+<a href="/nblik/blog/{{ blog.slug }}">{{ blog.title }}</a></p>
+{{ blog.blog_content|safe }}
+<p><strong>{{ blog.likes }}</strong> <font color="gray">like(s)</font> , <strong>{{ blog.views }}</strong> <font color="gray">view(s)</font></p>
+</div><hr><br>
 {% endfor %}
 </div>
 <div id="d3"><span class="data">Followers ({{ userprofile_follow.followers }})</span><br><br>
@@ -270,14 +289,14 @@ a:hover
 </div>
 {% endfor %}</div>
 <div id="d5">
-  About the user:
+  About the user:<br>
   {% if userprofile.who %}
-<br><strong>{{ userprofile.who }}</strong><br>
+<strong>{{ userprofile.who }}</strong><br>
 {% endif %}
 {% if cat_list %}
 <strong>Interested in: 
 {% for cat in cat_list %}
-<a href="/nblik/category/{{ cat.slug }}">{{ cat.name }}</a> 
+<a href="/nblik/category/{{ cat.slug }}">{{ cat.name }}</a> &nbsp
 {% endfor %}
 <br>
 </strong>
@@ -293,6 +312,7 @@ a:hover
 <br><strong>Lives in:</strong> {{ userprofile.lives_in }}
 {% endif %}
 <br>
+Prefered Language: <strong>{{ lang }}</strong><br>
 </div>
 </div>
 </div>

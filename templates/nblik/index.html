@@ -8,7 +8,7 @@
         <div id="quick_blog" class="blog_div">
         <form role="form" accept-charset="utf-8" method="post" action="/nblik/quick_add_blog/" class="simform">
             {% csrf_token %}
-            <textarea name="quick_blog_text" style="width:90%" rows="4" placeholder="Enlighten us..."></textarea><br />
+            <textarea name="quick_blog_text" style="width:90%" rows="4" placeholder="Write what you want to write"></textarea><br />
             <button type="submit">Done!</button>
         </form>
         </div>
@@ -45,8 +45,8 @@
                 {% endif %}
                 {% endfor %}
             </font><font style="color:gray;">comment(s)</font>,&nbsp
-{% if user.is_authenticated %}
-                
+            , <strong>{{ blog.views }}</strong> <font style="color:gray;">view(s)</font> ,&nbsp
+{% if user.is_authenticated %}            
     <a id="share" href="/nblik/post_to_facebook/{{ blog.id }}/"> <span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Share</a>
 
 {% else %}
