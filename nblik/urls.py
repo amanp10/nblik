@@ -4,6 +4,7 @@ from nblik import views
 urlpatterns = patterns('',
         url(r'^$',views.index,name='index'),
         url(r'^profile/$',views.profile,name="profile"),
+        url(r'^viewed/$',views.viewed,name="viewed"),
         url(r'^unlike_blog/$',views.unlike_blog,name="unlike_blog"),
 	url(r'^category/(?P<category_name_slug>[\w\-]+)/$',views.category,name ="category"),
         url(r'^blog/(?P<blog_title_slug>[\w\-]+)/$',views.blog,name="blog"),

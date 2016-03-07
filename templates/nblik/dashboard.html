@@ -221,10 +221,10 @@ a:hover
 <div id="nav">
 <ul>
 <li data-id="5">About</li>
-<li data-id="4">Following</li>
-<li data-id="3">Followers</li>
-<li data-id="2">Blogs</li>
-<li data-id="6">Discussions</li>
+<li data-id="4" id="follow_data">Following ({{ userprofile_follow.no_followed }})</li>
+<li data-id="3">Followers ({{ userprofile_follow.followers }})</li>
+<li data-id="2">Blogs ({{ l_blogs }})</li>
+<li data-id="6">Discussions ({{ l_dis }})</li>
 {% if user == user_m %}
 <li data-id="1">Settings</li>
 {% endif %}
@@ -250,7 +250,7 @@ a:hover
 </div>
 {% endif %}
 <div id="d6">
-  <span class="data">Discussions ({{ l_dis }})</span><br><br>
+  <span class="data">Discussions</span><br><br>
 {% for discussion in discussions %}
 <p style="text-align:left;">
 <a href="/nblik/discussion/{{ discussion.slug }}">{{ discussion.topic }}</a><br>
@@ -261,7 +261,7 @@ a:hover
 {% endfor %}
 </div>
 <div id="d2">
-  <span class="data">Blogs ({{ l_blogs }})</span><br><br>
+  <span class="data">Blogs</span><br><br>
 {% for blog in blogs %}
 <div class="blog">
 <p style="text-align:left;">
@@ -271,13 +271,13 @@ a:hover
 </div><hr><br>
 {% endfor %}
 </div>
-<div id="d3"><span class="data">Followers ({{ userprofile_follow.followers }})</span><br><br>
+<div id="d3"><span class="data">Followers</span><br><br>
   {% for up_follow in followers %}
 <br><img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up_follow.userprofile.userprofile.picture }}"> &nbsp &nbsp
 <a href="/{{ up_follow.userprofile }}/"><span class="data">{{ up_follow.userprofile.userprofile.name }}</span></a><br /><hr>
 {% endfor %}
 </div>
-<div id="d4"><span id="follow_data" class="data">Following ({{ userprofile_follow.no_followed }})</span><br><br>
+<div id="d4"><span class="data">Following</span><br><br>
   {% for up in followed_list %}
   <div id="follow_{{ up.user.id }}">
 <br><img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up.picture }}"> &nbsp &nbsp

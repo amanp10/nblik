@@ -43,14 +43,22 @@ def modify_content(blog_id):
         #print i1
         i2=str1.find('/media/blog_uploads/')
         i4=str1.find('style=',i1)
+        i5=str1.find('height:',i1)
+        i52=str1.find('px',i5)
+        i6=str1.find('width:',i5)
+        i62=str1.find('px',i6)
         i3=str1.rfind('.',i2,i4)
         #print i2
         #print i3
+        num1=int(str1[i5+7:i52])
+        num2=int(str1[i6+6:i62])
+        #print num1
+        #print num2
         str2=str1[i2+20:i3+5].replace('"','')
         str3=str1[i1+5:i3+5].replace('"','')
         #print str2
         #print str3
-        context_dict1=cloudinary.uploader.upload('http://protected-tor-4410.herokuapp.com/media/blog_uploads/'+str2,public_id='blog_uploads/'+str2,width = 700, height = 700, crop = 'limit')
+        context_dict1=cloudinary.uploader.upload('http://protected-tor-4410.herokuapp.com/media/blog_uploads/'+str2,public_id='blog_uploads/'+str2,width = num2, height = num1, crop = 'limit')
         url=context_dict1['url']
         #url='http://res.cloudinary.com/nblik/image/upload/blog_uploads/'+str2 ##
         str4=str1.replace(str3,url)
@@ -1063,3 +1071,17 @@ def unfollow_user(request):
         up_follow.save()
         ##print request.user
         return HttpResponse(current_up_follow.no_followed)
+
+def viewed(request):
+    id1=request.GET["blog_id"]
+    if request.user.is_active:
+        b=Blog.objects.get(id=int(id1))
+        viewer_list=b.viewers.all()
+        b.views+=1
+        for viewer in viewer_list:
+            if viewer==request.user.userprofile:
+                b.views-=1
+                b.viewers.remove(viewer)
+        b.viewers.add(request.user.userprofile)
+        b.save()
+    return HttpResponse(str(b.views))

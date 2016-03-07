@@ -302,6 +302,10 @@ $(".discuss-lyk").click(function(event){
   $('.text_div').click(function(event)
   {
     $(this).toggleClass('active_text');
+    blog_id=$(this).attr("data-blogid");
+    $.get('/nblik/viewed/',{blog_id: blog_id},function(data){
+        $('#'+blog_id+'_views').html(data);
+      });
     event.stopImmediatePropagation();
   });
 
