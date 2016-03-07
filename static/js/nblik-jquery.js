@@ -137,7 +137,6 @@ $(".comment-lyk").click(function(event){
 $('#discussion_like').click(function(event){
   $(this).html('<span class="glyphicon glyphicon-time" style="margin-left:7px;margin-right:7px;" aria-hidden="true"></span>');
     //console.log("Hello");
-    $(this).html('Wait');
     var discussion_id;
     discussion_id = $(this).attr("data-blogid");
     liked=$(this).attr("liked");
@@ -318,7 +317,7 @@ $(".discuss-lyk").click(function(event){
 });
 
   $('.unfollow_user').click(function(event){
-    $(this).html('Wait');
+    $(this).html('<span class="glyphicon glyphicon-time" style="margin-left:7px;margin-right:7px;" aria-hidden="true"></span>');
     var user_id;
     user_id = $(this).attr("data-userid");
     ele=$(this);
