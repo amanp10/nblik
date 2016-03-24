@@ -102,7 +102,7 @@ body
           <span class="logmod__heading-subtitle">Enter your email and password <strong>to sign in</strong></span>
         </div>
         {% if login_statement %}
-        {{ login_statement }}
+        <div style="margin:5px;"><font color="red">{{ login_statement }}</font></div>
         {% endif %}
         <div class="logmod__form">
           <form accept-charset="utf-8" action="." class="simform" method="post" role="form">

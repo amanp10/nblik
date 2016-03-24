@@ -125,7 +125,7 @@ a#cat:hover
                             <div id="wrapper">
                             {% if discuss_list %}
                             {% for discuss in discuss_list %}
-                                <div class="list-group-item" style="width:75%;">
+                                <div class="list-group-item" style="width:75%;border:1px solid rgb(100,100,100);-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;">
                                     <h4 class="list-group-item-heading" style="font-weight:bold;"><img src="{{ discuss.discuss_by.picture }}" class="pro_pic_2"/><a href="/{{ discuss.discuss_by }}/"> {{ discuss.discuss_by.name }}</a></h4>
 									<p class="list-group-item-text" style="font-family:georgia;font-size: 16px;margin-bottom:0;">{{ discuss.discuss_text|safe }}</p>
 									<p style="color:gray;"><span id="{{ discuss.id }}" style="color:black">{{ discuss.likes }}</span> like(s)</p>
@@ -140,7 +140,7 @@ a#cat:hover
                         Unlike</button>
                         {% endif %}
                         {% endfor %}
-                                </div>
+                                </div><br>
                             {% endfor %}
                             {% endif %}
                         </div>

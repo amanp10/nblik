@@ -68,6 +68,12 @@ def modify_content(blog_id):
     if repeat==1:
         modify_content(blog_id)
 
+def welcome(request):
+    if request.user.is_active:
+        return HttpResponseRedirect('/nblik/')
+    else:
+        return render(request,'nblik/welcome.html')
+
 def index(request):
     if request.method=="POST":
         blog_text=request.POST.get('blog_text')
@@ -636,8 +642,8 @@ def dashboard(request,username):
     try:
         user_m=User.objects.get(username=username)
         userprofile=UserProfile.objects.get(user=user_m)
-        blog_list=Blog.objects.filter(written_by=user_m)
-        discussion_list=Discussion.objects.filter(started_by=userprofile)
+        blog_list=Blog.objects.filter(written_by=user_m).order_by('-id')[:20]
+        discussion_list=Discussion.objects.filter(started_by=userprofile).order_by('-id')[:20]
         cat_list=userprofile.liked_categories.all()
         follow=Follow.objects.get(userprofile=request.user)
         for foll in follow.followed.all():
@@ -1085,3 +1091,22 @@ def viewed(request):
         b.viewers.add(request.user.userprofile)
         b.save()
     return HttpResponse(str(b.views))
+
+def change_email(request,username):
+    if request.method=="POST":
+        email=request.POST.get('email')
+        password=request.POST.get('password')
+        us=User.objects.get(username=username)
+        if us == authenticate(username=username,password=password):
+            us.email=email
+            us.save()
+            return HttpResponseRedirect('/'+str(us)+'/')
+        else:
+            context_dict={}
+            context_dict['email']=str(us.email)
+            return render(request,'nblik/change_email_error.html',context_dict)
+    else:
+        us=User.objects.get(username=username)
+        context_dict={}
+        context_dict['email']=str(us.email)
+        return render(request,'nblik/change_email.html',context_dict)

@@ -1,0 +1,144 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+	    <meta charset="UTF-8">
+	    <title>NbliK</title>
+	    <link rel="shortcut icon" href="{% static "images/icon.jpg" %}" type="image/jpg"/>
+		<link href= "{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+		<style type="text/css">
+		::-webkit-scrollbar,-moz-scrollbar,-o-scrollbar,scrollbar { 
+    display: none; 
+}
+*
+{
+	-ms-overflow-style:none;
+}
+		body
+		{
+			width:100%;
+			display: -webkit-box;
+			-webkit-box-orient:vertical;
+		}
+		div.outer
+		{
+			padding: 0;
+			width: 100%;
+			display: -webkit-box;
+			-webkit-box-orient:vertical;
+			min-height: 500px;
+		}
+		.inner
+		{
+			margin: 0;
+			width:100%;
+			padding: 50px;
+			display: -webkit-box;
+			-webkit-box-orient:vertical;
+			-webkit-box-pack:center;
+			text-align: center;
+			color: rgb(56,77,137);
+		}
+		.inner2
+		{
+			margin: 0;
+			width:100%;
+			padding: 50px;
+			display: -webkit-box;
+			-webkit-box-orient:vertical;
+			-webkit-box-pack:center;
+			text-align: center;
+			background: rgb(70,94,170);
+			color:white;
+		}
+		p
+		{
+			font-weight: bold;
+			font-size: 24px;
+			text-align: center;
+			letter-spacing: 1px;
+		}
+		p.center
+		{
+			font-weight: bold;
+			font-size: 22px;
+			text-align: center;
+			width: 600px;
+			position: relative;
+			left:50%;
+			margin-left: -300px;
+			/*letter-spacing: 1px;*/
+		}
+		a:link
+		{
+			padding: 15px 40px 15px 40px;
+			background: rgb(56,77,137);
+			color: white;
+			font-weight: bold;
+			font-size: 20px;
+			border:3px solid rgb(56,77,137);
+			text-decoration: none;
+		}
+		a:visited
+		{
+			background: rgb(56,77,137);
+			color: white;
+			border:3px solid rgb(56,77,137);
+		}
+		a:hover
+		{
+			background: white;
+			color: rgb(56,77,137);
+		}
+		a.link2:link
+		{
+			padding: 15px 40px 15px 40px;
+			background: orange;
+			color: white;
+			font-weight: bold;
+			font-size: 20px;
+			border:3px solid orange;
+			text-decoration: none;
+		}
+		a.link2:visited
+		{
+			background: orange;
+			color: white;
+			border:3px solid orange;
+		}
+		a.link2:hover
+		{
+			background: rgba(255,255,255,.2);
+			color: orange;
+		}
+		strong
+		{
+			color:orange;
+		}
+		.image
+		{
+			margin: 10px;
+			font-size: 64px;
+		}
+		</style>
+	</head>
+	<body>
+<div class="outer" style="">
+<div class="inner">
+<img src="{% static 'images/nblik.jpg' %}" height="200" width="400"><br><br>
+<p>NbliK- Network of Knowledge</p><br><br>
+<a href="/nblik/">NbliK</a>
+</div>
+</div>
+<div class="inner2">
+<span class="glyphicon glyphicon-globe image"></span><p class="center">Internet is a reservoir of knowledge. Everything known to humanity is present on the Internet. NbliK aims to make internet work the way it should, the way it was envisioned too. </p>
+</div>
+<div class="inner">
+<span class="glyphicon glyphicon-globe image"></span><p class="center">NbliK.com is one stop destination to share knowledge, information and opinion on topics as old as the Big Bang and as futuristic as the Time travel.</p>
+</div>
+<div class="inner2">
+<span class="glyphicon glyphicon-globe image"></span><p class="center">Share your feeling, your hopes, your aspirations, your stories with the world to show the world how you see the world.<strong>Cruise through the minds of countless NbliKers.</strong></p><br><br>
+<a class="link2" href="{% url 'login_signup' %}">SignUp/Login</a>
+</div>
+	</body>
+</html>

@@ -235,6 +235,8 @@ a:hover
 <div id="d1">
   <ul id="settings_list">
   <li><span id="edit_language">Language</span></li>
+  <li><a id="logout_link" href="{% url 'auth_password_change' %}">Change Password</a></li>
+  <li><a id="logout_link" href="/nblik/{{ user }}/change_email">Change Email</a></li>
   <li><a id="logout_link" href="{% url 'logout' %}">Logout</a></li>
 </ul>
 <div id="language_id" class="language1">
@@ -289,7 +291,11 @@ a:hover
 </div>
 {% endfor %}</div>
 <div id="d5">
-  About the user:<br>
+  {% if user == user_m %}
+<strong>Your Username: </strong><font style="color:rgb(70,94,170)">{{ user }}</font>
+<br><strong>Your registered Email: </strong><font style="color:rgb(70,94,170)">{{ user.email }}</font><br><br>
+{% endif %}
+About the user:<br>
   {% if userprofile.who %}
 <strong>{{ userprofile.who }}</strong><br>
 {% endif %}
@@ -301,18 +307,15 @@ a:hover
 <br>
 </strong>
 {% endif %}
-{% if user == user_m %}
-<br><strong>Your Username: </strong>{{ user }}<br>
-{% endif %}
 <br><strong>Birthday: </strong> {{ userprofile.dob_date }}/{{ userprofile.dob_month }}/{{ userprofile.dob_year }}<br>
 {% if userprofile.from_place %}
 <br><strong>From:</strong> {{ userprofile.from_place }}<br>
 {% endif %}
 {% if userprofile.lives_in %}
-<br><strong>Lives in:</strong> {{ userprofile.lives_in }}
+<br><strong>Lives in:</strong> {{ userprofile.lives_in }}<br>
 {% endif %}
 <br>
-Prefered Language: <strong>{{ lang }}</strong><br>
+<strong>Prefered Language(s): </strong>{{ lang }}<br>
 </div>
 </div>
 </div>

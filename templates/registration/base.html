@@ -5,21 +5,46 @@
 <head>
     <link rel="stylesheet" href="{{ STATIC_URL }}style.css" />
     <title>{% block title %}User test{% endblock %}</title>
+    <style type="text/css">
+    body
+    {
+        margin: 0;
+    }
+    #header
+    {
+        background: rgba(50,50,50,0.8);
+        padding: 10px;
+        border-bottom: 2px solid orange;
+    }
+    a
+    {
+        color:orange;
+        text-decoration: none;
+    }
+    a:hover
+    {
+        text-decoration: none;
+    }
+    a:visited
+    {
+        color:orange;
+        text-decoration: none;
+    }
+    </style>
 </head>
 
 <body>
     <div id="header">
     {% block header %}
-    <a href="{% url 'index' %}">{% trans "Home" %}</a> | 
+    <a href="{% url 'index' %}">{% trans "Home" %}</a> <font color="orange">| </font>
 
     {% if user.is_authenticated %}
-        {% trans "Logged in" %}: {{ user.username }} 
-        (<a href="{% url 'auth_logout' %}">{% trans "Log out" %}</a> | 
-        <a href="{% url 'auth_password_change' %}">{% trans "Change password" %}</a>)
+        <font color="orange">{% trans "Logged in" %}:</font> <font color="white">{{ user.username }}</font> 
+        <font color="orange">(</font><a href="{% url 'auth_logout' %}">{% trans "Log out" %}</a> <font color="orange">|</font> 
+        <a href="{% url 'auth_password_change' %}">{% trans "Change password" %}</a><font color="orange">)</font>
     {% else %}
-       <a href="{% url 'auth_login' %}">{% trans "Log in" %}</a>
+       <a href="{% url 'auth_login' %}"><font color="white">{% trans "Log in" %}</font></a>
     {% endif %}
-    <hr />
     {% endblock %}
     </div>
 
@@ -27,12 +52,11 @@
     {% block content %}{% endblock %}
     </div>
 
-    <div id="footer">
+    <!--<div id="footer">
     {% block footer %}
         <hr />
     {% endblock %}
-    </div>
+    </div>-->
 </body>
 
 </html>
-Status 

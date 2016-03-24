@@ -13,7 +13,7 @@ import cloudinary.api
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^nblik/', include('nblik.urls')),
-	url(r'^$', views.index,name='index'),
+	url(r'^$', views.welcome,name='welcome'),
 	#url(r'^accounts/register/$', MyRegistrationView.as_view(),name = 'registration_register'),
 	url(r'^accounts/',include('registration.backends.simple.urls')),
     url(r'^(?P<username>[\w\-]+)/$',views.dashboard,name='dashboard'),

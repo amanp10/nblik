@@ -1,0 +1,64 @@
+{% extends "registration/base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %} {% trans 'Email change' %} {% endblock %}
+
+{% block content %}
+<style type="text/css">
+body
+{
+	background-image: url('{% static "images/bg2.jpg" %}');
+	background-size: 100%;
+	background-attachment: fixed;
+}
+#main
+{
+	margin: 40px;
+	padding: 20px;
+	border:3px solid rgb(70,94,170);
+	background: rgba(234,237,247,0.5);
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+}
+#next
+{
+	background: rgb(56,77,137);
+	color: white;
+	font-weight: bold;
+	border:2px solid rgb(56,77,137);
+	padding: 5px;
+}
+#next:hover
+{
+	background: transparent;
+	color: rgb(56,77,137);
+}
+input[type="password"],input[type="email"]
+{
+padding: 3px;
+font-size: 15px;
+width:250px;
+border:1px solid rgb(56,77,137);
+-webkit-border-radius:5px;
+}
+</style>
+<div id="main">
+<h1 style="color:rgb(70,94,170);">{% trans 'Email change' %}</h1>
+
+<p style="color:red;">*{% trans "Invalid Password, please try again." %}</p>
+
+<form action="" method="post">
+{% csrf_token %}
+Your Email : <font style="color:rgb(56,77,137);"><strong>{{ email }}</strong></font><br><br>
+<input type="password" name="password" placeholder="Password" required><br><br>
+<input type="email" name="email" placeholder="New Email" required>
+<p><input type="submit" id="next" value="{% trans 'Change my Email' %}" /></p>
+</form>
+
+</div>
+<script src="{% static "js/jquery-1.11.3.min.js" %}"></script>
+<script type="text/javascript">
+
+</script>
+{% endblock %}
