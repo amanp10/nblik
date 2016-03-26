@@ -15,4 +15,4 @@ pillow
 django-imagekit==3.3
 Unidecode==0.04.9
 cloudinary==1.1.3
-psycopg2==2.6
+psycopg2==2.6.1
