@@ -8,9 +8,9 @@ django-ckeditor==5.0.2
 django-registration-redux==1.2
 django-social-auth==0.7.28
 facebook-sdk==0.4.0
-python-social-auth
+python-social-auth==0.2.13
 requests==2.2.1
-pillow
+Pillow==2.3.0
 django-imagekit==3.3
 Unidecode==0.04.9
 cloudinary==1.1.3
