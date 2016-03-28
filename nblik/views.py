@@ -13,9 +13,9 @@ from collections import Counter
 import json
 import facebook
 from unidecode import unidecode
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+# import cloudinary
+# import cloudinary.uploader
+# import cloudinary.api
 
 ZERO = timedelta(0)
 
@@ -33,40 +33,40 @@ class MyRegistrationView(RegistrationView):
     def get(self):
         print self
 
-def modify_content(blog_id):
-    b=Blog.objects.get(id=int(blog_id))
-    str1=b.blog_content
-    repeat=0
-    if str1.find('src="/media/blog_uploads')!= -1:
-        repeat=1
-        i1=str1.find('src="/media/')
-        #print i1
-        i2=str1.find('/media/blog_uploads/')
-        i4=str1.find('style=',i1)
-        i5=str1.find('height:',i1)
-        i52=str1.find('px',i5)
-        i6=str1.find('width:',i5)
-        i62=str1.find('px',i6)
-        i3=str1.rfind('.',i2,i4)
-        #print i2
-        #print i3
-        num1=int(str1[i5+7:i52])
-        num2=int(str1[i6+6:i62])
-        #print num1
-        #print num2
-        str2=str1[i2+20:i3+5].replace('"','')
-        str3=str1[i1+5:i3+5].replace('"','')
-        #print str2
-        #print str3
-        context_dict1=cloudinary.uploader.upload('http://protected-tor-4410.herokuapp.com/media/blog_uploads/'+str2,public_id='blog_uploads/'+str2,width = num2, height = num1, crop = 'limit')
-        url=context_dict1['url']
-        #url='http://res.cloudinary.com/nblik/image/upload/blog_uploads/'+str2 ##
-        str4=str1.replace(str3,url)
-        #print str4
-        b.blog_content=str4
-        b.save()
-    if repeat==1:
-        modify_content(blog_id)
+# def modify_content(blog_id):
+#     b=Blog.objects.get(id=int(blog_id))
+#     str1=b.blog_content
+#     repeat=0
+#     if str1.find('src="/media/blog_uploads')!= -1:
+#         repeat=1
+#         i1=str1.find('src="/media/')
+#         #print i1
+#         i2=str1.find('/media/blog_uploads/')
+#         i4=str1.find('style=',i1)
+#         i5=str1.find('height:',i1)
+#         i52=str1.find('px',i5)
+#         i6=str1.find('width:',i5)
+#         i62=str1.find('px',i6)
+#         i3=str1.rfind('.',i2,i4)
+#         #print i2
+#         #print i3
+#         num1=int(str1[i5+7:i52])
+#         num2=int(str1[i6+6:i62])
+#         #print num1
+#         #print num2
+#         str2=str1[i2+20:i3+5].replace('"','')
+#         str3=str1[i1+5:i3+5].replace('"','')
+#         #print str2
+#         #print str3
+#         context_dict1=cloudinary.uploader.upload('http://protected-tor-4410.herokuapp.com/media/blog_uploads/'+str2,public_id='blog_uploads/'+str2,width = num2, height = num1, crop = 'limit')
+#         url=context_dict1['url']
+#         #url='http://res.cloudinary.com/nblik/image/upload/blog_uploads/'+str2 ##
+#         str4=str1.replace(str3,url)
+#         #print str4
+#         b.blog_content=str4
+#         b.save()
+#     if repeat==1:
+#         modify_content(blog_id)
 
 def welcome(request):
     if request.user.is_active:
@@ -391,7 +391,7 @@ def add_blog(request,category_name_slug):
             blog1=Blog.objects.get(title=blog_title)
             #blog1.save()
             #return HttpResponse('Hello')
-            modify_content(blog1.id)
+            #modify_content(blog1.id)
             return blog(request,blog1.slug)
     else:
         context_dict={'category_list':Category.objects.all(),'category':cat}
@@ -414,7 +414,7 @@ def add_blog2(request,category_name_slug):
             blog1.category=cat
             blog1.written_by=request.user
             blog1.save()
-            modify_content(blog1.id)
+            #modify_content(blog1.id)
             return blog(request,blog1.slug)
         else:
             form=BlogForm()
@@ -777,8 +777,7 @@ def next_step(request):
         lives_in=request.POST.get('lives_in')
         from_place=request.POST.get('from_place')
         if len(request.FILES) != 0:
-            context_dict1 = cloudinary.uploader.upload(request.FILES['picture'],public_id = 'profile_pic/'+str(user),width = 400, height = 400, crop = 'fill',gravity = 'faces')
-            userpro.picture = str(context_dict1['url'])
+            up.picture = request.FILES['picture']
             ##print profile_pic_url
         languages=request.POST.get('language')
         profile_tagline=request.POST.get('profile_tag')
@@ -899,7 +898,7 @@ def update_blog(request,category_name_slug):
             blog1.category=cat
             blog1.written_by=request.user
             blog1.save()
-            modify_content(blog1.id)
+            #modify_content(blog1.id)
             return blog(request,blog1.slug)
         else:
             blog1=Blog.objects.get(id=int(request.POST.get('blog_id')))
@@ -941,8 +940,7 @@ def update_profile(request):
     userpro.lives_in=request.POST.get('lives_in')
     userpro.from_place=request.POST.get('from_place')
     if len(request.FILES) != 0:
-        context_dict1 = cloudinary.uploader.upload(request.FILES['picture'],public_id='profile_pic/'+str(user),width = 400, height = 400, crop = 'fill',gravity='faces')
-        userpro.picture = str(context_dict1['url'])
+        up.picture = request.FILES['picture']
         ##print profile_pic_url
     userpro.save()
     return HttpResponseRedirect('/'+str(user)+'/')

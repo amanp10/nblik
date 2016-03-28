@@ -13,4 +13,3 @@ requests==2.2.1
 Pillow==2.3.0
 django-imagekit==3.3
 Unidecode==0.04.9
-cloudinary==1.1.3

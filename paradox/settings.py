@@ -44,7 +44,6 @@ INSTALLED_APPS = (
     'ckeditor',
     'ckeditor_uploader',
     'imagekit',
-    'cloudinary',
 )
 
 AUTHENTICATION_BACKENDS = (

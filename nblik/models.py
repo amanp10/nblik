@@ -8,10 +8,10 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from imagekit.models import ProcessedImageField
 from unidecode import unidecode
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
-from cloudinary.models import CloudinaryField
+# import cloudinary
+# import cloudinary.uploader
+# import cloudinary.api
+# from cloudinary.models import CloudinaryField
 
 class Category(models.Model):
     name = models.CharField(max_length=1000,unique=True)
@@ -118,7 +118,7 @@ class Discuss(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     name = models.CharField(max_length=200)
-    picture = models.TextField(default='http://res.cloudinary.com/nblik/image/upload/icon.jpg')
+    picture = models.ImageField(default='/static/images/nblik.jpg')
     liked_blogs=models.ManyToManyField(Blog,blank=True)
     liked_categories=models.ManyToManyField(Category,blank=True)
     level=models.IntegerField(default=1)
