@@ -118,7 +118,7 @@ class Discuss(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     name = models.CharField(max_length=200)
-    picture = models.ImageField(default='/static/images/nblik.jpg')
+    picture = ProcessedImageField(default='/static/images/nblik.jpg',upload_to='profile_images',processors=[ResizeToFill(300, 300)],format='JPEG',options={'quality': 90})
     liked_blogs=models.ManyToManyField(Blog,blank=True)
     liked_categories=models.ManyToManyField(Category,blank=True)
     level=models.IntegerField(default=1)

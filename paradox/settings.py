@@ -180,3 +180,11 @@ LINKEDIN_SCOPE = ['r_basicprofile', 'r_emailaddress',]
 CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 CKEDITOR_UPLOAD_PATH = "blog_uploads/"
 CKEDITOR_RESTRICT_BY_USER=True
+CKEDITOR_BROWSE_SHOW_DIRS=True
+AWS_QUERYSTRING_AUTH = False
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
+# CKEDITOR_CONFIGS = {
+#     'awesome_ckeditor': {
+#         'toolbar': 'Basic',
+#     },
+# }

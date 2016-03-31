@@ -1,0 +1,65 @@
+{% load staticfiles %}
+<style type="text/css">
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+u1.nav.nav-sidebar>li.active>a:link
+{
+	font-weight: bold;
+	font-family: 'Montserrat',arial;
+	font-weight: 700;
+	background:rgb(34,47,83);
+}
+u1.nav.nav-sidebar>li.active>a:hover
+{
+	font-weight: bold;
+	background:rgb(34,47,83);
+}
+u1.nav.nav-sidebar>li.active>a:visited
+{
+	background:rgb(34,47,83);
+}
+u1.nav.nav-sidebar>li.inactive>a:link
+{
+	color:black;
+	font-family: 'Montserrat',arial;
+	font-weight: 600;
+	background:white;
+	padding-right: 15px;
+	border-bottom: 1px solid rgb(200,200,200);
+}
+u1.nav.nav-sidebar>li.inactive:last-of-type>a:last-of-type:link
+{
+	border-bottom: 1px solid white;
+}
+u1.nav.nav-sidebar>li.inactive>a:visited
+{
+	color:black;
+	background:white;
+	padding-right: 15px;
+	border-bottom: 1px solid rgb(200,200,200);
+}
+u1.nav.nav-sidebar>li.inactive:last-of-type>a:visited
+{
+	border-bottom: 1px solid white;
+}
+u1.nav.nav-sidebar>li.inactive>a:hover
+{
+	background:white;
+}
+u1.nav.nav-sidebar>li.inactive:last-of-type>a:hover
+{
+	border-bottom: 1px solid white;
+}
+</style>
+{% if cats %}
+    <u1 class="nav nav-sidebar">
+	{% for c in cats %}
+	    {% if c == act_cat %}
+		<li class="active"><a href="/nblik/discussion_cat/{{ c.slug }}">{{ c.name }}</a></li>
+		{% else %}
+	    <li class="inactive"><a href="/nblik/discussion_cat/{{ c.slug }}">{{ c.name }}</a></li>
+	    {% endif %}
+	{% endfor %}
+{% else %}
+    <li><strong>There are no categories present</strong></li>
+	</u1>
+{% endif %}

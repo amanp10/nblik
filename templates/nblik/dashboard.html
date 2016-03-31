@@ -11,6 +11,10 @@ body
   background: rgb(234,237,247);
   padding: 80px;
 }
+#pro_dark
+{
+  color:rgb(34,47,83);
+}
 p
 {
   text-align: left;
@@ -199,8 +203,8 @@ a:hover
   overflow: hidden;
 }
 </style>
-{% if userprofile.picture %}
-<img style="height:150px;width:150px;" src="{{ userprofile.picture }}" class="pro_pic"/>
+{% if userprofile.picture.url %}
+<img style="height:150px;width:150px;" src="{{ userprofile.picture.url }}" class="pro_pic"/>
 {% endif %}<br/><br />
 <span id="name">{{ userprofile.name }}</span><br>
 {% if userprofile.profile_tag_line %}
@@ -274,14 +278,14 @@ a:hover
 </div>
 <div id="d3"><span class="data">Followers</span><br><br>
   {% for up_follow in followers %}
-<br><img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up_follow.userprofile.userprofile.picture }}"> &nbsp &nbsp
+<br><img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up_follow.userprofile.userprofile.picture.url }}"> &nbsp &nbsp
 <a href="/{{ up_follow.userprofile }}/"><span class="data">{{ up_follow.userprofile.userprofile.name }}</span></a><br /><hr>
 {% endfor %}
 </div>
 <div id="d4"><span class="data">Following</span><br><br>
   {% for up in followed_list %}
   <div id="follow_{{ up.user.id }}">
-<br><img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up.picture }}"> &nbsp &nbsp
+<br><img style="height:50px;width:50px;-webkit-border-radius:50% 50%;" src="{{ up.picture.url }}"> &nbsp &nbsp
 <a href="/{{ up.user }}/"><span class="data">{{ up.name }}</span></a> 
 {% if user == user_m %}
 <button class="unfollow_user" data-userid="{{ up.user.id }}" type="button">Unfollow</button>

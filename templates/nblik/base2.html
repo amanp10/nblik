@@ -32,18 +32,19 @@
 				</div>
 				<div class="navbar-collapse collapse" style="-webkit-box-flex:1;-moz-box-flex:1;">
 				    <u1 class="nav navbar-nav navbar-right" style="background:white;">
-				    		<li><a href="{% url 'discussions' %}"><span class="glyphicon glyphicon-blackboard"></span>&nbsp Discussions</a></li>
+				    	<li><a id="blog_dark" href="/nblik/"><span class="glyphicon glyphicon-edit"></span>&nbsp Blogs</a></li>
+				    		<li><a id="discussion_dark" href="{% url 'discussions' %}"><span class="glyphicon glyphicon-blackboard"></span>&nbsp Discussions</a></li>
 				    	    {% if user.is_authenticated %}
 			                {% if category %}
-				    	    <li><a href="/nblik/{{ category.slug }}/add_blog/"><span class="glyphicon glyphicon-pencil"></span>&nbsp Write </a></li>
+				    	    <li><a id="write_dark" href="/nblik/{{ category.slug }}/add_blog/"><span class="glyphicon glyphicon-pencil"></span>&nbsp Write </a></li>
 				    	    {% else %}
-				    	    <li><a href="/nblik/none/add_blog/"><span class="glyphicon glyphicon-pencil"></span>&nbsp Write </a></li>
+				    	    <li><a id="write_dark" href="/nblik/none/add_blog/"><span class="glyphicon glyphicon-pencil"></span>&nbsp Write </a></li>
 				    	    {% endif %}
 				    	    {% else %}
 				    	    <li><a href="/nblik/login_signup"><span class="glyphicon glyphicon-pencil"></span>&nbsp Write </a></li>
 				    	    {% endif %}
 				    	    {% if user.is_authenticated %}
-				    	    <li><a href="/{{ user.username }}/"><img src="{{ user.userprofile.picture }}" class="pro_icon"> Profile</a></li>
+				    	    <li><a id="pro_dark" href="/{{ user.username }}/"><img src="{{ user.userprofile.picture.url }}" class="pro_icon"> Profile</a></li>
 			                {% else %}
 			                <li><a href="{% url 'login_signup' %}"><span class="glyphicon glyphicon-lock"></span>&nbsp SignIn/SignUp</a></li>
 			                {% endif %}

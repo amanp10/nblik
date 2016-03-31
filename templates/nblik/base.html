@@ -34,7 +34,8 @@
 				</div>
 				<div class="navbar-collapse collapse" style="-webkit-box-flex:1;-moz-box-flex:1;">
 				    <u1 class="nav navbar-nav navbar-right"  style="background:white;">
-              <li><a href="{% url 'discussions' %}"><span class="glyphicon glyphicon-blackboard"></span>&nbsp Discussions</a></li>
+				<li><a id="blog_dark" href="/nblik/" style="color:rgb(34,47,83);"><span class="glyphicon glyphicon-edit"></span>&nbsp Blogs</a></li>
+              <li><a id="discussion_dark" href="{% url 'discussions' %}"><span class="glyphicon glyphicon-blackboard"></span>&nbsp Discussions</a></li>
 			                {% if user.is_authenticated %}
 			                {% if category %}
 				    	    <li><a href="/nblik/{{ category.slug }}/add_blog/"><span class="glyphicon glyphicon-pencil"></span> Write </a></li>
@@ -45,7 +46,7 @@
 				    	    <li><a href="/nblik/login_signup"><span class="glyphicon glyphicon-pencil"></span> Write </a></li>
 				    	    {% endif %}
 				    	    {% if user.is_authenticated %}
-                                <li><a href="/{{ user.username }}/"><img src="{{ user.userprofile.picture }}" class="pro_icon"> Profile</a></li>
+                                <li><a href="/{{ user.username }}/"><img src="{{ user.userprofile.picture.url }}" class="pro_icon"> Profile</a></li>
 			                {% else %}
 			                    <li><a href="{% url 'login_signup' %}"><span class="glyphicon glyphicon-lock"></span> SignIn/SignUp</a></li>
 			                {% endif %}
@@ -67,7 +68,7 @@
 			  {% endblock %}
 			</div>
 			</div>
-		    <div class="col-sm-6 col-sm-offset-3 col-md-offset-2 col-md-8 main" style="padding:20px 0 0 0;">
+		    <div class="col-sm-6 col-sm-offset-3 col-md-offset-2 col-md-8 main" style="padding:20px 0 0 0;margin-left:12%;">
 				    {% block body_block %}
 					{% endblock %}
 
@@ -81,26 +82,11 @@
 				</div>
 				</div>
 			<div class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 sidebar" style="background:rgb(234,237,247);">
-				<u1 class="nav nav-list">
-			    <li class="nav-header" style="font-family:tahoma;font-weight:bold;font-size:16px;">Featured Blogs</li>
-			    <hr style="margin:2px 2px 0 2px;border-color:black;">
-			    </u1>
-				<div id="featured_blogs">
-        	{% block side_block2_1 %}
-				{% get_blogs_list %}
-          	{% endblock %}
-          </div>
-          <u1 class="nav nav-list">
-  			    <li class="nav-header" style="font-family:tahoma;font-weight:bold;"></li>
-  			    </u1>
-  			    <br>
-  			    {% if user.is_authenticated %}
           <div id="to_follow">
             {% block side_block2_2 %}
             {% get_to_follow_list user %}
             {% endblock %}
           </div>
-          {% endif %}
 			</div>
 		</div>
     <script src="{% static "js/jquery-1.11.3.min.js" %}"></script>

@@ -132,7 +132,6 @@ def profile(request):
 	pass
 
 def category(request,category_name_slug):
-
     context_dict = {}
     context_dict['result_list']=None
     try:
@@ -187,7 +186,6 @@ def category(request,category_name_slug):
     except Category.DoesNotExist:
         context_dict['category_name']=category_name_slug
     return render(request,'nblik/category.html',context_dict)
-
 
 def get_category_list(max_results=0,startswith=''):
     cat_list=[]
@@ -709,6 +707,22 @@ def discussions(request):
         discussions=Discussion.objects.order_by('-id')[:10]
     return render(request,'nblik/discussions.html',{'discussions':discussions})
 
+def discussion_2(request,category_slug):
+    cat=Category.objects.get(slug=category_slug)
+    if request.user.is_active:
+        user2=UserProfile.objects.get(user=request.user)
+        discussions=Discussion.objects.filter(category=cat).order_by('-id')[:25]
+        show_cat="yes"
+        for cate in user2.liked_categories.all():
+            if cat == cate:
+                show_cat=None
+                break
+        print show_cat
+    else:
+        discussions=Discussion.objects.filter(category=cat).order_by('-id')[:10]
+    return render(request,'nblik/discussions.html',{'discussions':discussions,'category':cat,'show_cat':show_cat})
+
+
 def new_discussion(request):
     if request.method=='POST':
         user=request.user
@@ -921,7 +935,7 @@ def edit_profile(request):
     context_dict['date']=str(userpro.dob_date)
     context_dict['month']=str(userpro.dob_month)
     context_dict['year']=str(userpro.dob_year)
-    context_dict['pic']=str(userpro.picture)
+    context_dict['pic']=str(userpro.picture.url)
     return render(request,'nblik/edit_profile.html',context_dict)
 
 def update_profile(request):
@@ -940,7 +954,7 @@ def update_profile(request):
     userpro.lives_in=request.POST.get('lives_in')
     userpro.from_place=request.POST.get('from_place')
     if len(request.FILES) != 0:
-        up.picture = request.FILES['picture']
+        userpro.picture = request.FILES['picture']
         ##print profile_pic_url
     userpro.save()
     return HttpResponseRedirect('/'+str(user)+'/')

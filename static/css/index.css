@@ -211,7 +211,6 @@ a#written_by:hover
 .discussion_div
 {
 	background: white;
-	max-width: 98%;
 	padding: 20px;
 	-webkit-box-shadow:2px 2px 3px rgb(100,100,100);
 	-webkit-border-radius:5px;
@@ -220,7 +219,6 @@ a#written_by:hover
 	box-shadow:2px 2px 3px rgb(100,100,100);
 	border-radius:5px;
 	margin: 10px;
-	margin-left: 40px;
 }
 button.like
 {

@@ -9,6 +9,11 @@ def get_category_list(cat=None):
     #print Category.objects.all()
     return {'cats':Category.objects.all().order_by('name'), "act_cat": cat}
 
+@register.inclusion_tag('nblik/cats_dis.html')
+def get_category_list_dis(cat=None):
+    #print Category.objects.all()
+    return {'cats':Category.objects.all().order_by('name'), "act_cat": cat}
+
 @register.inclusion_tag('nblik/blogs.html')
 def get_blogs_list(cat=None):
     if cat:

@@ -11,7 +11,7 @@
 {% endif %}
 {% if users %}
     {% for user_pro in users %}
-	    <li><img src="{{ user_pro.picture }}" width="30" height="30"> <a href="/{{ user_pro }}/">{{ user_pro.name }} <span style="color:gray;font-weight:normal;">(user)</span></a></li>
+	    <li><img src="{{ user_pro.picture.url }}" width="30" height="30"> <a href="/{{ user_pro }}/">{{ user_pro.name }} <span style="color:gray;font-weight:normal;">(user)</span></a></li>
 	{% endfor %}
 {% endif %}
 </u1>
