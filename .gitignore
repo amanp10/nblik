@@ -9,6 +9,7 @@ virt_env/
 
 # Distribution / packaging
 .Python
+staticfiles/
 env/
 build/
 develop-eggs/
