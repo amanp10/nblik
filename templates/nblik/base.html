@@ -55,7 +55,7 @@
 		    </div>
 	    </div>
 		<div class="container-fluid">
-		    <div class="col-sm-3 col-md-2 sidebar" style="overflow-y:auto;background:rgb(234,237,247);-moz-box-sizing:content-box;">
+		    <div class="sidebar" style="overflow-y:auto;background:rgb(234,237,247);-moz-box-sizing:content-box;width:15%;">
 		    	<br>
 			<u1 class="nav nav-list" style="style:inline-table;">
 				<form>
@@ -68,10 +68,9 @@
 			  {% endblock %}
 			</div>
 			</div>
-		    <div class="col-sm-6 col-sm-offset-3 col-md-offset-2 col-md-8 main" style="padding:20px 0 0 0;margin-left:12%;">
+		    <div class="main" style="padding:20px 0 0 0;margin-left:11%;width:69%;">
 				    {% block body_block %}
 					{% endblock %}
-
 				<div id="body_footer">
 					<div id="footer_table">
 						<div><a href="/nblik/info/about-us/">About</a></div>
@@ -81,7 +80,7 @@
 					</div>
 				</div>
 				</div>
-			<div class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 sidebar" style="background:rgb(234,237,247);">
+			<div class="sidebar" style="background:rgb(234,237,247);margin-left:80%;width:20%;padding-right:5px;">
           <div id="to_follow">
             {% block side_block2_2 %}
             {% get_to_follow_list user %}

@@ -55,7 +55,7 @@
 		    </div>
 	    </div>
 		<div class="container-fluid">
-		    <div class="col-sm-3 col-md-2 sidebar" style="overflow-y:auto;background:rgb(234,237,247);-moz-box-sizing:content-box;">
+		    <div class="sidebar" style="overflow-y:auto;background:rgb(234,237,247);-moz-box-sizing:content-box;width:15%;">
 		    	<br>
 			<u1 class="nav nav-list" style="style:inline-table;">
 				<form>
@@ -68,10 +68,9 @@
 			  {% endblock %}
 			</div>
 			</div>
-		    <div class="col-sm-6 col-sm-offset-3 col-md-offset-2 col-md-8 main" style="padding:20px 0 0 0;">
+		    <div class="main" style="padding:20px 0 0 0;margin-left:13%;width:68%;">
 				    {% block body_block %}
 					{% endblock %}
-
 				<div id="body_footer">
 					<div id="footer_table">
 						<div><a href="/nblik/info/about-us/">About</a></div>
@@ -81,20 +80,7 @@
 					</div>
 				</div>
 				</div>
-			<div class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 sidebar" style="background:rgb(234,237,247);">
-				<u1 class="nav nav-list">
-			    <li class="nav-header" style="font-family:tahoma;font-weight:bold;font-size:16px;">Featured Blogs</li>
-			    <hr style="margin:2px 2px 0 2px;border-color:black;">
-			    </u1>
-				<div id="featured_blogs">
-        	{% block side_block2_1 %}
-				{% get_blogs_list %}
-          	{% endblock %}
-          </div>
-          <u1 class="nav nav-list">
-  			    <li class="nav-header" style="font-family:tahoma;font-weight:bold;"></li>
-  			    </u1>
-  			    <br>
+			<div class="sidebar" style="background:rgb(234,237,247);margin-left:80%;width:20%;padding-right:5px;">
   			    {% if user.is_authenticated %}
           <div id="to_follow">
             {% block side_block2_2 %}

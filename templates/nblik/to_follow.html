@@ -4,8 +4,8 @@
 #wrapper
 {
 	overflow:hidden;
-	width:178px;
-	height:153px;
+	width:100%;
+	height:173px;
 	position: relative;
 	-webkit-border-radius:10px 0 0 10px;
 	-moz-border-radius:10px 0 0 10px;
@@ -13,8 +13,8 @@
 }
 .follow_div
 {
-	width:175px;
-	height:150px;
+	width:98%;
+	height:170px;
 	margin: 0;
 	padding: 15px;
 	position: absolute;
@@ -32,17 +32,24 @@
 }
 #inner
 {
-	max-height: 100px;
-	overflow: auto;
+	max-height: 115px;
+	overflow-y: auto;
+	overflow-x: hidden; 
 }
 </style>
 <font style="font-size:14px;font-weight:bold;">Follow</font>
 <hr style="margin:2px 2px 5px 2px;border-color:black;">
 <div id="wrapper">
-	<div class="follow_div">No more to <br>follow.</div>
+	<div class="follow_div">No more to follow.</div>
 	{% for up in userprofiles %}
-	    <div id="{{ up.id }}" class="follow_div"><div id="inner"><img src="{{ up.picture.url }}" class="pro_pic"/> &nbsp-<a id="written_by" href="/{{ up.user }}/">{{ up.name }}</a></div><br>
+	    <div id="{{ up.id }}" class="follow_div"><div id="inner"><img src="{{ up.picture.url }}" class="pro_pic"/> <br><a id="written_by" href="/{{ up.user }}/">{{ up.name }}</a><br>
+	    	<font color="black">{{ up.who }}</font>
+	    </div>
+	    {% if user.is_authenticated %}
       	<button class="follow_user like" data-userprofileid="{{ up.id }}" type="button">Follow</button>&nbsp<button type="button" class="skip like" data-userprofileid="{{ up.id }}">Skip</button>
+      	{% else %}
+      	<a class="follow_user like" type="button" href="/nblik/login_signup">Follow</a>&nbsp<button type="button" class="skip like" data-userprofileid="{{ up.id }}">Skip</button>
+      	{% endif %}
   		</div>
 	{% endfor %}
 </div>

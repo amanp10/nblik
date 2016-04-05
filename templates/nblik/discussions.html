@@ -81,7 +81,6 @@ h2>a.cat:hover
 <span style="color:rgb(50,50,50);font-size:16px;">Discussions-</span><span><a href="/nblik/login_signup">Start a new discussion</a></span>
 </div>
 {% endif %}
-<br />
 {% for discussion in discussions %}
 <div class="discussion_div">
 <h2 style="font-size:16px;"><a href="/nblik/discussion_cat/{{ discussion.category.slug }}" class="cat">{{ discussion.category.name }}</a></h2>

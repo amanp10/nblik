@@ -27,7 +27,7 @@ def get_blogs_list(cat=None):
 @register.inclusion_tag('nblik/to_follow.html')
 def get_to_follow_list(user=None):
     #print user
-    if user:
+    if user.is_active:
         try:
             up=UserProfile.objects.get(user=user)
             up_follow=Follow.objects.get(userprofile=user)
@@ -35,7 +35,7 @@ def get_to_follow_list(user=None):
             #liked_blog_list=up.liked_blogs.all()
             #liked_categories_list=up.liked_categories.all()
             #up_all=UserProfile.objects.order_by('-level')[:5]
-            to_follow=Follow.objects.order_by('-followers')[:5]
+            to_follow=Follow.objects.order_by('-followers')[:10]
             up_list=[]
             for follow in to_follow:
                 if user!=follow.userprofile:
@@ -62,8 +62,12 @@ def get_to_follow_list(user=None):
             #                     if lb1 in up1_liked_blog_list:
             #                         up_list.append(up1)
             #            
-            return {'userprofiles':up_list}
+            return {'userprofiles':up_list,'user':user}
         except:
             return None
     else:
-        return None
+        up_list=[]
+        to_follow=Follow.objects.order_by('-followers')[:10]
+        for up in to_follow:
+            up_list.append(up.userprofile.userprofile)
+        return {'userprofiles':up_list}

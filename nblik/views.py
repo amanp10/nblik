@@ -6,6 +6,7 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
+from django.conf import settings
 from registration.backends.simple.views import RegistrationView
 from django.contrib.auth.models import User
 from datetime import datetime,date,tzinfo,timedelta
@@ -13,6 +14,8 @@ from collections import Counter
 import json
 import facebook
 from unidecode import unidecode
+from django.core.mail import send_mail
+import random
 # import cloudinary
 # import cloudinary.uploader
 # import cloudinary.api
@@ -1122,3 +1125,37 @@ def change_email(request,username):
         context_dict={}
         context_dict['email']=str(us.email)
         return render(request,'nblik/change_email.html',context_dict)
+
+def reset_password(request):
+    if request.method=="POST":
+        email1=request.POST.get('email')
+        for us in User.objects.all():
+            if us.email == email1:
+                pass_new=str(random.randrange(1000000,100000000))
+                us.set_password(pass_new)
+                us.save()
+                to_email=email1
+                subject="Password Reset"
+                text="Hello,<br> Your new password is <strong>"+pass_new+" </strong>. <br>Please signin and change your password soon.<br>Thank You"
+                try:
+                    print "1.."
+                    send_mail(subject, text, settings.EMAIL_HOST_USER,[to_email], fail_silently=False)
+                    print "2.."
+                except:
+                    return HttpResponseRedirect('/nblik/password_reset_error/')
+                return HttpResponseRedirect('/accounts/password/reset/done/')
+        return HttpResponseRedirect('/nblik/password_reset_error/')
+    else:
+        return HttpResponseRedirect('/accounts/password/reset/')
+
+def password_reset_error(request):
+    return render(request,'registration/password_reset_error.html',{})
+# to_email="abc@xyz.com"
+# subject="abc"
+# text="Hello World"
+# send_mail(subject, text, settings.EMAIL_HOST_USER,[to_email], fail_silently=False) 
+
+# remember [to_email] is a list
+
+# also you will need to add double protection to your gmail account from which you are sending email
+
