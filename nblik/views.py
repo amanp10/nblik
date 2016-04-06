@@ -1138,9 +1138,8 @@ def reset_password(request):
                 subject="Password Reset"
                 text="Hello,<br> Your new password is <strong>"+pass_new+" </strong>. <br>Please signin and change your password soon.<br>Thank You"
                 try:
-                    print "1.."
+                    print settings.EMAIL_HOST_USER
                     send_mail(subject, text, settings.EMAIL_HOST_USER,[to_email], fail_silently=False)
-                    print "2.."
                 except:
                     return HttpResponseRedirect('/nblik/password_reset_error/')
                 return HttpResponseRedirect('/accounts/password/reset/done/')
