@@ -10,6 +10,7 @@ virt_env/
 # Distribution / packaging
 .Python
 staticfiles/
+static/media/
 env/
 build/
 develop-eggs/
