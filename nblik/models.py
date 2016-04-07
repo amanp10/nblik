@@ -14,7 +14,7 @@ from unidecode import unidecode
 # from cloudinary.models import CloudinaryField
 
 class Category(models.Model):
-    name = models.CharField(max_length=1000,unique=True)
+    name = models.CharField(max_length=250,unique=True)
     likes = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
     def save(self, *args, **kwargs):
@@ -50,17 +50,17 @@ class Blog(models.Model):
 
 
 class Tag(models.Model):
-    name=models.CharField(max_length=500)
+    name=models.CharField(max_length=250)
     category=models.ForeignKey(Category)
     def __unicode__(self):
         return self.name
 
 class Company(models.Model):
     user=models.OneToOneField(User)
-    name=models.CharField(max_length=500)
+    name=models.TextField()
     logo=models.ImageField(upload_to='logo_images',blank=True)
     date_registered=models.DateTimeField(null=True,blank=True)
-    address=models.CharField(max_length=1500)
+    address=models.TextField(max_length=1500)
     about=models.TextField()
     def __unicode__(self):
         return self.name
