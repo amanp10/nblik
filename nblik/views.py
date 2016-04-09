@@ -646,11 +646,18 @@ def dashboard(request,username):
         blog_list=Blog.objects.filter(written_by=user_m).order_by('-id')[:20]
         discussion_list=Discussion.objects.filter(started_by=userprofile).order_by('-id')[:20]
         cat_list=userprofile.liked_categories.all()
-        follow=Follow.objects.get(userprofile=request.user)
-        for foll in follow.followed.all():
-            if foll==userprofile:
-                show=None
-                break
+        try:
+            follow=Follow.objects.get(userprofile=request.user)
+            for foll in follow.followed.all():
+                if foll==userprofile:
+                    show=None
+                    break
+        except:
+            pass
+        if request.user.is_active:
+            pass
+        else:
+            show=None
     except:
         user_m=None
         userprofile=None
