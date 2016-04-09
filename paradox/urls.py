@@ -3,9 +3,6 @@ from django.conf import settings
 from django.conf.urls import include, url, patterns
 from django.contrib import admin
 from nblik import views
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
 #class MyRegistrationView(RegistrationView):
 #    def get_success_url(self,request,user):
 #        return '/nblik/'
