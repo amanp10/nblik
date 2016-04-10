@@ -134,15 +134,15 @@ USE_L10N = True
 USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-#STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = 'staticfiles'
 #STATIC_URL = '/static/'
-#STATIC_PATH = os.path.join(BASE_DIR,'static').replace('\\','/')
-#STATICFILES_DIRS = (
-#    STATIC_PATH,
-#)
+STATIC_PATH = os.path.join(BASE_DIR,'static').replace('\\','/')
+STATICFILES_DIRS = (
+    STATIC_PATH,
+)
 #STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 #MEDIA_URL='/media/'
-#MEDIA_ROOT = os.path.join(STATIC_PATH,'media')
+MEDIA_ROOT = os.path.join(STATIC_PATH,'media')
 #EMAIL_HOST = 'smtp.gmail.com'
 #EMAIL_USE_TLS = True
 #EMAIL_HOST_USER = 'nitingera1996@gmail.com'
