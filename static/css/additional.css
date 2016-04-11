@@ -139,17 +139,17 @@ body
 	display: -webkit-box;
 	display: -moz-box;
 	position: relative;
-	margin-left: 25%;
+	left: 15%;
 	margin-top: 15px;
 	width: auto;
-	color:white;
+	color: white;
 	font-weight: bold;
 }
 #search_top_div input
 {
 	padding: 1px 5px 1px 5px;
 	background: rgb(220,227,246);
-	width: 500px;
+	width: 450px;
 	color:black;
 	font-weight: normal;
 	border:none;
@@ -281,6 +281,7 @@ a#written_by:hover
 	box-pack: center;
 	box-flex:1;
 	margin:0;
+	padding: 0 10px 0 10px;
 }
 #footer_table a:link
 {
@@ -405,4 +406,8 @@ button.comment-lyk.like[liked="yes"]:hover,button.discuss-lyk[liked="yes"]:hover
 	-webkit-border-radius:50% 50%;
 	-moz-border-radius:50% 50%;
 	border-radius:50% 50%;
+}
+.nav>li>a
+{
+	padding: 15px 10px;
 }

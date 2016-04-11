@@ -135,7 +135,7 @@ html {
   overflow: hidden;
   position: relative;
   display: block;
-  width: 50%;
+  width: 200px;
   height: 40px;
   line-height: 40px;
   text-decoration: none;
@@ -151,8 +151,6 @@ html {
 }
 .connect__icon {
   vertical-align: middle;
-  float: left;
-  width: 70px;
   text-align: center;
   font-size: 22px;
 }

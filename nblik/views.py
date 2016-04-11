@@ -434,7 +434,7 @@ def create_signup_username(signup_name):
         max1=1
         found=0
         for u in u_list:
-            if u.name==signup_name:
+            if u.name.lower()==signup_name.lower():
                 found=1
                 prev_username=u.user.username
                 lindex=prev_username.rfind("-",0,len(prev_username))
@@ -1144,11 +1144,11 @@ def reset_password(request):
                 to_email=email1
                 subject="Password Reset"
                 text="Hello,<br> Your new password is <strong>"+pass_new+" </strong>. <br>Please signin and change your password soon.<br>Thank You"
-                try:
-                    print settings.EMAIL_HOST_USER
-                    send_mail(subject, text, settings.EMAIL_HOST_USER,[to_email], fail_silently=False)
-                except:
-                    return HttpResponseRedirect('/nblik/password_reset_error/')
+                #try:
+                print settings.EMAIL_HOST_USER
+                send_mail(subject, text, settings.EMAIL_HOST_USER,[to_email], fail_silently=False)
+                #except:
+                    #return HttpResponseRedirect('/nblik/password_reset_error/')
                 return HttpResponseRedirect('/accounts/password/reset/done/')
         return HttpResponseRedirect('/nblik/password_reset_error/')
     else:

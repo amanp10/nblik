@@ -55,7 +55,7 @@
 		    </div>
 	    </div>
 		<div class="container-fluid">
-		    <div class="sidebar" style="overflow-y:auto;background:rgb(234,237,247);-moz-box-sizing:content-box;width:15%;">
+		    <div class="sidebar" style="overflow-y:auto;background:rgb(234,237,247);-moz-box-sizing:border-box;width:15%;">
 		    	<br>
 			<u1 class="nav nav-list" style="style:inline-table;">
 				<form>
@@ -81,13 +81,11 @@
 				</div>
 				</div>
 			<div class="sidebar" style="background:rgb(234,237,247);margin-left:80%;width:20%;padding-right:5px;">
-  			    {% if user.is_authenticated %}
           <div id="to_follow">
             {% block side_block2_2 %}
             {% get_to_follow_list user %}
             {% endblock %}
           </div>
-          {% endif %}
 			</div>
 		</div>
     <script src="{% static "js/jquery-1.11.3.min.js" %}"></script>
