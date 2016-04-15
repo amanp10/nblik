@@ -42,7 +42,7 @@
 <div id="wrapper">
 	<div class="follow_div">No more to follow.</div>
 	{% for up in userprofiles %}
-	    <div id="{{ up.id }}" class="follow_div"><div id="inner"><img src="{{ up.picture.url }}" class="pro_pic"/> <br><a id="written_by" href="/{{ up.user }}/">{{ up.name }}</a><br>
+	    <div id="follow_{{ up.id }}" class="follow_div"><div id="inner"><img src="{{ up.picture.url }}" class="pro_pic"/> <br><a id="written_by" href="/{{ up.user }}/">{{ up.name }}</a><br>
 	    	<font color="black">{{ up.who }}</font>
 	    </div>
 	    {% if user.is_authenticated %}
@@ -55,19 +55,18 @@
 </div>
     <script src="{% static "js/jquery-1.11.3.min.js" %}"></script>
     <script type="text/javascript">
-    $('button.follow_user').click(function(event){
+    $('.follow_user').click(function(event){
 		var user_id;
-    console.log("yo");
 		user_id = $(this).attr("data-userprofileid");
 		$.get('/nblik/follow_user/',{user_id: user_id},function(data){
-		    $("#"+user_id).hide();
+		    $("#follow_"+user_id).hide();
 			});
     event.stopImmediatePropagation();
     });
     $('.skip').click(function(event){
     var user_id;
     user_id = $(this).attr("data-userprofileid");
-    $("#"+user_id).hide();
+    $("#follow_"+user_id).hide();
     });
     </script>
 	<script src="{% static "js/nblik-jquery.js" %}"></script>
