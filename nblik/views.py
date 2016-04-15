@@ -204,18 +204,24 @@ def get_category_list(max_results=0,startswith=''):
     return cat_list
 
 def blog(request,blog_title_slug):
+    #if not request.user.is_active:
+     #   HttpResponseRedirect('/nblik/login_signup/')
     b=None
     c=None
     b_time=None
     b=Blog.objects.get(slug=blog_title_slug)
     viewer_list=b.viewers.all()
     b.views+=1
-    for viewer in viewer_list:
-        if viewer==request.user.userprofile:
-            b.views-=1
-            b.viewers.remove(viewer)
-    b.viewers.add(request.user.userprofile)
-    b.save()
+    try:
+        for viewer in viewer_list:
+            if viewer==request.user.userprofile:
+                b.views-=1
+                b.viewers.remove(viewer)
+        b.viewers.add(request.user.userprofile)
+        b.save()
+    except:
+        b.views-=1
+        b.save()
     try:
         b=Blog.objects.get(slug=blog_title_slug)
         ##print b.blog_content
