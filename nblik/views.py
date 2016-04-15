@@ -1147,7 +1147,7 @@ def reset_password(request):
                 pass_new=str(random.randrange(1000000,100000000))
                 us.set_password(pass_new)
                 us.save()
-                to_email=email1
+                to_email=str(email1)
                 subject="Password Reset"
                 text="Hello,<br> Your new password is <strong>"+pass_new+" </strong>. <br>Please signin and change your password soon.<br>Thank You"
                 #try:
