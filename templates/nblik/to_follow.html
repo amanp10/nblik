@@ -54,5 +54,21 @@
 	{% endfor %}
 </div>
     <script src="{% static "js/jquery-1.11.3.min.js" %}"></script>
+    <script type="text/javascript">
+    $('button.follow_user').click(function(event){
+		var user_id;
+    console.log("yo");
+		user_id = $(this).attr("data-userprofileid");
+		$.get('/nblik/follow_user/',{user_id: user_id},function(data){
+		    $("#"+user_id).hide();
+			});
+    event.stopImmediatePropagation();
+    });
+    $('.skip').click(function(event){
+    var user_id;
+    user_id = $(this).attr("data-userprofileid");
+    $("#"+user_id).hide();
+    });
+    </script>
 	<script src="{% static "js/nblik-jquery.js" %}"></script>
 {% endif %}
