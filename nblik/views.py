@@ -1149,10 +1149,11 @@ def reset_password(request):
                 us.save()
                 to_email=str(email1)
                 subject="Password Reset"
-                text="Hello,<br> Your new password is <strong>"+pass_new+" </strong>. <br>Please signin and change your password soon.<br>Thank You"
+                text="<br> Your new password is <strong>"+pass_new+" </strong>. <br>Please signin and change your password soon.<br>Thank You"
+                text1="Hello,"
                 #try:
                 print settings.EMAIL_HOST_USER
-                send_mail(subject, text, settings.EMAIL_HOST_USER,[to_email], fail_silently=False)
+                send_mail(subject, text1, settings.EMAIL_HOST_USER,[to_email], fail_silently=False, html_message=text)
                 #except:
                     #return HttpResponseRedirect('/nblik/password_reset_error/')
                 return HttpResponseRedirect('/accounts/password/reset/done/')
