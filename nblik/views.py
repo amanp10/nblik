@@ -558,9 +558,13 @@ def google_login(request):
                 else:
                     response_dict.update({'response':"Your Nblik account is disabled."})
                     response=HttpResponse(json.dumps(response_dict), content_type='application/javascript')
-
         except:
             #print "In except"
+            users=User.objects.all()
+            for us in users:
+                if email == us.email:
+                    response=HttpResponse(json.dumps(response_dict), content_type='application/javascript')
+                    return response
             signup_username=create_signup_username(name)
             #print signup_username,email
             user=User.objects.create_user(username=signup_username,email=email)
@@ -1149,8 +1153,8 @@ def reset_password(request):
                 us.save()
                 to_email=str(email1)
                 subject="Password Reset"
-                text="<br> Your new password is <strong>"+pass_new+" </strong>. <br>Please signin and change your password soon.<br>Thank You"
-                text1="Hello,"
+                text="Hello,<br> Your new password is <strong>"+pass_new+" </strong>. <br>Please <a href='http://www.nblik.com/nblik/login_signup/'>SignIn</a> and change your password soon.<br>Thank You"
+                text1=""
                 #try:
                 print settings.EMAIL_HOST_USER
                 send_mail(subject, text1, settings.EMAIL_HOST_USER,[to_email], fail_silently=False, html_message=text)
