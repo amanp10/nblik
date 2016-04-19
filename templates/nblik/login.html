@@ -75,7 +75,7 @@ body
           
           <div class="logmod__alter">
             <div class="logmod__alter-container">
-              <a href="#" class="connect facebook">
+              <a href="{% url 'socialauth_begin' 'facebook' %}" class="connect facebook">
                 <div class="connect__icon">
                   <i class="fa fa-facebook"></i>
                 </div>
@@ -84,7 +84,7 @@ body
                 </div>
               </a>
 
-              <a href="#" class="connect googleplus">
+              <a href="{% url 'socialauth_begin' 'google-oauth2' %}" class="connect googleplus">
                 <div class="connect__icon">
                   <i class="fa fa-google-plus"></i>
                 </div>
