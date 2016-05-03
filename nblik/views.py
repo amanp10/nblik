@@ -539,7 +539,7 @@ def google_login(request):
         response_dict={}
         #print "email=",email
         try:
-            u=User.objects.get(email=str(email))
+            u=User.objects.get(email=email)
             up=UserProfile.objects.get(user=u)
             if up.google_registered:
                 up.login=1
@@ -563,12 +563,12 @@ def google_login(request):
             #print "In except"
             users=User.objects.all()
             for us in users:
-                if str(email) == str(us.email):
+                if email == us.email:
                     response=HttpResponse(json.dumps(response_dict), content_type='application/javascript')
                     return response
             signup_username=create_signup_username(name)
             #print signup_username,email
-            user=User.objects.create_user(username=signup_username,email=str(email))
+            user=User.objects.create_user(username=signup_username,email=email)
             user.set_password("password")
             user.save()
             user1=User.objects.get(username=signup_username)
