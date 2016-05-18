@@ -223,3 +223,6 @@ EMAIL_HOST_USER = "nblikindia@gmail.com"
 EMAIL_HOST_PASSWORD = "drzjjtxfowkpkhyj"
 DEFAULT_FROM_EMAIL = "nblikindia@gmail.com"
 DEFAULT_TO_EMAIL = 'to email' # don't change this
+  # 01makemigrations:
+  #   command: "django-admin.py makemigrations"
+  #   leader_only: true
