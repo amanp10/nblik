@@ -226,3 +226,6 @@ DEFAULT_TO_EMAIL = 'to email' # don't change this
   # 01makemigrations:
   #   command: "django-admin.py makemigrations"
   #   leader_only: true
+    # 02migrate_auth:
+    # command: "django-admin.py migrate auth"
+    # leader_only: true
