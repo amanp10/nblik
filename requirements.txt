@@ -16,3 +16,4 @@ django-imagekit==3.3
 Unidecode==0.04.9
 django-storages==1.4
 boto==2.39.0
+Unipath==1.1
