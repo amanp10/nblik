@@ -40,7 +40,7 @@ INSTALLED_APPS = (
     'nblik',
     'registration',
     'bootstrap_toolkit',
-    'social_auth',
+    'social.apps.django_app.default',
     'ckeditor',
     'ckeditor_uploader',
     'imagekit',
