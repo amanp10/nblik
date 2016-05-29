@@ -65,6 +65,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 )
 
 ROOT_URLCONF = 'paradox.urls'
@@ -80,7 +81,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'social_auth.context_processors.social_auth_by_type_backends',
+                'social.apps.django_app.context_processors.backends',
                 'social.apps.django_app.context_processors.login_redirect',
             ],
         },
@@ -157,7 +158,7 @@ SOCIAL_AUTH_UID_LENGTH = 223
 SOCIAL_AUTH_NONCE_SERVER_URL_LENGTH = 255
 SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = 255
 SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 255
-SOCIAL_AUTH_USER_MODEL = 'nblik.models.User'
+SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'email']
 SOCIAL_AUTH_ENABLED_BACKENDS = ('google','facebook','linkedin','twitter')
 GOOGLE_OAUTH2_CLIENT_ID = '110490777047-akrqtv142ehtq246eoa3lusf7pi1qk83.apps.googleusercontent.com'
 GOOGLE_OAUTH2_CLIENT_SECRET = '_KiK-17I-R6xNpGSmgOv0guV'
