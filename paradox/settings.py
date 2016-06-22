@@ -48,12 +48,15 @@ INSTALLED_APPS = (
 )
 
 AUTHENTICATION_BACKENDS = (
-  'social_auth.backends.google.GoogleOAuth2Backend',
-  'social_auth.backends.contrib.github.GithubBackend',
   'django.contrib.auth.backends.ModelBackend',
-  'social_auth.backends.facebook.FacebookBackend',
-  'social.backends.twitter.TwitterOAuth',
-  'social_auth.backends.contrib.linkedin.LinkedinBackend',
+  'social.backends.github.GithubOAuth2',
+  'social.backends.google.GoogleOAuth',
+  'social.backends.google.GoogleOAuth2',
+  'social.backends.google.GoogleOpenId',
+  'social.backends.google.GooglePlusAuth',
+  'social.backends.google.GoogleOpenIdConnect',
+  'social.backends.facebook.FacebookAppOAuth2',
+  'social.backends.facebook.FacebookOAuth2',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -150,6 +153,7 @@ MEDIA_ROOT = os.path.join(STATIC_PATH,'media')
 #EMAIL_HOST_PASSWORD = 'geranitin18091996'
 #ACCOUNT_ACTIVATION_DAYS = 7
 #REGISTRATION_AUTO_LOGIN = True
+AUTH_USER_MODEL = 'nblik.User'
 LOGIN_URL ='/nblik/login/'
 LOGIN_REDIRECT_URL = '/nblik/next_step/'
 SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
@@ -175,6 +179,34 @@ LINKEDIN_CONSUMER_KEY        = '77ny0w4dfmmzci'
 LINKEDIN_CONSUMER_SECRET     = 'f0IGt6awVN7F9dhT'
 # Add email to requested authorizations.
 LINKEDIN_SCOPE = ['r_basicprofile', 'r_emailaddress',]
+SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
+SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
+SOCIAL_AUTH_GOOGLE_OAUTH_SCOPE = [
+    'https://www.googleapis.com/auth/drive',
+    'https://www.googleapis.com/auth/userinfo.profile'
+]
+# SOCIAL_AUTH_EMAIL_FORM_URL = '/signup-email'
+SOCIAL_AUTH_EMAIL_FORM_HTML = 'email_signup.html'
+SOCIAL_AUTH_EMAIL_VALIDATION_FUNCTION = 'example.app.mail.send_validation'
+SOCIAL_AUTH_EMAIL_VALIDATION_URL = '/email-sent/'
+# SOCIAL_AUTH_USERNAME_FORM_URL = '/signup-username'
+SOCIAL_AUTH_USERNAME_FORM_HTML = 'username_signup.html'
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'example.app.pipeline.require_email',
+    'social.pipeline.mail.mail_validation',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.debug.debug',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+    'social.pipeline.debug.debug'
+)
 # Add the fields so they will be requested from linkedin.
 #LINKEDIN_EXTRA_FIELD_SELECTORS = ['email-address', 'headline', 'industry']
 # Arrange to add the fields to UserSocialAuth.extra_data

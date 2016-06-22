@@ -531,13 +531,11 @@ def login_and_signup(request):
 
 def google_login(request):
     if request.method=="POST":
-        ##print "Hello"
         email=request.POST['email']
         image_url=request.POST['image_url']
         name=request.POST['name']
         google_id=request.POST['id']
         response_dict={}
-        #print "email=",email
         try:
             u=User.objects.get(email=email)
             up=UserProfile.objects.get(user=u)
@@ -549,7 +547,6 @@ def google_login(request):
                 up.google_registered=True
                 up.login=1
                 up.save()
-                    ##print "Hello"
             user = authenticate(username = up.user.username,password=up.user.password)
             if user:
                 if user.is_active:
@@ -560,14 +557,12 @@ def google_login(request):
                     response_dict.update({'response':"Your Nblik account is disabled."})
                     response=HttpResponse(json.dumps(response_dict), content_type='application/javascript')
         except:
-            #print "In except"
             users=User.objects.all()
-            for us in users:
-                if email == us.email:
-                    response=HttpResponse(json.dumps(response_dict), content_type='application/javascript')
-                    return response
+            # for us in users:
+            #     if email == us.email:
+            #         response=HttpResponse(json.dumps(response_dict), content_type='application/javascript')
+            #         return response
             signup_username=create_signup_username(name)
-            #print signup_username,email
             user=User.objects.create_user(username=signup_username,email=email)
             user.set_password("password")
             user.save()
@@ -802,7 +797,14 @@ def discuss(request):
 def next_step(request):
     u=request.user
     if request.method=="POST":
-        up=UserProfile.objects.get(user=u)
+        try:
+            up=UserProfile.objects.get(user=u)
+        except:
+            up=UserProfile(user=u,level=1)
+            up.google_registered=True
+            up.save()
+            up_follow=Follow(userprofile=u)
+            up_follow.save()
         name = request.POST.get('name')
         email = request.POST.get('email')
         dob_date = request.POST.get('dob_date')
