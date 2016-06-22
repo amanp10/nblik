@@ -153,8 +153,8 @@ MEDIA_ROOT = os.path.join(STATIC_PATH,'media')
 #EMAIL_HOST_PASSWORD = 'geranitin18091996'
 #ACCOUNT_ACTIVATION_DAYS = 7
 #REGISTRATION_AUTO_LOGIN = True
-LOGIN_URL ='/nblik/login/'
-LOGIN_REDIRECT_URL = '/nblik/next_step/'
+SOCIAL_AUTH_LOGIN_URL ='/nblik/login/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/nblik/next_step/'
 SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
 SOCIAL_AUTH_UUID_LENGTH = 16
 SOCIAL_AUTH_UID_LENGTH = 223
@@ -162,7 +162,7 @@ SOCIAL_AUTH_NONCE_SERVER_URL_LENGTH = 255
 SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = 255
 SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 255
 SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'email']
-SOCIAL_AUTH_ENABLED_BACKENDS = ('google','facebook','linkedin','twitter')
+#SOCIAL_AUTH_ENABLED_BACKENDS = ('google','facebook','linkedin','twitter')
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '110490777047-akrqtv142ehtq246eoa3lusf7pi1qk83.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '_KiK-17I-R6xNpGSmgOv0guV'
 GITHUB_APP_ID = 'dc5dbf969550b54b6f1b'
@@ -178,12 +178,12 @@ LINKEDIN_CONSUMER_KEY        = '77ny0w4dfmmzci'
 LINKEDIN_CONSUMER_SECRET     = 'f0IGt6awVN7F9dhT'
 # Add email to requested authorizations.
 LINKEDIN_SCOPE = ['r_basicprofile', 'r_emailaddress',]
-# SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
-# SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
-# SOCIAL_AUTH_GOOGLE_OAUTH_SCOPE = [
-#     'https://www.googleapis.com/auth/drive',
-#     'https://www.googleapis.com/auth/userinfo.profile'
-# ]
+SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
+#SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    'https://www.googleapis.com/auth/drive',
+    'https://www.googleapis.com/auth/userinfo.profile'
+]
 # SOCIAL_AUTH_EMAIL_FORM_URL = '/signup-email'
 # SOCIAL_AUTH_EMAIL_FORM_HTML = 'email_signup.html'
 # SOCIAL_AUTH_EMAIL_VALIDATION_FUNCTION = 'example.app.mail.send_validation'
