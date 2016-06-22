@@ -153,7 +153,6 @@ MEDIA_ROOT = os.path.join(STATIC_PATH,'media')
 #EMAIL_HOST_PASSWORD = 'geranitin18091996'
 #ACCOUNT_ACTIVATION_DAYS = 7
 #REGISTRATION_AUTO_LOGIN = True
-AUTH_USER_MODEL = 'nblik.User'
 LOGIN_URL ='/nblik/login/'
 LOGIN_REDIRECT_URL = '/nblik/next_step/'
 SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
