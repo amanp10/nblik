@@ -48,7 +48,6 @@ INSTALLED_APPS = (
 )
 
 AUTHENTICATION_BACKENDS = (
-  'django.contrib.auth.backends.ModelBackend',
   'social_auth.backends.google.GoogleOAuth2Backend',
   'social_auth.backends.contrib.github.GithubBackend',
   'django.contrib.auth.backends.ModelBackend',
@@ -82,6 +81,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_auth.context_processors.social_auth_by_type_backends',
                 'social.apps.django_app.context_processors.backends',
                 'social.apps.django_app.context_processors.login_redirect',
             ],
