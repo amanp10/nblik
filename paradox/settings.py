@@ -49,14 +49,12 @@ INSTALLED_APPS = (
 
 AUTHENTICATION_BACKENDS = (
   'django.contrib.auth.backends.ModelBackend',
-  'social.backends.github.GithubOAuth2',
-  'social.backends.google.GoogleOAuth',
-  'social.backends.google.GoogleOAuth2',
-  'social.backends.google.GoogleOpenId',
-  'social.backends.google.GooglePlusAuth',
-  'social.backends.google.GoogleOpenIdConnect',
-  'social.backends.facebook.FacebookAppOAuth2',
-  'social.backends.facebook.FacebookOAuth2',
+  'social_auth.backends.google.GoogleOAuth2Backend',
+  'social_auth.backends.contrib.github.GithubBackend',
+  'django.contrib.auth.backends.ModelBackend',
+  'social_auth.backends.facebook.FacebookBackend',
+  'social.backends.twitter.TwitterOAuth',
+  'social_auth.backends.contrib.linkedin.LinkedinBackend',
 )
 
 MIDDLEWARE_CLASSES = (
