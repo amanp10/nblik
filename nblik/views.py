@@ -860,12 +860,44 @@ def quick_add_blog(request):
         context_dict['blog_list']=Blog.objects.all()
         return render(request,'nblik/add_blog2.html',context_dict)
 
+
+def blog_to_post(id1):
+    blog=Blog.objects.get(id=int(id1))
+    text="""<div id="main" style="min-width:90%;padding:10px;margin:5px;border:1px solid black;">
+<img src="https://elasticbeanstalk-us-west-2-031348677605.s3.amazonaws.com/images/nblik.jpg" style="height:60px;margin:10px;margin-bottom:2px;border:2px solid rgb(70, 94, 170);-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;">
+<font style="font-size:14px;color:rgb(70,94,170);margin-left:0;">Network of Knowledge</font>
+<br>
+<div id="data" style="font-weight:bold;padding:5px;font-family:georgia;font-size:24px;">
+<a href="/nblik/blog/"""+blog.slug+"""/" style="color:inherit;text-decoration:none;">
+"""+blog.title+"""
+</a>
+</div>
+</div>
+"""
+    return text
+
+def discussion_to_post(id1):
+    dis=Discussion.objects.get(id=int(id1))
+    text="""<div id="main" style="min-width:90%;padding:10px;margin:5px;border:1px solid black;">
+<img src="https://elasticbeanstalk-us-west-2-031348677605.s3.amazonaws.com/images/nblik.jpg" style="height:60px;margin:10px;margin-bottom:2px;border:2px solid rgb(70, 94, 170);-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;">
+<font style="font-size:14px;color:rgb(70,94,170);margin-left:0;">Network of Knowledge</font>
+<br>
+<div id="data" style="font-weight:bold;padding:5px;font-family:georgia;font-size:24px;">
+<a href="/nblik/discussion/"""+dis.slug+"""/" style="color:inherit;text-decoration:none;">
+"""+dis.topic+"""
+</a>
+</div>
+</div>
+"""
+    return text
+
+
 def post_to_facebook(request,blog_id):
     blog=Blog.objects.get(id=blog_id)
     user = request.user
     auth = user.social_auth.first()
     graph = facebook.GraphAPI(auth.extra_data['access_token'])
-    graph.put_object('me', 'feed', message=blog.title)
+    graph.put_object('me', 'feed', message=blog_to_post(blog_id))
     return HttpResponseRedirect('/nblik/')
 
 def post_to_facebook_discussion(request,discussion_id):
@@ -873,9 +905,8 @@ def post_to_facebook_discussion(request,discussion_id):
     user = request.user
     auth = user.social_auth.first()
     graph = facebook.GraphAPI(auth.extra_data['access_token'])
-    graph.put_object('me', 'feed', message=discussion.topic)
+    graph.put_object('me', 'feed', message=discussion_to_post(discussion_id))
     return HttpResponseRedirect('/nblik/')
-
 
 def blog_title(request):
     title=slugify(unidecode(request.GET['blog_title']))

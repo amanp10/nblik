@@ -326,6 +326,7 @@ About the user:<br>
   <script src="{% static "js/nblik-jquery.js" %}"></script>
   <script type="text/javascript">
   $('.follow_user').click(function(event){
+    $(this).html('<span class="glyphicon glyphicon-time" style="margin-left:7px;margin-right:7px;" aria-hidden="true"></span>');
     var user_id;
     user_id = $(this).attr("data-userprofileid");
     var ele=$(this);

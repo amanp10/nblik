@@ -88,6 +88,24 @@
           </div>
 			</div>
 		</div>
+		<script type="text/javascript">
+    $('.follow_user').click(function(event){
+    	$(this).html('<span class="glyphicon glyphicon-time" style="margin-left:7px;margin-right:7px;" aria-hidden="true"></span>');
+		var user_id;
+    console.log("yo");
+		user_id = $(this).attr("data-userprofileid");
+		$.get('/nblik/follow_user/',{user_id: user_id},function(data){
+		    $("#"+user_id).hide();
+			});
+    event.stopImmediatePropagation();
+    });
+    $('.skip').click(function(event){
+    	$(this).html('<span class="glyphicon glyphicon-time" style="margin-left:7px;margin-right:7px;" aria-hidden="true"></span>');
+    var user_id;
+    user_id = $(this).attr("data-userprofileid");
+    $("#"+user_id).hide();
+    });
+    </script>
     <script src="{% static "js/jquery-1.11.3.min.js" %}"></script>
 		<script src="{% static "js/bootstrap.js" %}"></script>
 		<script src="{% static "js/bootstrap.min.js" %}"> </script>
