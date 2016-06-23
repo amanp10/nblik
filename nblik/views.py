@@ -897,7 +897,7 @@ def post_to_facebook(request,blog_id):
     user = request.user
     auth = user.social_auth.first()
     graph = facebook.GraphAPI(auth.extra_data['access_token'])
-    graph.put_object('me', 'feed', message=blog_to_post(blog_id))
+    graph.put_object('me', 'feed', message='')
     return HttpResponseRedirect('/nblik/')
 
 def post_to_facebook_discussion(request,discussion_id):
@@ -905,7 +905,7 @@ def post_to_facebook_discussion(request,discussion_id):
     user = request.user
     auth = user.social_auth.first()
     graph = facebook.GraphAPI(auth.extra_data['access_token'])
-    graph.put_object('me', 'feed', message=discussion_to_post(discussion_id))
+    graph.put_object('me', 'feed', message='')
     return HttpResponseRedirect('/nblik/')
 
 def blog_title(request):
