@@ -1144,6 +1144,9 @@ def change_email(request,username):
         us=User.objects.get(username=username)
         context_dict={}
         context_dict['email']=str(us.email)
+        user_pro=UserProfile.objects.get(user=us)
+        if user_pro.google_registered == True :
+            return HttpResponseRedirect('/nblik/')
         return render(request,'nblik/change_email.html',context_dict)
 
 def reset_password(request):
@@ -1166,6 +1169,10 @@ def reset_password(request):
                 return HttpResponseRedirect('/accounts/password/reset/done/')
         return HttpResponseRedirect('/nblik/password_reset_error/')
     else:
+        user=request.user
+        user_pro=UserProfile.objects.get(user=user)
+        if user_pro.google_registered == True :
+            return HttpResponseRedirect('/nblik/')
         return HttpResponseRedirect('/accounts/password/reset/')
 
 def password_reset_error(request):
