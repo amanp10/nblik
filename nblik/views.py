@@ -1162,7 +1162,7 @@ def reset_password(request):
                 text="Hello,<br> Your new password is <strong>"+pass_new+" </strong>. <br>Please <a href='http://www.nblik.com/nblik/login_signup/'>SignIn</a> and change your password soon.<br>Thank You"
                 text1=""
                 #try:
-                print settings.EMAIL_HOST_USER
+                #print settings.EMAIL_HOST_USER
                 send_mail(subject, text1, settings.EMAIL_HOST_USER,[to_email], fail_silently=False, html_message=text)
                 #except:
                     #return HttpResponseRedirect('/nblik/password_reset_error/')
