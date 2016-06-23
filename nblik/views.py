@@ -897,7 +897,7 @@ def post_to_facebook(request,blog_id):
     user = request.user
     auth = user.social_auth.first()
     graph = facebook.GraphAPI(auth.extra_data['access_token'])
-    graph.put_object('me', 'feed', message='')
+    graph.put_object('me', 'feed', caption='caption', name='name', link='https://google.co.in', source='https://elasticbeanstalk-us-west-2-031348677605.s3.amazonaws.com/images/nblik.jpg')
     return HttpResponseRedirect('/nblik/')
 
 def post_to_facebook_discussion(request,discussion_id):
