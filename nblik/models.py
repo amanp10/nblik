@@ -123,7 +123,7 @@ class UserProfile(models.Model):
     liked_categories=models.ManyToManyField(Category,blank=True)
     level=models.IntegerField(default=1)
     date_registered=models.DateTimeField(null=True,blank=True)
-    google_registered=models.BooleanField(default=False)
+    google_registered=models.BooleanField(default=False)#includes facebook registered as well
     profile_tag_line=models.TextField(null=True,blank=True)
     languages=models.IntegerField(default=1)#English=1,Hindi=2,English And Hindi both =3
     followed_tags=models.ManyToManyField(Tag,blank=True)

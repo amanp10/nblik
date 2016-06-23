@@ -823,6 +823,7 @@ def next_step(request):
             cat=Category.objects.get(id=int(i))
             up.liked_categories.add(cat)
         up.name=name
+        up.date_registered=datetime.now()
         up.who=who
         up.lives_in=lives_in
         up.from_place=from_place
