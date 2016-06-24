@@ -885,7 +885,7 @@ def post_to_facebook(request,blog_id):
     user = request.user
     auth = user.social_auth.first()
     graph = facebook.GraphAPI(auth.extra_data['access_token'])
-    graph.put_wall_post('me', 'feed', message='NbliK - Network of Knowledge', attachment =  {'name': name,'link': link,'caption': cap,'picture': src})
+    graph.put_wall_post(parent_object='me', connection_name='feed', message='NbliK - Network of Knowledge', attachment =  {'name': name,'link': link,'caption': cap,'picture': src})
     return HttpResponseRedirect('/nblik/')
 
 def post_to_facebook_discussion(request,discussion_id):
@@ -898,7 +898,7 @@ def post_to_facebook_discussion(request,discussion_id):
     user = request.user
     auth = user.social_auth.first()
     graph = facebook.GraphAPI(auth.extra_data['access_token'])
-    graph.put_wall_post('me', 'feed', message='NbliK - Network of Knowledge', attachment =  {'name': name,'link': link,'caption': cap,'description' : des ,'picture': src})
+    graph.put_wall_post(parent_object='me', connection_name='feed', message='NbliK - Network of Knowledge', attachment =  {'name': name,'link': link,'caption': cap,'description' : des ,'picture': src})
     return HttpResponseRedirect('/nblik/')
 
 def blog_title(request):
