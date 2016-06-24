@@ -1179,6 +1179,9 @@ def reset_password(request):
         email1=request.POST.get('email')
         for us in User.objects.all():
             if us.email == email1:
+                u_pro=UserProfile.objects.get(user=us)
+                if u_pro.google_registered == True:
+                    return HttpResponseRedirect('/nblik/login_signup/') 
                 pass_new=str(random.randrange(1000000,100000000))
                 us.set_password(pass_new)
                 us.save()
@@ -1194,10 +1197,6 @@ def reset_password(request):
                 return HttpResponseRedirect('/accounts/password/reset/done/')
         return HttpResponseRedirect('/nblik/password_reset_error/')
     else:
-        user=request.user
-        user_pro=UserProfile.objects.get(user=user)
-        if user_pro.google_registered == True :
-            return HttpResponseRedirect('/nblik/')
         return HttpResponseRedirect('/accounts/password/reset/')
 
 def password_reset_error(request):
