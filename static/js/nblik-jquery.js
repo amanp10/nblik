@@ -90,7 +90,7 @@ $(document).ready(function(){
     if(blog_liked=='no')
     {
 		$.get('/nblik/like_blog/',{blog_id: blog_id},function(data){
-		    $('#'+blog_id).html(data);
+		    $('#blog-'+blog_id).html(data);
 		    blog.html("Unlike");
         blog.attr("liked","yes");
         //console.log('yo');
@@ -120,7 +120,7 @@ $(".comment-lyk").click(function(event){
     $.get('/nblik/like_comment/',{comment_id: comment_id},function(data){
         ele.attr("liked","yes");
         ele.html("Unlike");
-        $('#'+comment_id).html(data);
+        $('#comment-'+comment_id).html(data);
       });
     }
     else
@@ -174,7 +174,7 @@ $(".discuss-lyk").click(function(event){
     $.get('/nblik/like_discuss/',{discuss_id: discuss_id},function(data){
         ele.attr("liked","yes");
         ele.html("Unlike");
-        $('#'+discuss_id).html(data);
+        $('#discuss-'+discuss_id).html(data);
       });
     }
     else

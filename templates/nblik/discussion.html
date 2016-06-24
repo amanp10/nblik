@@ -131,7 +131,7 @@ a#cat:hover
                                 <div class="list-group-item" style="width:75%;border:1px solid rgb(100,100,100);-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;">
                                     <h4 class="list-group-item-heading" style="font-weight:bold;"><img src="{{ discuss.discuss_by.picture.url }}" class="pro_pic_2"/><a href="/{{ discuss.discuss_by }}/"> {{ discuss.discuss_by.name }}</a></h4>
 									<p class="list-group-item-text" style="font-family:georgia;font-size: 16px;margin-bottom:0;">{{ discuss.discuss_text|safe }}</p>
-									<p style="color:gray;"><span id="{{ discuss.id }}" style="color:black">{{ discuss.likes }}</span> like(s)</p>
+									<p style="color:gray;"><span id="discuss-{{ discuss.id }}" style="color:black">{{ discuss.likes }}</span> like(s)</p>
                         {% for key,value in show_discuss.items %}
                         {% if key == discuss.id and value == "yes" %}
                         <button id="discuss {{ discuss.id }}" data-blogid="{{ discuss.id }}" class="discuss-lyk" type="button" liked="no" style="font-size:14px;padding:2px;">
