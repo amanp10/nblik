@@ -22,7 +22,7 @@ utc = UTC()
 def populate():
     user1=add_user(username='ankit',email='ankit@gmail.com',password='ankit')
     #user2=User.objects.get_or_create(username='nitingera1996',password='geranitin18091996')
-    literature_cat = add_cat(name='Literature',likes=10)
+    literature_cat = add_cat(name='Lit',likes=10)
     book_cat = add_cat(name="Books",likes=32)
     frame_cat = add_cat(name="History",likes=16)
     education_cat = add_cat(name="Education",likes=0,)
